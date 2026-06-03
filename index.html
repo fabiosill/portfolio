@@ -38,13 +38,16 @@
       <img src="img/logo.png" alt="FabioSill">
       <span>FABIOSILL</span>
     </a>
-    <ul class="nlinks">
+    <button class="hamburger" id="hbg" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nlinks" id="navlinks">
       <li><a href="#about">Sobre</a></li>
       <li><a href="#services">Serviços</a></li>
       <li><a href="#process">Processo</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#portfolio">Portfolio</a></li>
-      <li><a href="#contact" class="nbtn">Contratar</a></li>
+      <li><a href="#contact">Contratar</a></li>
     </ul>
   </div>
 </nav>
@@ -269,7 +272,7 @@
         <form onsubmit="doSend(event)">
           <div class="fg"><label>NOME_COMPLETO</label><input type="text" placeholder="Seu nome completo..." required></div>
           <div class="fg"><label>EMAIL_ADDRESS</label><input type="email" placeholder="seu@email.com" required></div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+          <div class="form-2col" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
             <div class="fg"><label>TELEFONE</label><input type="tel" placeholder="(11) 99999-9999"></div>
             <div class="fg"><label>TIPO_PROJETO</label><select><option value="">Selecionar...</option><option>Site Institucional</option><option>E-commerce</option><option>Landing Page</option><option>Manutenção</option><option>Outro</option></select></div>
           </div>

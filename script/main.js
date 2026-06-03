@@ -190,6 +190,20 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
   a.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth'});});
 });
 
+// ━━━━ HAMBURGER MENU ━━━━
+const hbg=document.getElementById('hbg');
+const navlinks=document.getElementById('navlinks');
+hbg.addEventListener('click',()=>{
+  hbg.classList.toggle('open');
+  navlinks.classList.toggle('open');
+});
+navlinks.querySelectorAll('a').forEach(a=>{
+  a.addEventListener('click',()=>{hbg.classList.remove('open');navlinks.classList.remove('open');});
+});
+document.addEventListener('click',e=>{
+  if(!hbg.contains(e.target)&&!navlinks.contains(e.target)){hbg.classList.remove('open');navlinks.classList.remove('open');}
+});
+
 // ━━━━ CSS INJECTIONS ━━━━
 const s=document.createElement('style');
 s.textContent=`
