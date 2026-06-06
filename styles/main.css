@@ -29,12 +29,16 @@
 
 /* ━━━━ RESET ━━━━ */
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{
+  scroll-behavior:smooth;
+  overflow-x:hidden; /* prevent horizontal scroll at root */
+}
 body{
   background:var(--bg);
   color:var(--txt);
   font-family:'Rajdhani',sans-serif;
   overflow-x:hidden;
+  max-width:100vw; /* never wider than viewport */
   cursor:none;
   -webkit-tap-highlight-color:transparent;
 }
@@ -77,12 +81,22 @@ body{
 }
 
 /* ━━━━ LAYOUT ━━━━ */
-.wrap{position:relative;z-index:10;max-width:1200px;margin:0 auto;padding:0 2rem}
+.wrap{
+  position:relative;z-index:10;
+  max-width:1200px;margin:0 auto;padding:0 2rem;
+  width:100%;          /* prevents wrap from stretching beyond parent */
+  overflow-x:hidden;   /* safeguard: clip any child that misbehaves */
+}
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    NAV
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:1.6rem 0;transition:.4s}
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  padding:1.6rem 0;transition:.4s;
+  width:100%;        /* explicit 100% so it never stretches beyond viewport */
+  overflow:hidden;   /* clip anything that would spill out */
+}
 nav.scrolled{
   background:rgba(1,13,31,.94);
   backdrop-filter:blur(24px);
@@ -92,14 +106,16 @@ nav.scrolled{
 .nav-i{
   display:flex;justify-content:space-between;align-items:center;
   max-width:1200px;margin:0 auto;padding:0 2rem;
+  min-width:0; /* allow flex children to shrink */
+  width:100%;
 }
-.nlogo{display:flex;align-items:center;gap:.9rem;text-decoration:none}
+.nlogo{display:flex;align-items:center;gap:.9rem;text-decoration:none;min-width:0;overflow:hidden}
 .nlogo img{
   width:48px;height:48px;object-fit:contain;
-  filter:drop-shadow(0 0 10px var(--neon));transition:.3s;
+  filter:drop-shadow(0 0 2px var(--neon));transition:.3s;
   flex-shrink:0;
 }
-.nlogo img:hover{filter:drop-shadow(0 0 24px var(--neon)) drop-shadow(0 0 48px var(--neon))}
+.nlogo img:hover{filter:drop-shadow(0 0 4px var(--neon)) drop-shadow(0 0 4px var(--neon))}
 .nlogo span{
   font-family:'Orbitron',monospace;font-size:1.15rem;font-weight:900;
   color:var(--neon);letter-spacing:3px;
@@ -115,7 +131,7 @@ nav.scrolled{
 .nlinks a::after{
   content:'';position:absolute;bottom:0;left:0;width:0;height:2px;
   background:linear-gradient(90deg,var(--primary),var(--neon));
-  transition:.35s;box-shadow:0 0 8px var(--neon);
+  transition:.35s;box-shadow:0 0 2px var(--neon);
 }
 .nlinks a:hover{color:var(--neon)}
 .nlinks a:hover::after{width:100%}
@@ -139,8 +155,15 @@ nav.scrolled{
   min-height:100vh;min-height:100dvh;
   display:flex;align-items:center;justify-content:center;
   position:relative;overflow:hidden;
+  width:100%;max-width:100vw; /* never wider than viewport */
 }
-.hero-c{text-align:center;z-index:10;position:relative;padding-top:80px;width:100%}
+.hero-video{
+  display:none;
+}
+
+.hero-overlay{position:absolute;inset:0;background:#000;opacity:.2;z-index:1}
+
+.hero-c,.scan,.scroll-ind{position:relative;z-index:2}
 .scan{
   position:absolute;left:0;right:0;height:3px;
   background:linear-gradient(90deg,transparent,var(--neon),transparent);
@@ -149,6 +172,63 @@ nav.scrolled{
 @keyframes scan{from{top:-3px}to{top:100%}}
 
 /* Logo 3D */
+.nlogo img{
+  width:60px;
+  height:60px;
+  object-fit:contain;
+
+
+
+  transition:.3s;
+}
+
+.nlogo:hover img{
+  transform:scale(1.08);
+  filter:
+    drop-shadow(0 0 2px rgba(59,156,237,1))
+    drop-shadow(0 0 2px rgba(59,156,237,.9))
+    drop-shadow(0 0 2px rgba(59,156,237,.7));
+}
+
+.nlogo span{
+  font-size:1.3rem;
+  font-weight:900;
+
+  text-shadow:
+    0 0 10px rgba(59,156,237,.8),
+    0 0 20px rgba(59,156,237,.6),
+    0 0 40px rgba(59,156,237,.4);
+}
+.nlogo{
+  position:relative;
+}
+
+.nlogo::before{
+  content:'';
+  position:absolute;
+  left:-8px;
+  top:50%;
+  transform:translateY(-50%);
+
+  width:76px;
+  height:76px;
+  border-radius:50%;
+
+  background:radial-gradient(
+    circle,
+    rgba(59,156,237,.18) 0%,
+    rgba(59,156,237,.08) 50%,
+    transparent 75%
+  );
+
+  pointer-events:none;
+}
+nav.scrolled .nlogo img{
+  filter:
+    drop-shadow(0 0 2px rgba(59,156,237,1))
+    drop-shadow(0 0 2px rgba(59,156,237,.8))
+    drop-shadow(0 0 2px rgba(59,156,237,.5));
+}
 .logo3d{display:inline-block;position:relative;margin-bottom:2.5rem;perspective:600px}
 .logo3d-inner{position:relative;transition:transform .1s linear;transform-style:preserve-3d}
 .logo3d img{
@@ -168,7 +248,7 @@ nav.scrolled{
 .dot-orbit::before{
   content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
   width:8px;height:8px;background:var(--neon);border-radius:50%;
-  box-shadow:0 0 12px var(--neon);
+  box-shadow:0 0 2px var(--neon);
 }
 
 .badge{
@@ -177,6 +257,8 @@ nav.scrolled{
   font-family:'Share Tech Mono',monospace;font-size:.78rem;
   color:var(--neon);letter-spacing:4px;text-transform:uppercase;
   margin-bottom:1.4rem;position:relative;overflow:hidden;
+  max-width:calc(100% - 2rem); /* never wider than its parent */
+  word-break:break-word;
 }
 .badge::before{
   content:'';position:absolute;inset:0;
@@ -205,7 +287,21 @@ nav.scrolled{
 @keyframes g2{0%,85%,100%{opacity:0;transform:translate(3px)}87%{opacity:.9;transform:translate(6px,-2px)}89%{opacity:.9;transform:translate(2px,2px)}91%{opacity:0}}
 
 .hsub{font-size:1.45rem;color:rgba(220,238,255,.65);font-weight:300;letter-spacing:5px;margin-bottom:.8rem}
-.htype{font-family:'Share Tech Mono',monospace;font-size:1.1rem;color:var(--neon);margin-bottom:2rem;min-height:1.4em}
+.htype{
+  font-family:'Share Tech Mono',monospace;
+  font-size:1.1rem;
+  color:var(--neon);
+  margin-bottom:2rem;
+  min-height:1.4em;
+  /* ── Typewriter overflow fix ──────────────────────────────────────
+     The animated text must never push the container wider than the
+     viewport. overflow:hidden + max-width together stop it from
+     causing horizontal scroll or nudging sibling / fixed elements.  */
+  max-width:100%;
+  overflow:hidden;
+  white-space:nowrap;        /* keep on one line so we can clip it */
+  text-overflow:ellipsis;    /* graceful truncation if still too long */
+}
 .cursor-blink{display:inline-block;width:2px;height:1em;background:var(--neon);animation:blink .7s infinite;vertical-align:text-bottom;margin-left:2px}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
 .hdesc{font-size:1.05rem;max-width:580px;margin:0 auto 2.5rem;color:rgba(220,238,255,.6);line-height:1.9}
@@ -721,6 +817,36 @@ footer{
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 @media(max-width:600px){
   /* Global */
+#hero{
+  min-height:100svh;
+}
+#c-net,
+#c-rain,
+#c-grid,
+.noise,
+#vignette{
+  display:none;
+}
+  .hero-video{
+  display:block;
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+  opacity:.45;
+  z-index:0;
+}
+.hero-overlay{
+  background:linear-gradient(
+    to bottom,
+    rgba(0,0,0,.65),
+    rgba(0,0,0,.45),
+    rgba(0,0,0,.75)
+  );
+  opacity:1;
+}
   .wrap{padding:0 1rem}
   section{padding:5rem 0}
   .sh{margin-bottom:3rem}
@@ -768,7 +894,14 @@ footer{
     hyphens:auto;
   }
   .hsub{font-size:.88rem;letter-spacing:1.5px;word-spacing:2px}
-  .htype{font-size:.82rem;min-height:1.6em}
+  .htype{
+    font-size:.82rem;
+    min-height:2.8em;   /* taller min-height to accommodate 2 lines on wrap */
+    white-space:normal; /* allow wrap on narrow screens */
+    overflow:hidden;
+    max-width:100%;
+    word-break:break-word;
+  }
   .hdesc{font-size:.88rem;margin-bottom:1.8rem;line-height:1.8;padding:0}
   .avail-badge{max-width:100%;justify-content:center}
   .avail-badge span{font-size:.62rem;letter-spacing:1px}
@@ -882,7 +1015,7 @@ footer{
   .htitle{font-size:clamp(1.45rem,10vw,2rem)}
   .badge{font-size:.52rem;padding:.25rem .6rem}
   .hsub{font-size:.82rem}
-  .htype{font-size:.76rem}
+  .htype{font-size:.76rem;min-height:2.8em;white-space:normal;word-break:break-word}
   .hdesc{font-size:.83rem}
   .btn{max-width:260px;font-size:.7rem;padding:.8rem 1rem}
 

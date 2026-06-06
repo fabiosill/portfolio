@@ -181,11 +181,10 @@ if (logo3di && !isTouch) {
 const el = document.getElementById('typeEl');
 if (el) {
   const phrases = [
-    'Criador de Sites Incríveis',
-    'Especialista em E-commerce',
+    'Especialista em Soluções Digitais',
+    'Experiente em E-commerce',
     'Desenvolvedor Full Stack',
-    'Designer de Experiências Digitais',
-    'Transformador de Ideias em Código'
+    'Designer de Interfaces UI/UX'
   ];
   let pi = 0, ci = 0, del = false;
   function type() {
