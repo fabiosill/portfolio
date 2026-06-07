@@ -16,7 +16,7 @@ if (!isTouch && cur && cur2) {
     cur.style.left = dx + 'px'; cur.style.top = dy + 'px';
     requestAnimationFrame(animC);
   })();
-  document.querySelectorAll('a,button,.svc,.pcard,.tcard,.sbox,.citem').forEach(el => {
+  document.querySelectorAll('a,button,.svc,.pcard,.tcard,.sbox,.citem,.pshow-item').forEach(el => {
     el.addEventListener('mouseenter', () => cur.classList.add('big'));
     el.addEventListener('mouseleave', () => cur.classList.remove('big'));
   });
@@ -286,13 +286,102 @@ if (!isTouch) {
       const r = card.getBoundingClientRect();
       const x = (e.clientX - r.left) / r.width - .5;
       const y = (e.clientY - r.top) / r.height - .5;
-      card.style.transform = `perspective(900px) rotateX(${-y * 10}deg) rotateY(${x * 10}deg) translateZ(8px) translateY(-8px)`;
+      card.style.transform = `perspective(900px) rotateX(${-y * 10}deg) rotateY(${x * 10}deg) translateY(-10px)`;
     });
     card.addEventListener('mouseleave', () => {
-      card.style.transform = 'perspective(900px) rotateX(0) rotateY(0) translateZ(0)';
+      card.style.transform = '';
     });
   });
 }
+
+// ━━━━ PHONE SHOWCASE — AUTO-SCROLL SUAVE NO HOVER ━━━━
+(function phoneShowcaseScroll() {
+  // Aguarda DOM + iframes prontos
+  function init() {
+    document.querySelectorAll('.pshow-screen').forEach(screen => {
+      const iframe = screen.querySelector('iframe');
+      if (!iframe) return;
+
+      let animId = null;
+      let scrollY = 0;
+      let maxScroll = 0;
+      const SPEED = 0.5; // px por frame ~30px/s a 60fps
+
+      // Atualiza maxScroll quando o iframe carregar
+      function updateMax() {
+        try {
+          const iDoc = iframe.contentDocument || iframe.contentWindow.document;
+          maxScroll = iDoc.body.scrollHeight - iDoc.documentElement.clientHeight;
+        } catch(e) {
+          // cross-origin: usamos um valor estimado alto para loop contínuo
+          maxScroll = 6000;
+        }
+      }
+
+      iframe.addEventListener('load', updateMax);
+      // tenta imediatamente se já carregou
+      setTimeout(updateMax, 800);
+
+      function scrollStep() {
+        scrollY += SPEED;
+
+        // Ao chegar no fim, volta suavemente ao topo
+        if (scrollY >= maxScroll) {
+          scrollY = 0;
+          // Retenta atualizar maxScroll a cada loop
+          updateMax();
+        }
+
+        // Aplica o scroll via transform no iframe (não mexe no scrollTop do iframe)
+        // Isso é mais suave e evita problemas cross-origin
+        iframe.style.transform = `scale(${getScale(screen)}) translateY(${-scrollY}px)`;
+        iframe.style.transformOrigin = 'top left';
+
+        animId = requestAnimationFrame(scrollStep);
+      }
+
+      function getScale(s) {
+        return s.offsetWidth / 375;
+      }
+
+      // Garante que o transform base é mantido
+      function resetTransform() {
+        const sc = getScale(screen);
+        iframe.style.transform = `scale(${sc}) translateY(${-scrollY}px)`;
+        iframe.style.transformOrigin = 'top left';
+        iframe.style.width = '375px';
+        iframe.style.height = Math.round(812 / sc) + 'px';
+        iframe.style.position = 'absolute';
+        iframe.style.top = '0';
+        iframe.style.left = '0';
+        iframe.style.border = 'none';
+        screen.style.height = Math.round(screen.offsetWidth * (812 / 375)) + 'px';
+      }
+
+      // Hover start
+      screen.addEventListener('mouseenter', () => {
+        updateMax();
+        if (!animId) animId = requestAnimationFrame(scrollStep);
+      });
+
+      // Hover end: para o scroll
+      screen.addEventListener('mouseleave', () => {
+        if (animId) { cancelAnimationFrame(animId); animId = null; }
+        resetTransform();
+      });
+
+      // Init base transform
+      setTimeout(resetTransform, 100);
+      window.addEventListener('resize', resetTransform, { passive: true });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
 
 // ━━━━ SMOOTH SCROLL ━━━━
 document.querySelectorAll('a[href^="#"]').forEach(a => {
@@ -333,3 +422,75 @@ if (hbg && navlinks) {
 const s = document.createElement('style');
 s.textContent = `@keyframes rs{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}`;
 document.head.appendChild(s);
+// ━━━━ PHONE SHOWCASE — IFRAME SCALE (gerenciado pelo scroll handler acima) ━━━━
+// A escala dos iframes agora é controlada pela função phoneShowcaseScroll()
+// que aplica o transform correto tanto no estado parado quanto no scroll hover.
+
+// ━━━━ PORTFOLIO FILTER (mantido por compatibilidade) ━━━━
+// A nova seção de portfolio não usa mais .pcard, mas a função pf()
+// permanece no código para não quebrar nada.
+if (typeof pf === 'undefined') {
+  function pf(btn, cat) {
+    document.querySelectorAll('.pfbtn').forEach(b => b.classList.remove('on'));
+    if (btn) btn.classList.add('on');
+  }
+}
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   PORTFOLIO — SCROLL INTERNO NO HOVER
+   Cole no final do main.js
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+(() => {
+  const cards = document.querySelectorAll('.pcardx-frame');
+  if (!cards.length) return;
+
+  // velocidade: pixels por segundo de scroll
+  const SPEED_PX_PER_SEC = 220;
+  const MIN_DURATION = 2.2;   // s
+  const MAX_DURATION = 9;     // s
+
+  cards.forEach(frame => {
+    const scroller = frame.querySelector('.pcardx-scroll');
+    const img = scroller && scroller.querySelector('img');
+    if (!scroller || !img) return;
+
+    let maxTranslate = 0;
+
+    const measure = () => {
+      // altura real da imagem renderizada vs container
+      const frameH = frame.clientHeight;
+      const imgH = img.getBoundingClientRect().height;
+      maxTranslate = Math.max(0, imgH - frameH);
+      const duration = Math.min(
+        MAX_DURATION,
+        Math.max(MIN_DURATION, maxTranslate / SPEED_PX_PER_SEC)
+      );
+      scroller.style.setProperty('--pdur', duration.toFixed(2) + 's');
+    };
+
+    // remeasure quando imagem carregar / janela redimensionar
+    if (img.complete) measure();
+    else img.addEventListener('load', measure, { once: true });
+    window.addEventListener('resize', measure);
+
+    const enter = () => {
+      if (!maxTranslate) measure();
+      scroller.classList.add('is-animating');
+      // força reflow para garantir transição
+      void scroller.offsetWidth;
+      scroller.style.transform = `translate3d(0, ${-maxTranslate}px, 0)`;
+    };
+
+    const leave = () => {
+      scroller.classList.add('is-animating');
+      void scroller.offsetWidth;
+      scroller.style.transform = 'translate3d(0,0,0)';
+    };
+
+    frame.addEventListener('mouseenter', enter);
+    frame.addEventListener('mouseleave', leave);
+
+    // touch: ao tocar, dispara o scroll uma vez
+    frame.addEventListener('touchstart', enter, { passive: true });
+    frame.addEventListener('touchend', leave, { passive: true });
+  });
+})();
