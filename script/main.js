@@ -38,7 +38,6 @@ window.addEventListener('scroll', () => {
   const c = document.getElementById('c-net');
   if (!c) return;
   const ctx = c.getContext('2d');
-  // Reduce particles on mobile for performance
   const particleCount = isMobile ? 55 : 100;
   const linkDistance   = isMobile ? 100 : 130;
   let W, H, pts;
@@ -66,7 +65,6 @@ window.addEventListener('scroll', () => {
       ctx.fillStyle = 'rgba(59,156,237,.6)';
       ctx.fill();
     });
-    // Skip connection drawing on very small screens
     if (!isMobile || window.innerWidth > 480) {
       for (let i = 0; i < pts.length; i++) {
         for (let j = i + 1; j < pts.length; j++) {
@@ -92,7 +90,7 @@ window.addEventListener('scroll', () => {
 (()=>{
   const c = document.getElementById('c-rain');
   if (!c) return;
-  if (isMobile) { c.style.display = 'none'; return; } // skip on mobile
+  if (isMobile) { c.style.display = 'none'; return; }
   const ctx = c.getContext('2d');
   let W, H, cols, drops;
   const chars = '01ABCDEF</>{}[];()★◆■';
@@ -274,6 +272,8 @@ function doSend(e) {
         btn.style.background = '';
         btn.disabled = false;
         e.target.reset();
+        // Fechar o modal após sucesso
+        setTimeout(closeContactModal, 1800);
       }, 3500);
     } else { btn.textContent = steps[si]; si++; }
   }, 500);
@@ -296,7 +296,6 @@ if (!isTouch) {
 
 // ━━━━ PHONE SHOWCASE — AUTO-SCROLL SUAVE NO HOVER ━━━━
 (function phoneShowcaseScroll() {
-  // Aguarda DOM + iframes prontos
   function init() {
     document.querySelectorAll('.pshow-screen').forEach(screen => {
       const iframe = screen.querySelector('iframe');
@@ -305,77 +304,57 @@ if (!isTouch) {
       let animId = null;
       let scrollY = 0;
       let maxScroll = 0;
-      const SPEED = 0.5; // px por frame ~30px/s a 60fps
+      const SPEED = 0.5;
 
-      // Atualiza maxScroll quando o iframe carregar
       function updateMax() {
         try {
           const iDoc = iframe.contentDocument || iframe.contentWindow.document;
           maxScroll = iDoc.body.scrollHeight - iDoc.documentElement.clientHeight;
         } catch(e) {
-          // cross-origin: usamos um valor estimado alto para loop contínuo
           maxScroll = 6000;
         }
       }
 
       iframe.addEventListener('load', updateMax);
-      // tenta imediatamente se já carregou
       setTimeout(updateMax, 800);
 
       function scrollStep() {
         scrollY += SPEED;
-
-        // Ao chegar no fim, volta suavemente ao topo
         if (scrollY >= maxScroll) {
           scrollY = 0;
-          // Retenta atualizar maxScroll a cada loop
           updateMax();
         }
-
-        // Aplica o scroll via transform no iframe (não mexe no scrollTop do iframe)
-        // Isso é mais suave e evita problemas cross-origin
         iframe.style.transform = `scale(${getScale(screen)}) translateY(${-scrollY}px)`;
         iframe.style.transformOrigin = 'top left';
-
         animId = requestAnimationFrame(scrollStep);
       }
 
       function getScale(s) {
-        // Usa offsetWidth do .pshow-screen para calcular scale real.
-        // Como todos os .pshow-item têm width idêntico (--phone-w),
-        // o offsetWidth de cada screen também será idêntico.
         return s.offsetWidth / 375;
       }
 
-      // Garante que o transform base é mantido
       function resetTransform() {
         const sc = getScale(screen);
         iframe.style.transform = `scale(${sc}) translateY(${-scrollY}px)`;
         iframe.style.transformOrigin = 'top left';
         iframe.style.width = '375px';
-        // Altura do iframe: suficiente para cobrir a tela com scroll
         iframe.style.height = '812px';
         iframe.style.position = 'absolute';
         iframe.style.top = '0';
         iframe.style.left = '0';
         iframe.style.border = 'none';
-        // NÃO forçamos screen.style.height — o CSS aspect-ratio:375/812 garante
-        // proporção uniforme para todos os cards sem variação por JS.
       }
 
-      // Hover start
       screen.addEventListener('mouseenter', () => {
         updateMax();
         if (!animId) animId = requestAnimationFrame(scrollStep);
       });
 
-      // Hover end: para o scroll
       screen.addEventListener('mouseleave', () => {
         if (animId) { cancelAnimationFrame(animId); animId = null; }
         resetTransform();
       });
 
-      // Init base transform
       setTimeout(resetTransform, 100);
       window.addEventListener('resize', resetTransform, { passive: true });
     });
@@ -391,8 +370,11 @@ if (!isTouch) {
 // ━━━━ SMOOTH SCROLL ━━━━
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
+    const href = a.getAttribute('href');
+    // Não executar scroll se for o botão de contato (handled separately)
+    if (a.classList.contains('open-contact-btn')) return;
     e.preventDefault();
-    const t = document.querySelector(a.getAttribute('href'));
+    const t = document.querySelector(href);
     if (t) t.scrollIntoView({ behavior: 'smooth' });
   });
 });
@@ -404,7 +386,6 @@ if (hbg && navlinks) {
   hbg.addEventListener('click', () => {
     hbg.classList.toggle('open');
     navlinks.classList.toggle('open');
-    // Prevent body scroll when menu is open
     document.body.style.overflow = navlinks.classList.contains('open') ? 'hidden' : '';
   });
   navlinks.querySelectorAll('a').forEach(a => {
@@ -427,31 +408,25 @@ if (hbg && navlinks) {
 const s = document.createElement('style');
 s.textContent = `@keyframes rs{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}`;
 document.head.appendChild(s);
-// ━━━━ PHONE SHOWCASE — IFRAME SCALE (gerenciado pelo scroll handler acima) ━━━━
-// A escala dos iframes agora é controlada pela função phoneShowcaseScroll()
-// que aplica o transform correto tanto no estado parado quanto no scroll hover.
 
-// ━━━━ PORTFOLIO FILTER (mantido por compatibilidade) ━━━━
-// A nova seção de portfolio não usa mais .pcard, mas a função pf()
-// permanece no código para não quebrar nada.
+// ━━━━ PORTFOLIO FILTER (compatibilidade) ━━━━
 if (typeof pf === 'undefined') {
   function pf(btn, cat) {
     document.querySelectorAll('.pfbtn').forEach(b => b.classList.remove('on'));
     if (btn) btn.classList.add('on');
   }
 }
+
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    PORTFOLIO — SCROLL INTERNO NO HOVER
-   Cole no final do main.js
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 (() => {
   const cards = document.querySelectorAll('.pcardx-frame');
   if (!cards.length) return;
 
-  // velocidade: pixels por segundo de scroll
   const SPEED_PX_PER_SEC = 220;
-  const MIN_DURATION = 2.2;   // s
-  const MAX_DURATION = 9;     // s
+  const MIN_DURATION = 2.2;
+  const MAX_DURATION = 9;
 
   cards.forEach(frame => {
     const scroller = frame.querySelector('.pcardx-scroll');
@@ -461,7 +436,6 @@ if (typeof pf === 'undefined') {
     let maxTranslate = 0;
 
     const measure = () => {
-      // altura real da imagem renderizada vs container
       const frameH = frame.clientHeight;
       const imgH = img.getBoundingClientRect().height;
       maxTranslate = Math.max(0, imgH - frameH);
@@ -472,7 +446,6 @@ if (typeof pf === 'undefined') {
       scroller.style.setProperty('--pdur', duration.toFixed(2) + 's');
     };
 
-    // remeasure quando imagem carregar / janela redimensionar
     if (img.complete) measure();
     else img.addEventListener('load', measure, { once: true });
     window.addEventListener('resize', measure);
@@ -480,7 +453,6 @@ if (typeof pf === 'undefined') {
     const enter = () => {
       if (!maxTranslate) measure();
       scroller.classList.add('is-animating');
-      // força reflow para garantir transição
       void scroller.offsetWidth;
       scroller.style.transform = `translate3d(0, ${-maxTranslate}px, 0)`;
     };
@@ -493,9 +465,191 @@ if (typeof pf === 'undefined') {
 
     frame.addEventListener('mouseenter', enter);
     frame.addEventListener('mouseleave', leave);
-
-    // touch: ao tocar, dispara o scroll uma vez
     frame.addEventListener('touchstart', enter, { passive: true });
     frame.addEventListener('touchend', leave, { passive: true });
   });
+})();
+
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   CONTACT MODAL — abrir / fechar
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+const contactModal   = document.getElementById('contact-modal');
+const contactModalClose = document.getElementById('cmodal-close');
+
+function openContactModal() {
+  if (!contactModal) return;
+  contactModal.classList.add('open');
+  contactModal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  // Focar o primeiro campo do formulário para acessibilidade
+  setTimeout(() => {
+    const firstInput = contactModal.querySelector('input, textarea, select');
+    if (firstInput) firstInput.focus();
+  }, 380);
+}
+
+function closeContactModal() {
+  if (!contactModal) return;
+  contactModal.classList.remove('open');
+  contactModal.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+
+// Botões que abrem o modal (class open-contact-btn)
+document.querySelectorAll('.open-contact-btn').forEach(btn => {
+  btn.addEventListener('click', e => {
+    e.preventDefault();
+    openContactModal();
+  });
+});
+
+// Botão fechar
+if (contactModalClose) {
+  contactModalClose.addEventListener('click', closeContactModal);
+}
+
+// Fechar ao clicar no overlay (fora do box)
+if (contactModal) {
+  contactModal.addEventListener('click', e => {
+    if (e.target === contactModal) closeContactModal();
+  });
+}
+
+// Fechar com ESC
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && contactModal && contactModal.classList.contains('open')) {
+    closeContactModal();
+  }
+});
+
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   TESTIMONIALS — CARROSSEL AUTOMÁTICO
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+(function testimonialCarousel() {
+  const carousel = document.getElementById('tcarousel');
+  const dotsContainer = document.getElementById('tcarousel-dots');
+  if (!carousel) return;
+
+  // Todos os cards originais (os 3 primeiros são reais, os 2 últimos são clones para loop)
+  const TOTAL_REAL = 3;
+  const cards = carousel.querySelectorAll('.tcard');
+  const dots  = dotsContainer ? dotsContainer.querySelectorAll('.tdot') : [];
+
+  // Largura de cada card + gap (2rem = 32px)
+  // Calculamos dinamicamente
+  let cardW = 0;
+  let gap = 0;
+  let currentIdx = 0;
+  let offset = 0;
+  let autoTimer = null;
+  let isDragging = false;
+  let startX = 0;
+  let startOffset = 0;
+  let transitioning = false;
+
+  function getCardWidth() {
+    const card = carousel.querySelector('.tcard');
+    if (!card) return 340;
+    const style = window.getComputedStyle(carousel);
+    gap = parseFloat(style.gap) || 32;
+    return card.offsetWidth;
+  }
+
+  function goTo(idx, animate = true) {
+    cardW = getCardWidth();
+    currentIdx = idx;
+    offset = currentIdx * (cardW + gap);
+
+    if (animate) {
+      carousel.style.transition = 'transform 0.65s cubic-bezier(.23,1,.32,1)';
+    } else {
+      carousel.style.transition = 'none';
+    }
+    carousel.style.transform = `translateX(${-offset}px)`;
+
+    // Atualizar dots
+    const realIdx = currentIdx % TOTAL_REAL;
+    dots.forEach((d, i) => {
+      d.classList.toggle('active', i === realIdx);
+    });
+  }
+
+  function next() {
+    if (transitioning) return;
+    const nextIdx = currentIdx + 1;
+    goTo(nextIdx);
+
+    // Quando chega nos clones, reseta silenciosamente
+    if (nextIdx >= TOTAL_REAL) {
+      transitioning = true;
+      setTimeout(() => {
+        goTo(nextIdx % TOTAL_REAL, false);
+        transitioning = false;
+      }, 680);
+    }
+  }
+
+  function startAuto() {
+    stopAuto();
+    autoTimer = setInterval(next, 4000);
+  }
+
+  function stopAuto() {
+    if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
+  }
+
+  // Dots clicáveis
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => {
+      stopAuto();
+      goTo(i);
+      startAuto();
+    });
+  });
+
+  // Pause no hover
+  carousel.addEventListener('mouseenter', stopAuto);
+  carousel.addEventListener('mouseleave', startAuto);
+
+  // Suporte a touch/swipe
+  carousel.addEventListener('touchstart', e => {
+    startX = e.touches[0].clientX;
+    startOffset = currentIdx * (getCardWidth() + gap);
+    isDragging = true;
+    stopAuto();
+  }, { passive: true });
+
+  carousel.addEventListener('touchmove', e => {
+    if (!isDragging) return;
+    const dx = e.touches[0].clientX - startX;
+    carousel.style.transition = 'none';
+    carousel.style.transform = `translateX(${-(startOffset - dx)}px)`;
+  }, { passive: true });
+
+  carousel.addEventListener('touchend', e => {
+    if (!isDragging) return;
+    isDragging = false;
+    const dx = e.changedTouches[0].clientX - startX;
+    if (dx < -50) {
+      next();
+    } else if (dx > 50 && currentIdx > 0) {
+      goTo(currentIdx - 1);
+    } else {
+      goTo(currentIdx);
+    }
+    startAuto();
+  }, { passive: true });
+
+  // Inicializar
+  setTimeout(() => {
+    goTo(0, false);
+    startAuto();
+  }, 300);
+
+  // Re-calc no resize
+  window.addEventListener('resize', () => {
+    goTo(currentIdx, false);
+  }, { passive: true });
 })();
