@@ -341,6 +341,9 @@ if (!isTouch) {
       }
 
       function getScale(s) {
+        // Usa offsetWidth do .pshow-screen para calcular scale real.
+        // Como todos os .pshow-item têm width idêntico (--phone-w),
+        // o offsetWidth de cada screen também será idêntico.
         return s.offsetWidth / 375;
       }
 
@@ -350,12 +353,14 @@ if (!isTouch) {
         iframe.style.transform = `scale(${sc}) translateY(${-scrollY}px)`;
         iframe.style.transformOrigin = 'top left';
         iframe.style.width = '375px';
-        iframe.style.height = Math.round(812 / sc) + 'px';
+        // Altura do iframe: suficiente para cobrir a tela com scroll
+        iframe.style.height = '812px';
         iframe.style.position = 'absolute';
         iframe.style.top = '0';
         iframe.style.left = '0';
         iframe.style.border = 'none';
-        screen.style.height = Math.round(screen.offsetWidth * (812 / 375)) + 'px';
+        // NÃO forçamos screen.style.height — o CSS aspect-ratio:375/812 garante
+        // proporção uniforme para todos os cards sem variação por JS.
       }
 
       // Hover start

@@ -23,11 +23,32 @@
 
 /* ━━━━ RESET ━━━━ */
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;overflow-x:hidden}
+html{
+  scroll-behavior:smooth;
+  overflow-x:hidden;
+  overflow-y:auto;
+  height:auto;
+  /* ── Custom scrollbar (thin + tema azul) ── */
+  scrollbar-width:thin;
+  scrollbar-color:rgba(59,156,237,.45) rgba(1,13,31,.6);
+}
+html::-webkit-scrollbar{width:5px}
+html::-webkit-scrollbar-track{background:rgba(1,13,31,.6)}
+html::-webkit-scrollbar-thumb{
+  background:linear-gradient(180deg,var(--primary),var(--neon));
+  border-radius:8px;
+  transition:background .3s;
+}
+html::-webkit-scrollbar-thumb:hover{
+  background:linear-gradient(180deg,var(--neon),var(--primary-accent));
+}
 body{
   background:var(--bg);color:var(--txt);
   font-family:'Rajdhani',sans-serif;
-  overflow-x:hidden;max-width:100vw;
+  overflow-x:hidden;
+  overflow-y:visible;
+  max-width:100vw;
+  height:auto;
   -webkit-tap-highlight-color:transparent;
 }
 
@@ -72,7 +93,7 @@ body{
 .wrap{
   position:relative;z-index:10;
   max-width:1200px;margin:0 auto;padding:0 2rem;
-  width:100%;overflow-x:hidden;
+  width:100%;
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -80,7 +101,7 @@ body{
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:200;
-  padding:1.6rem 0;transition:.4s;width:100%;overflow:hidden;
+  padding:1.6rem 0;transition:.4s;width:100%;
 }
 nav.scrolled{
   background:rgba(1,13,31,.94);
@@ -141,7 +162,7 @@ nav.scrolled .nlogo img{
 #hero{
   min-height:100vh;min-height:100dvh;
   display:flex;align-items:center;justify-content:center;
-  position:relative;overflow:hidden;width:100%;max-width:100vw;
+  position:relative;overflow:clip;width:100%;max-width:100vw;
 }
 .hero-video{display:none}
 .hero-overlay{position:absolute;inset:0;background:#000;opacity:.2;z-index:1}
@@ -253,7 +274,7 @@ nav.scrolled .nlogo img{
    SECTIONS BASE
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 section{padding:9rem 0;position:relative;z-index:10}
-.sh{text-align:center;margin-bottom:5rem}
+.sh{text-align:center;margin-bottom:5rem;position:relative;z-index:12}
 .stag{
   font-family:'Share Tech Mono',monospace;font-size:.82rem;
   color:var(--neon);letter-spacing:4px;text-transform:uppercase;
@@ -323,7 +344,7 @@ section{padding:9rem 0;position:relative;z-index:10}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 #work-offer{
   background:rgba(2,19,48,.55);
-  position:relative;overflow:hidden;
+  position:relative;overflow:visible;
 }
 #work-offer::before{
   content:'';position:absolute;inset:0;
@@ -338,7 +359,7 @@ section{padding:9rem 0;position:relative;z-index:10}
   display:grid;
   grid-template-columns:1fr 40px 1fr;
   gap:0;
-  align-items:start;
+  align-items:stretch;
 }
 
 /* Label intro de cada lado */
@@ -348,8 +369,12 @@ section{padding:9rem 0;position:relative;z-index:10}
 }
 
 /* ── LADO ESQUERDO: PROCESSO (Timeline) ── */
-.wo-left{padding-right:3rem}
-.process-timeline{position:relative;padding-left:.5rem}
+.wo-left{
+  padding-right:3rem;
+  display:flex;
+  flex-direction:column;
+}
+.process-timeline{position:relative;padding-left:.5rem;flex:1}
 .process-timeline::before{
   content:'';position:absolute;left:22px;top:12px;bottom:12px;width:2px;
   background:linear-gradient(180deg,var(--neon),rgba(59,156,237,.1));
@@ -357,7 +382,7 @@ section{padding:9rem 0;position:relative;z-index:10}
 }
 .ptl-item{
   display:flex;gap:1.4rem;align-items:flex-start;
-  margin-bottom:1.8rem;position:relative;z-index:1;
+  margin-bottom:2.2rem;position:relative;z-index:1;
   transition:.35s;
 }
 .ptl-item:last-child{margin-bottom:0}
@@ -385,6 +410,7 @@ section{padding:9rem 0;position:relative;z-index:10}
 .wo-divider{
   display:flex;flex-direction:column;align-items:center;
   justify-content:center;padding-top:4rem;gap:.5rem;
+  height:100%;
 }
 .wo-divider-line{
   width:2px;flex:1;
@@ -399,11 +425,16 @@ section{padding:9rem 0;position:relative;z-index:10}
 @keyframes pulse-gem{0%,100%{opacity:.35;transform:scale(1)}50%{opacity:.8;transform:scale(1.25)}}
 
 /* ── LADO DIREITO: SERVIÇOS (5 cards mini) ── */
-.wo-right{padding-left:3rem}
+.wo-right{
+  padding-left:3rem;
+  display:flex;
+  flex-direction:column;
+}
 .svc-quintet{
   display:grid;
   grid-template-rows:repeat(5,1fr);
   gap:1rem;
+  flex:1;
 }
 .svc-mini{
   display:flex;align-items:flex-start;gap:1.1rem;
@@ -508,13 +539,13 @@ section{padding:9rem 0;position:relative;z-index:10}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 #portfolio{
   background:rgba(2,19,48,.35);
-  overflow:hidden;
+  overflow:visible;
   position:relative;
 }
 
 /* Grade de fundo decorativa */
 .port-bg-grid{
-  position:absolute;inset:0;pointer-events:none;z-index:1;
+  position:absolute;inset:0;pointer-events:none;z-index:0;
   background-image:
     linear-gradient(rgba(59,156,237,.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(59,156,237,.03) 1px, transparent 1px);
@@ -525,29 +556,47 @@ section{padding:9rem 0;position:relative;z-index:10}
 #portfolio .wrap{position:relative;z-index:10}
 
 .port-sub{
-  color:rgba(220,238,255,.45);font-size:.85rem;letter-spacing:2.5px;
+  color:rgba(220,238,255,.55);font-size:.85rem;letter-spacing:2.5px;
   font-family:'Share Tech Mono',monospace;margin-top:-2.5rem;
   text-transform:uppercase;
+  position:relative;
+  z-index:15;
+  display:block;
+  margin-bottom:1rem;
 }
 
 /* ── STAGE: 3 celulares lado a lado — iguais ── */
+/*
+   ESTRATÉGIA DE LARGURA ÚNICA:
+   --phone-w é a única fonte de verdade para a largura de cada card.
+   O grid columns usa esse valor diretamente, eliminando qualquer
+   variação causada por 1fr, padding ou conteúdo interno.
+   Todos os filhos (.pshow-phone, .pshow-meta, .pshow-info) herdam
+   essa largura via width:100% sobre um pai com width fixo.
+*/
 .pshow-stage{
+  --phone-w: 260px;   /* largura fixa de cada card — altere só aqui */
+  --phone-gap: 2.5rem;
+
   display:grid;
-  /* todas 3 colunas idênticas */
-  grid-template-columns:repeat(3,1fr);
-  gap:2rem;
-  /* alinha pelo centro — sem destaque entre eles */
+  /* 3 colunas de largura exata = --phone-w; sem 1fr, sem stretch */
+  grid-template-columns:repeat(3, var(--phone-w));
+  gap:var(--phone-gap);
+  justify-content:center;   /* centraliza o grid no wrap */
   align-items:start;
-  padding:2rem 0 4rem;
-  margin-bottom:1rem;
+  padding:1rem 0 2rem;
+  margin-bottom:0;
 }
 
 /* ── ITEM ── */
 .pshow-item{
+  /* largura fixa e idêntica para todos os 3 itens */
+  width:var(--phone-w);
+  min-width:0;               /* evita overflow em flex pai */
   display:flex;
   flex-direction:column;
-  align-items:center;
-  gap:1.4rem;
+  align-items:stretch;       /* phone e meta preenchem exatamente --phone-w */
+  gap:0.8rem;
   will-change:transform;
   transition:transform .45s cubic-bezier(.23,1,.32,1);
   position:relative;
@@ -559,7 +608,7 @@ section{padding:9rem 0;position:relative;z-index:10}
 
 /* ── META (número + categoria + tags) ── */
 .pshow-meta{
-  width:100%;
+  width:100%;  /* herda --phone-w do .pshow-item */
   display:flex;flex-direction:column;gap:.6rem;
 }
 .pshow-meta-line{
@@ -605,7 +654,8 @@ section{padding:9rem 0;position:relative;z-index:10}
 /* ━━━━ DEVICE WRAP ━━━━ */
 .pshow-device-wrap{
   position:relative;
-  width:100%;
+  width:100%;                /* herda --phone-w do .pshow-item */
+  box-sizing:border-box;
   display:flex;
   justify-content:center;
 }
@@ -645,17 +695,20 @@ section{padding:9rem 0;position:relative;z-index:10}
    top: status-bar (~30px) + padding 10px = 40px
    bottom: home-bar (~20px) + padding 16px = 36px
    lateral: 9px cada lado
+
+   LARGURA: width:100% herda --phone-w do .pshow-item.
+   NÃO defina max-width ou width fixo aqui — o pai já é a referência.
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 .pshow-phone{
   position:relative;z-index:5;
-  /* width fill do device-wrap */
+  /* herda exatamente a largura do .pshow-item = --phone-w */
   width:100%;
-  /* altura auto definida pelo aspect-ratio do .pshow-screen interno */
+  box-sizing:border-box;     /* padding e border incluídos na largura herdada */
   background:linear-gradient(165deg,#0f1f3d 0%,#071428 55%,#0c1d38 100%);
   border-radius:38px;
   border:1.5px solid rgba(59,156,237,.3);
-  /* padding: top / lados / bottom */
-  padding:10px 9px 16px;
+  /* compact padding: top / sides / bottom */
+  padding:8px 8px 12px;
   box-shadow:
     0 0 0 1px rgba(59,156,237,.09),
     0 30px 80px rgba(0,0,0,.75),
@@ -664,8 +717,7 @@ section{padding:9rem 0;position:relative;z-index:10}
     inset 0 1px 0 rgba(255,255,255,.07),
     inset 0 0 30px rgba(0,0,0,.25);
   transition:border-color .4s, box-shadow .4s;
-  /* gpu layer */
-  transform:translate3d(0,0,0);
+  /* NO scale transform — the phone is the master width reference */
 }
 /* featured phone — visual igual aos demais */
 .pshow-phone--featured{
@@ -685,6 +737,7 @@ section{padding:9rem 0;position:relative;z-index:10}
     0 40px 90px rgba(0,0,0,.72),
     0 0 60px rgba(59,156,237,.12),
     inset 0 1px 0 rgba(255,255,255,.08);
+  transform:translate3d(0,-4px,0);
 }
 
 /* Reflexo lateral acetinado */
@@ -748,16 +801,17 @@ section{padding:9rem 0;position:relative;z-index:10}
 .pshow-screen{
   /* width:100% herda o padding lateral do .pshow-phone */
   width:100%;
+  box-sizing:border-box;     /* border de 1px não alarga o elemento */
   /* aspect-ratio mantém proporção 375:812 exata */
   aspect-ratio:375/812;
   overflow:hidden;
-  /* border-radius que clippa o conteúdo do iframe nas bordas */
-  border-radius:24px;
+  /* border-radius compacto e premium */
+  border-radius:20px;
   background:#020d1e;
   position:relative;
   border:1px solid rgba(59,156,237,.08);
   /* clip-path reforça o corte em browsers que ignorem border-radius+overflow */
-  clip-path:inset(0 round 24px);
+  clip-path:inset(0 round 20px);
   /* GPU layer independente para o iframe */
   transform:translate3d(0,0,0);
   isolation:isolate;
@@ -821,7 +875,7 @@ section{padding:9rem 0;position:relative;z-index:10}
 }
 
 /* ── INFO abaixo ── */
-.pshow-info{width:100%}
+.pshow-info{width:100%;box-sizing:border-box;margin-top:.4rem}
 .pshow-title{
   font-family:'Orbitron',sans-serif;font-size:.92rem;color:#fff;
   margin-bottom:.45rem;letter-spacing:.8px;
@@ -946,7 +1000,7 @@ footer{
   border-top:1px solid var(--border);
   padding:2.5rem 0 1.5rem;   /* ← compacto */
   position:relative;z-index:10;
-  overflow:hidden;
+  overflow:visible;
 }
 
 /* Banner de fundo — arquivo: img/footer-bg.png (1920×320px) */
@@ -970,7 +1024,7 @@ footer .wrap{position:relative;z-index:1}
 
 .foot-top{
   display:grid;grid-template-columns:1.5fr 1fr 1fr;
-  gap:3rem;margin-bottom:1.6rem;  /* ← reduzido */
+  gap:2rem;margin-bottom:1.2rem;
 }
 .foot-brand .flogo{
   font-family:'Orbitron',sans-serif;font-size:1.6rem;font-weight:900;
@@ -981,14 +1035,14 @@ footer .wrap{position:relative;z-index:1}
 
 /* Colunas compactas */
 .foot-col h4{
-  font-family:'Orbitron',sans-serif;font-size:.78rem;  /* ← menor */
+  font-family:'Orbitron',sans-serif;font-size:.76rem;
   color:var(--neon);letter-spacing:2px;
-  margin-bottom:.8rem;  /* ← reduzido (era 1.5rem) */
+  margin-bottom:.6rem;
 }
 .foot-col ul{list-style:none}
-.foot-col ul li{margin-bottom:.38rem}  /* ← reduzido (era .8rem) */
+.foot-col ul li{margin-bottom:.28rem}
 .foot-col ul a{
-  color:rgba(220,238,255,.5);text-decoration:none;font-size:.85rem;
+  color:rgba(220,238,255,.5);text-decoration:none;font-size:.83rem;
   transition:.3s;position:relative;padding-left:.9rem;
 }
 .foot-col ul a::before{content:'>';position:absolute;left:0;color:var(--neon);transition:.3s;font-size:.75rem}
@@ -1137,12 +1191,14 @@ footer .wrap{position:relative;z-index:1}
 
   /* Phone showcase: empilha em 1 coluna no tablet */
   .pshow-stage{
-    grid-template-columns:1fr;
-    max-width:360px;
-    margin-left:auto;margin-right:auto;
-    gap:4rem;
+    --phone-w: 320px;
+    grid-template-columns:var(--phone-w);
+    gap:3rem;
     align-items:start;
   }
+  /* reset scale no tablet — coluna única, escala natural */
+  .pshow-phone{transform:translate3d(0,0,0)}
+  .pshow-item:hover .pshow-phone{transform:translate3d(0,-4px,0)}
   .pshow-featured-badge{top:-1rem}
 
   /* Contact */
@@ -1236,13 +1292,14 @@ footer .wrap{position:relative;z-index:1}
 
   /* Phone showcase: 1 coluna, bem menor */
   .pshow-stage{
-    grid-template-columns:1fr;
-    max-width:290px;
-    margin-left:auto;margin-right:auto;
+    --phone-w: 260px;
+    grid-template-columns:var(--phone-w);
     gap:3rem;
     align-items:start;
   }
-  .pshow-phone{border-radius:30px;padding:10px 8px 16px}
+  /* reset scale no mobile — o layout de coluna única já é compacto */
+  .pshow-phone{border-radius:30px;padding:10px 8px 16px;transform:translate3d(0,0,0)}
+  .pshow-item:hover .pshow-phone{transform:translate3d(0,-4px,0)}
   .pshow-home-bar{width:36px;margin-top:10px}
   .pshow-featured-badge{font-size:.56rem;padding:.22rem .75rem}
   .port-sub{font-size:.72rem;letter-spacing:1px}
@@ -1303,7 +1360,7 @@ footer .wrap{position:relative;z-index:1}
   .nlogo img{width:32px;height:32px}
   .foot-brand .flogo{font-size:1.15rem}
 
-  .pshow-stage{max-width:250px}
+  .pshow-stage{--phone-w:220px}
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -1337,21 +1394,21 @@ footer .wrap{position:relative;z-index:1}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 
 .pgrid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:2.5rem;
-  margin-top:3rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 270px));
+  justify-content: center;
+  gap: 3rem;
 }
 
 .pcardx{
   position:relative;
   display:flex;
   flex-direction:column;
-  gap:1.1rem;
-  padding:1.25rem;
+  gap:.9rem;
+  padding:1rem;
   background:linear-gradient(180deg, rgba(2,19,48,.55) 0%, rgba(1,13,31,.65) 100%);
   border:1px solid var(--border);
-  border-radius:22px;
+  border-radius:18px;
   box-shadow:
     0 10px 30px -12px rgba(0,0,0,.55),
     0 0 0 1px rgba(59,156,237,.04) inset;
@@ -1379,20 +1436,21 @@ footer .wrap{position:relative;z-index:1}
 .pcardx-num{color:var(--neon);font-weight:700}
 .pcardx-cat{color:#9ec7ee}
 
-/* ── FRAME (retângulo vertical estilo preview) ── */
+/* ── FRAME reduzido 30% ── */
 .pcardx-frame{
   position:relative;
   display:block;
-  width:100%;
-  aspect-ratio: 9 / 16;   /* retângulo vertical, mais curto que celular real */
-  max-height:520px;
-  border-radius:18px;
+  width:95%;          /* reduzido 30% */
+  margin:0 auto;      /* centralizado */
+  aspect-ratio: 9 / 16;
+  max-height:384px;   /* era 520px × 0.7 */
+  border-radius:16px;
   overflow:hidden;
   background:#0a0f1a;
   border:1px solid rgba(59,156,237,.18);
   box-shadow:
     inset 0 0 0 1px rgba(255,255,255,.03),
-    0 18px 40px -20px rgba(0,0,0,.7);
+    0 12px 28px -14px rgba(0,0,0,.7);
   cursor:pointer;
   isolation:isolate;
 }
@@ -1445,19 +1503,38 @@ footer .wrap{position:relative;z-index:1}
 .pcardx-info{display:flex;flex-direction:column;gap:.55rem;padding:.25rem .35rem .35rem}
 .pcardx-title{
   font-family:'Orbitron',sans-serif;
-  font-size:1.15rem;font-weight:700;
+  font-size:1.05rem;font-weight:700;
   color:#fff;letter-spacing:.02em;
 }
 .pcardx-desc{
-  color:#a8c2dc;font-size:.92rem;line-height:1.45;
+  color:#a8c2dc;font-size:.88rem;line-height:1.45;
 }
 .pcardx-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.15rem}
 
+/* Link "ver ao vivo" dentro do card */
+.pshow-link{
+  display:inline-flex;align-items:center;gap:.45rem;
+  font-family:'Share Tech Mono',monospace;font-size:.68rem;
+  color:var(--neon);letter-spacing:1.5px;text-decoration:none;
+  position:relative;padding-bottom:.2rem;transition:.3s;
+  margin-top:.2rem;
+}
+.pshow-link::after{
+  content:'';position:absolute;bottom:0;left:0;
+  width:0;height:1px;background:var(--neon);transition:.35s;
+  box-shadow:0 0 6px var(--neon);
+}
+.pshow-link:hover::after{width:100%}
+.pshow-link:hover{color:#fff}
+.pshow-link svg{flex-shrink:0;transition:.3s}
+.pshow-link:hover svg{transform:translate(2px,-2px)}
+
 /* ── RESPONSIVO ── */
 @media (max-width:1024px){
-  .pgrid{grid-template-columns:repeat(2,1fr);gap:2rem}
+  .pgrid{grid-template-columns:repeat(2,1fr);gap:1.75rem}
+  .pcardx-frame{width:75%;max-height:392px}
 }
 @media (max-width:680px){
-  .pgrid{grid-template-columns:1fr;gap:1.75rem}
-  .pcardx-frame{max-height:560px;aspect-ratio:9/15}
+  .pgrid{grid-template-columns:1fr;gap:1.5rem}
+  .pcardx-frame{width:70%;max-height:392px;aspect-ratio:9/15}
 }
