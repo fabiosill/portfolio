@@ -185,95 +185,103 @@
       <p class="port-sub">Experiências de clientes reais</p>
     </div>
 
-    <!-- PORTFOLIO TWO-COLUMN LAYOUT: projetos + carrossel 3D -->
+    <!-- PORTFOLIO — DOIS COLUNAS: SMARTPHONE CARD + SHOWCASE 3D -->
     <div class="port-split">
 
-      <!-- COLUNA ESQUERDA: projetos existentes -->
+      <!-- ══ COLUNA ESQUERDA: Card smartphone + carrossel ══ -->
       <div class="port-split__projects">
-        <div class="pgrid">
 
-          <!-- PROJETO 1 -->
-          <article class="pcardx reveal-l">
-            <div class="pcardx-head">
-              <span class="pcardx-num">01</span>
-              <span class="pcardx-cat">Landing page</span>
-            </div>
-            <a href="https://fabiosill.github.io/hairstylist-website" target="_blank" rel="noopener"
-               class="pcardx-frame" aria-label="Ver Kleber Pinto ao vivo">
-              <div class="pcardx-scroll">
-                <img src="img/kleberpintosite.png" alt="Kleber Pinto — preview do site" loading="lazy">
+        <!-- Wrapper do card + controles -->
+        <div class="ppc-wrap">
+
+          <!-- Card único no formato smartphone -->
+          <div class="ppc-phone" id="ppc-phone">
+            <div class="ppc-shell">
+              <!-- Notch / câmera -->
+              <div class="ppc-notch">
+                <span class="ppc-notch-cam"></span>
+                <span class="ppc-notch-speaker"></span>
               </div>
-              <span class="pcardx-glare" aria-hidden="true"></span>
-            </a>
-            <div class="pcardx-info">
-              <h3 class="pcardx-title">Kleber Pinto</h3>
-              <p class="pcardx-desc">Site institucional para serviços de química, cabelo e barba.</p>
-              <div class="pcardx-tags">
+
+              <!-- Tela do projeto -->
+              <div class="ppc-screen">
+                <div class="ppc-slide active" data-idx="0">
+                  <a href="https://fabiosill.github.io/hairstylist-website" target="_blank" rel="noopener"
+                     class="ppc-frame-link" aria-label="Ver Kleber Pinto ao vivo">
+                    <div class="ppc-scroll">
+                      <img src="img/kleberpintosite.png" alt="Kleber Pinto" loading="lazy">
+                    </div>
+                    <span class="ppc-glare" aria-hidden="true"></span>
+                  </a>
+                </div>
+                <div class="ppc-slide" data-idx="1">
+                  <a href="https://fabiosill.github.io/sisa-clean" target="_blank" rel="noopener"
+                     class="ppc-frame-link" aria-label="Ver SISA Clean ao vivo">
+                    <div class="ppc-scroll">
+                      <img src="img/sisacleansite.png" alt="SISA Clean" loading="lazy">
+                    </div>
+                    <span class="ppc-glare" aria-hidden="true"></span>
+                  </a>
+                </div>
+                <div class="ppc-slide" data-idx="2">
+                  <a href="https://fabiosill.github.io/leparfragancy-web" target="_blank" rel="noopener"
+                     class="ppc-frame-link" aria-label="Ver Le Parfragancy ao vivo">
+                    <div class="ppc-scroll">
+                      <img src="img/leparfragancysite.png" alt="Le Parfragancy" loading="lazy">
+                    </div>
+                    <span class="ppc-glare" aria-hidden="true"></span>
+                  </a>
+                </div>
+              </div><!-- /ppc-screen -->
+
+              <!-- Barra home inferior -->
+              <div class="ppc-home-bar"><span></span></div>
+              <!-- Glare da moldura -->
+              <div class="ppc-shell-glare" aria-hidden="true"></div>
+            </div><!-- /ppc-shell -->
+          </div><!-- /ppc-phone -->
+
+          <!-- Info do projeto atual -->
+          <div class="ppc-info" id="ppc-info">
+            <div class="ppc-info-inner">
+              <div class="ppc-head">
+                <span class="pcardx-num" id="ppc-num">01</span>
+                <span class="pcardx-cat" id="ppc-cat">Landing Page</span>
+              </div>
+              <h3 class="pcardx-title" id="ppc-title">Kleber Pinto</h3>
+              <p class="pcardx-desc" id="ppc-desc">Site institucional para serviços de química, cabelo e barba.</p>
+              <div class="pcardx-tags" id="ppc-tags">
                 <span class="ptag">HTML</span><span class="ptag">CSS</span><span class="ptag">JS</span>
               </div>
-              <a href="https://fabiosill.github.io/hairstylist-website" target="_blank" rel="noopener" class="pshow-link">
+              <a href="https://fabiosill.github.io/hairstylist-website" target="_blank" rel="noopener"
+                 class="pshow-link" id="ppc-link">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="13" height="13"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                 <span>Ver site ao vivo</span>
               </a>
             </div>
-          </article>
+          </div>
 
-          <!-- PROJETO 2 -->
-          <article class="pcardx reveal">
-            <div class="pcardx-head">
-              <span class="pcardx-num">02</span>
-              <span class="pcardx-cat">Site Institucional</span>
-            </div>
-            <a href="https://fabiosill.github.io/sisa-clean" target="_blank" rel="noopener"
-               class="pcardx-frame" aria-label="Ver SISA Clean ao vivo">
-              <div class="pcardx-scroll">
-                <img src="img/sisacleansite.png" alt="SISA Clean — preview do site" loading="lazy">
-              </div>
-              <span class="pcardx-glare" aria-hidden="true"></span>
-            </a>
-            <div class="pcardx-info">
-              <h3 class="pcardx-title">SISA Clean</h3>
-              <p class="pcardx-desc">Site limpo e moderno com foco em conversão e identidade visual forte.</p>
-              <div class="pcardx-tags">
-                <span class="ptag">HTML</span><span class="ptag">CSS</span><span class="ptag">UI/UX</span>
-              </div>
-              <a href="https://fabiosill.github.io/sisa-clean" target="_blank" rel="noopener" class="pshow-link">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="13" height="13"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                <span>Ver site ao vivo</span>
-              </a>
-            </div>
-          </article>
+          <!-- Botões do carrossel -->
+          <div class="ppc-controls" role="group" aria-label="Selecionar projeto">
+            <button class="ppc-btn active" data-target="0" aria-label="Projeto 1 — Kleber Pinto">
+              <span class="ppc-btn-num">1</span>
+              <span class="ppc-btn-label">Kleber Pinto</span>
+            </button>
+            <button class="ppc-btn" data-target="1" aria-label="Projeto 2 — SISA Clean">
+              <span class="ppc-btn-num">2</span>
+              <span class="ppc-btn-label">SISA Clean</span>
+            </button>
+            <button class="ppc-btn" data-target="2" aria-label="Projeto 3 — Le Parfragancy">
+              <span class="ppc-btn-num">3</span>
+              <span class="ppc-btn-label">Le Parfragancy</span>
+            </button>
+          </div>
 
-          <!-- PROJETO 3 -->
-          <article class="pcardx reveal-r">
-            <div class="pcardx-head">
-              <span class="pcardx-num">03</span>
-              <span class="pcardx-cat">E-commerce</span>
-            </div>
-            <a href="https://fabiosill.github.io/leparfragancy-web" target="_blank" rel="noopener"
-               class="pcardx-frame" aria-label="Ver Le Parfragancy ao vivo">
-              <div class="pcardx-scroll">
-                <img src="img/leparfragancysite.png" alt="Le Parfragancy — preview do site" loading="lazy">
-              </div>
-              <span class="pcardx-glare" aria-hidden="true"></span>
-            </a>
-            <div class="pcardx-info">
-              <h3 class="pcardx-title">Le Parfragancy</h3>
-              <p class="pcardx-desc">Loja de perfumaria premium com experiência de compra luxuosa e intuitiva.</p>
-              <div class="pcardx-tags">
-                <span class="ptag">E-commerce</span><span class="ptag">UX</span><span class="ptag">JS</span>
-              </div>
-              <a href="https://fabiosill.github.io/leparfragancy-web" target="_blank" rel="noopener" class="pshow-link">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="13" height="13"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                <span>Ver site ao vivo</span>
-              </a>
-            </div>
-          </article>
+        </div><!-- /ppc-wrap -->
 
-        </div><!-- /pgrid -->
       </div><!-- /port-split__projects -->
 
-      <!-- COLUNA DIREITA: carrossel 3D -->
+      <!-- ══ COLUNA DIREITA: Showcase 3D (intacto) ══ -->
       <div class="port-split__carousel reveal-r" aria-label="Carrossel 3D de projetos">
         <div class="c3d-label">
           <span class="stag" style="text-align:left;margin-bottom:.5rem;">// SHOWCASE 3D</span>

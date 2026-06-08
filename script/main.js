@@ -782,3 +782,164 @@ if (!isTouch) {
     scene && scene.addEventListener('mouseleave', () => cur.classList.remove('big'));
   }
 })();
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   PORTFOLIO — SMARTPHONE CARD CAROUSEL (ppc)
+   Layout duas colunas: card smartphone (esq) +
+   Showcase 3D intacto (dir).
+   Botões [1][2][3] trocam projeto com fade suave.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+(function portfolioPhoneCarousel() {
+
+  /* ── Dados dos projetos ── */
+  const projects = [
+    {
+      num:   '01',
+      cat:   'Landing Page',
+      title: 'Kleber Pinto',
+      desc:  'Site institucional para serviços de química, cabelo e barba.',
+      tags:  ['HTML', 'CSS', 'JS'],
+      link:  'https://fabiosill.github.io/hairstylist-website'
+    },
+    {
+      num:   '02',
+      cat:   'Site Institucional',
+      title: 'SISA Clean',
+      desc:  'Site limpo e moderno com foco em conversão e identidade visual forte.',
+      tags:  ['HTML', 'CSS', 'UI/UX'],
+      link:  'https://fabiosill.github.io/sisa-clean'
+    },
+    {
+      num:   '03',
+      cat:   'E-commerce',
+      title: 'Le Parfragancy',
+      desc:  'Loja de perfumaria premium com experiência de compra luxuosa e intuitiva.',
+      tags:  ['E-commerce', 'UX', 'JS'],
+      link:  'https://fabiosill.github.io/leparfragancy-web'
+    }
+  ];
+
+  /* ── Referências DOM ── */
+  const slides    = document.querySelectorAll('.ppc-slide');
+  const btns      = document.querySelectorAll('.ppc-btn');
+  const infoInner = document.querySelector('.ppc-info-inner');
+  const elNum     = document.getElementById('ppc-num');
+  const elCat     = document.getElementById('ppc-cat');
+  const elTitle   = document.getElementById('ppc-title');
+  const elDesc    = document.getElementById('ppc-desc');
+  const elTags    = document.getElementById('ppc-tags');
+  const elLink    = document.getElementById('ppc-link');
+  const phone     = document.getElementById('ppc-phone');
+
+  if (!slides.length || !btns.length || !infoInner) return;
+
+  let current      = 0;
+  let transitioning = false;
+
+  /* ── Atualiza bloco de info com micro-fade ── */
+  function updateInfo(proj) {
+    infoInner.classList.add('is-transitioning');
+    setTimeout(() => {
+      elNum.textContent   = proj.num;
+      elCat.textContent   = proj.cat;
+      elTitle.textContent = proj.title;
+      elDesc.textContent  = proj.desc;
+      elTags.innerHTML    = proj.tags.map(t => `<span class="ptag">${t}</span>`).join('');
+      elLink.href         = proj.link;
+      infoInner.classList.remove('is-transitioning');
+    }, 200);
+  }
+
+  /* ── Troca de slide com fade ── */
+  function goTo(idx) {
+    if (idx === current || transitioning) return;
+    transitioning = true;
+
+    slides[current].classList.remove('active');
+    slides[idx].classList.add('active');
+
+    // Reset scroll do slide entrante
+    const enterScroll = slides[idx].querySelector('.ppc-scroll');
+    if (enterScroll) {
+      enterScroll.style.transition = 'none';
+      enterScroll.style.transform  = 'translate3d(0,0,0)';
+    }
+
+    btns.forEach((b, i) => b.classList.toggle('active', i === idx));
+    updateInfo(projects[idx]);
+
+    current = idx;
+    setTimeout(() => { transitioning = false; }, 560);
+  }
+
+  /* ── Eventos dos botões ── */
+  btns.forEach((btn, i) => {
+    btn.addEventListener('click', () => goTo(i));
+  });
+
+  /* ── Auto-scroll suave da imagem ao hover ── */
+  function setupScrollAnim(slide) {
+    const frame  = slide.querySelector('.ppc-frame-link');
+    const scroll = slide.querySelector('.ppc-scroll');
+    const img    = scroll && scroll.querySelector('img');
+    if (!frame || !scroll || !img) return;
+
+    const SPEED    = 0.5;   // px por frame
+    let   maxT     = 0;
+    let   scrollY  = 0;
+    let   animId   = null;
+
+    function measure() {
+      const frameH = frame.clientHeight || 480;
+      // Calcula altura real da imagem escalada para a largura do frame
+      const naturalRatio = img.naturalHeight && img.naturalWidth
+        ? img.naturalHeight / img.naturalWidth
+        : 2.2;
+      const scaledH = frame.clientWidth * naturalRatio;
+      maxT = Math.max(0, scaledH - frameH);
+    }
+
+    img.complete ? measure() : img.addEventListener('load', measure, { once: true });
+    window.addEventListener('resize', measure, { passive: true });
+
+    function step() {
+      scrollY += SPEED;
+      if (scrollY >= maxT) { scrollY = 0; measure(); }
+      scroll.style.transform = `translate3d(0,${-scrollY}px,0)`;
+      animId = requestAnimationFrame(step);
+    }
+
+    function startScroll() {
+      if (!slide.classList.contains('active')) return;
+      measure();
+      if (!animId) animId = requestAnimationFrame(step);
+    }
+    function stopScroll() {
+      if (animId) { cancelAnimationFrame(animId); animId = null; }
+      scroll.style.transition = 'transform .55s ease';
+      scroll.style.transform  = 'translate3d(0,0,0)';
+      setTimeout(() => { scroll.style.transition = ''; scrollY = 0; }, 600);
+    }
+
+    frame.addEventListener('mouseenter',  startScroll);
+    frame.addEventListener('mouseleave',  stopScroll);
+    frame.addEventListener('touchstart',  startScroll, { passive: true });
+    frame.addEventListener('touchend',    stopScroll,  { passive: true });
+  }
+
+  slides.forEach(setupScrollAnim);
+
+  /* ── Swipe touch no card ── */
+  if (phone) {
+    let startX = 0;
+    phone.addEventListener('touchstart', e => {
+      startX = e.touches[0].clientX;
+    }, { passive: true });
+    phone.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - startX;
+      if      (dx < -50 && current < projects.length - 1) goTo(current + 1);
+      else if (dx >  50 && current > 0)                   goTo(current - 1);
+    }, { passive: true });
+  }
+
+})();

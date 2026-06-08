@@ -1123,7 +1123,7 @@ footer .wrap{position:relative;z-index:1}
   width:130px;
   height:260px;
   transform-style:preserve-3d;
-  animation:c3d-spin 16s linear infinite;
+  animation:c3d-spin 10s linear infinite;
 }
 
 /* Individual card */
@@ -1647,4 +1647,321 @@ footer .wrap{position:relative;z-index:1}
 .sk-logo-center .orb-center img {
   width: 80px;
   height: 80px;
+}
+
+
+/* ══════════════════════════════════════════════════════════════
+   PORTFOLIO — SMARTPHONE CARD CAROUSEL (ppc)
+   Coluna esquerda do port-split: card único + botões 1/2/3
+   Coluna direita: Showcase 3D (intacto, sem alterações)
+══════════════════════════════════════════════════════════════ */
+
+/* ─── Wrapper interno da coluna esquerda ─── */
+.ppc-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.8rem;
+}
+
+/* ─── SMARTPHONE SHELL ─── */
+.ppc-phone {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  filter: drop-shadow(0 0 36px rgba(59,156,237,.22)) drop-shadow(0 0 70px rgba(59,156,237,.1));
+  transition: filter .5s ease;
+}
+.ppc-phone:hover {
+  filter: drop-shadow(0 0 52px rgba(59,156,237,.35)) drop-shadow(0 0 90px rgba(59,156,237,.15));
+}
+
+.ppc-shell {
+  position: relative;
+  width: 260px;
+  height: 540px;
+  background: linear-gradient(160deg, rgba(12,30,60,.95) 0%, rgba(4,15,35,.98) 100%);
+  border-radius: 44px;
+  border: 1.5px solid rgba(59,156,237,.35);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.04) inset,
+    0 0 0 3px rgba(2,18,45,.9),
+    0 0 0 4px rgba(59,156,237,.12),
+    0 30px 70px -20px rgba(0,0,0,.8),
+    0 0 50px -18px rgba(59,156,237,.18);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Notch */
+.ppc-notch {
+  position: relative;
+  z-index: 10;
+  width: 110px;
+  height: 26px;
+  background: rgba(2,14,35,.98);
+  border-radius: 0 0 16px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  flex-shrink: 0;
+  border-left: 1px solid rgba(59,156,237,.1);
+  border-right: 1px solid rgba(59,156,237,.1);
+  border-bottom: 1px solid rgba(59,156,237,.12);
+}
+.ppc-notch-cam {
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, rgba(59,156,237,.55), rgba(5,20,50,.9));
+  border: 1px solid rgba(59,156,237,.28);
+  box-shadow: 0 0 5px rgba(59,156,237,.22);
+}
+.ppc-notch-speaker {
+  width: 46px; height: 4px;
+  border-radius: 2px;
+  background: rgba(59,156,237,.16);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,.5);
+}
+
+/* Tela */
+.ppc-screen {
+  flex: 1;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  background: #000;
+}
+
+/* Slides — empilhados, só o .active aparece */
+.ppc-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity .5s cubic-bezier(.4,0,.2,1);
+  pointer-events: none;
+}
+.ppc-slide.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* Link wrapper */
+.ppc-frame-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Scroll de imagem */
+.ppc-scroll {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+}
+.ppc-scroll img {
+  display: block;
+  width: 100%;
+  height: auto;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Glare na tela */
+.ppc-glare {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255,255,255,.07) 0%, transparent 28%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Barra home */
+.ppc-home-bar {
+  width: 100%;
+  height: 26px;
+  background: rgba(2,14,35,.98);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid rgba(59,156,237,.08);
+}
+.ppc-home-bar span {
+  width: 80px; height: 4px;
+  border-radius: 2px;
+  background: rgba(59,156,237,.28);
+  box-shadow: 0 0 7px rgba(59,156,237,.18);
+}
+
+/* Glare da moldura */
+.ppc-shell-glare {
+  position: absolute;
+  inset: 0;
+  border-radius: 44px;
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,.05) 0%,
+    transparent 40%,
+    transparent 60%,
+    rgba(255,255,255,.02) 100%
+  );
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* Botões laterais físicos do smartphone */
+.ppc-shell::before,
+.ppc-shell::after {
+  content: '';
+  position: absolute;
+  right: -3px;
+  width: 3px;
+  border-radius: 0 2px 2px 0;
+  background: linear-gradient(to right, rgba(59,156,237,.15), rgba(59,156,237,.04));
+}
+.ppc-shell::before { top: 95px;  height: 38px; }
+.ppc-shell::after  { top: 147px; height: 56px; }
+
+/* ─── INFO DO PROJETO ─── */
+.ppc-info {
+  width: 100%;
+  max-width: 280px;
+}
+.ppc-info-inner {
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+  transition: opacity .3s ease, transform .3s ease;
+}
+.ppc-info-inner.is-transitioning {
+  opacity: 0;
+  transform: translateY(5px);
+}
+.ppc-head {
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: .78rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+/* ─── BOTÕES DE CONTROLE ─── */
+.ppc-controls {
+  display: flex;
+  gap: .85rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.ppc-btn {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .3rem;
+  padding: .6rem 1.25rem .65rem;
+  background: rgba(2,14,35,.8);
+  border: 1px solid rgba(59,156,237,.22);
+  border-radius: 10px;
+  color: rgba(168,194,220,.65);
+  cursor: pointer;
+  font-family: 'Share Tech Mono', monospace;
+  transition: all .3s cubic-bezier(.2,.7,.2,1);
+  overflow: hidden;
+  min-width: 86px;
+  box-shadow: 0 4px 16px -8px rgba(0,0,0,.6);
+}
+.ppc-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(59,156,237,.08), transparent 60%);
+  opacity: 0;
+  transition: opacity .3s;
+}
+.ppc-btn:hover::before,
+.ppc-btn.active::before { opacity: 1; }
+
+.ppc-btn:hover {
+  border-color: rgba(59,156,237,.5);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px -10px rgba(59,156,237,.3);
+}
+.ppc-btn.active {
+  border-color: var(--neon, #3B9CED);
+  color: #fff;
+  background: rgba(59,156,237,.1);
+  box-shadow:
+    0 0 0 1px rgba(59,156,237,.15) inset,
+    0 8px 24px -10px rgba(59,156,237,.4);
+}
+
+.ppc-btn-num {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--neon, #3B9CED);
+  line-height: 1;
+  text-shadow: 0 0 10px rgba(59,156,237,.5);
+}
+.ppc-btn.active .ppc-btn-num {
+  text-shadow: 0 0 16px rgba(59,156,237,.8);
+}
+.ppc-btn-label {
+  font-size: .58rem;
+  letter-spacing: .07em;
+  white-space: nowrap;
+  text-transform: uppercase;
+  opacity: .7;
+}
+.ppc-btn.active .ppc-btn-label,
+.ppc-btn:hover .ppc-btn-label { opacity: 1; }
+
+/* ─── Override: dentro do port-split, a coluna esquerda
+       mantém o pcardx-tags alinhado à esquerda ─── */
+.port-split__projects .ppc-info .pcardx-tags {
+  justify-content: flex-start;
+}
+
+/* ─── Responsivo ≤ 1024px: empilha as colunas ─── */
+@media (max-width: 1024px) {
+  .ppc-wrap {
+    align-items: center;
+  }
+  .ppc-info {
+    max-width: 300px;
+    text-align: center;
+  }
+  .port-split__projects .ppc-info .pcardx-tags {
+    justify-content: center;
+  }
+  .ppc-controls {
+    justify-content: center;
+  }
+}
+
+/* ─── Responsivo ≤ 680px ─── */
+@media (max-width: 680px) {
+  .ppc-shell {
+    width: 230px;
+    height: 476px;
+    border-radius: 38px;
+  }
+  .ppc-shell-glare { border-radius: 38px; }
+  .ppc-btn { min-width: 78px; padding: .5rem .9rem .55rem; }
+  .ppc-controls { gap: .65rem; }
+}
+
+@media (max-width: 400px) {
+  .ppc-shell { width: 205px; height: 428px; border-radius: 34px; }
+  .ppc-shell-glare { border-radius: 34px; }
 }
