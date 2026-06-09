@@ -548,13 +548,19 @@ section{padding:5.5rem 0;position:relative;z-index:10}
 .tname{font-weight:700;font-size:1rem}
 .trole{font-size:.8rem;color:rgba(220,238,255,.5);letter-spacing:1px}
 
-.tcarousel-dots{display:flex;justify-content:center;gap:.6rem;margin-top:1.8rem}
+.tcarousel-dots{display:flex;justify-content:center;gap:.55rem;margin-top:1.8rem}
 .tdot{
-  width:28px;height:4px;border-radius:2px;
-  background:rgba(59,156,237,.2);border:none;cursor:pointer;
-  transition:background .3s,width .3s;padding:0;
+  width:28px;height:3px;border-radius:999px;
+  background:rgba(59,156,237,.18);border:none;cursor:pointer;
+  transition:width .38s cubic-bezier(.4,0,.2,1),background .38s cubic-bezier(.4,0,.2,1),box-shadow .38s cubic-bezier(.4,0,.2,1),opacity .38s ease;
+  padding:0;opacity:.65;
 }
-.tdot.active{background:var(--neon);box-shadow:0 0 10px rgba(59,156,237,.5);width:44px}
+.tdot:hover{opacity:1;background:rgba(59,156,237,.35);}
+.tdot.active{
+  background:linear-gradient(90deg,#1a6dff 0%,#00c6ff 55%,#38e1ff 100%);
+  box-shadow:0 0 8px rgba(59,156,237,.75),0 0 18px rgba(59,156,237,.40),0 0 32px rgba(59,156,237,.18);
+  width:60px;opacity:1;
+}
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    CONTACT (modal only)
@@ -865,7 +871,6 @@ footer .wrap{position:relative;z-index:1}
   .nlinks.open{right:0}
   .nlinks a{font-size:1.05rem;letter-spacing:2px}
 
-  .sk-layout{grid-template-columns:1fr}
   .foot-top{grid-template-columns:1fr 1fr;gap:2rem}
   .sf{display:none}
 
@@ -881,14 +886,7 @@ footer .wrap{position:relative;z-index:1}
   .wo-divider{flex-direction:row;padding-top:0;margin:2rem 0;height:auto}
   .wo-divider-line{flex:1;width:auto;height:2px;background:linear-gradient(90deg,transparent,var(--neon),transparent);opacity:.18}
 
-  .sk-orbit{width:220px;height:220px}
-  .or1{width:130px;height:130px}
-  .or2{width:200px;height:200px}
-  .or3{width:215px;height:215px}
-  .orb-center{width:80px;height:80px}
-  .orb-center img{width:50px;height:50px}
-
-  .svc:hover,.tcard:hover,.pcard:hover{transform:translateY(-4px)}
+  .tcard:hover{transform:translateY(-4px)}
 }
 
 /* Responsive modal ≤ 750px */
@@ -919,7 +917,6 @@ footer .wrap{position:relative;z-index:1}
   section{padding:4rem 0}
   .sh{margin-bottom:3rem}
 
-  #cur,#cur2{display:none}
   body{cursor:auto}
   #c-rain{opacity:.04}
   #c-grid{opacity:.08}
@@ -958,9 +955,6 @@ footer .wrap{position:relative;z-index:1}
   .svc-mini-body h4{font-size:.75rem}
   .svc-mini-body p{font-size:.8rem}
 
-  .sk-layout{gap:2rem}
-  .sk-cat h3{font-size:.85rem;margin-bottom:2rem}
-  .skname{font-size:.88rem}
   .tcard{min-width:280px;max-width:280px;padding:1.5rem 1.2rem 1.4rem}
   .tcard::before{font-size:3rem}
   .ttext{font-size:.9rem}
@@ -990,9 +984,8 @@ footer .wrap{position:relative;z-index:1}
   .reveal-l{transform:translateX(-30px)}
   .reveal-r{transform:translateX(30px)}
 
-  .pgrid,.port-split__projects .pgrid{grid-template-columns:1fr;gap:1.5rem}
-  .pcardx-frame,.port-split__projects .pcardx-frame{width:70%;max-height:392px;aspect-ratio:9/15}
-  .c3d-scene{height:360px}
+  .pgrid{grid-template-columns:1fr;gap:1.5rem}
+  .pcardx-frame{width:70%;max-height:392px;aspect-ratio:9/15}
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -1011,7 +1004,6 @@ footer .wrap{position:relative;z-index:1}
   .nlogo span{font-size:.78rem;letter-spacing:1.5px}
   .nlogo img{width:32px;height:32px}
   .foot-brand .flogo{font-size:1.15rem}
-  .pshow-stage{--phone-w:220px}
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -1027,180 +1019,10 @@ footer .wrap{position:relative;z-index:1}
   .hdesc{display:none}
 }
 
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   PORT-SPLIT — two-column portfolio layout
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-.port-split{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:3rem;
-  align-items:start;
-}
-
-/* Left column: keep pgrid as a 1-col stacked list */
-.port-split__projects .pgrid{
-  grid-template-columns:1fr;
-  gap:2rem;
-}
-
-/* Override desktop responsive rules when inside split */
-@media(min-width:1025px){
-  .port-split__projects .pgrid{
-    grid-template-columns:1fr;
-  }
-  .port-split__projects .pcardx-frame{
-    width:80%;
-    max-height:360px;
-  }
-}
-
-/* ━━━━ Right column — 3D carousel container ━━━━ */
-.port-split__carousel{
-  position:sticky;
-  top:7rem;
-  display:flex;
-  flex-direction:column;
-  gap:1.5rem;
-}
-
-.c3d-label{
-  padding:0 .25rem;
-}
-.c3d-desc{
-  font-size:.88rem;
-  color:rgba(220,238,255,.5);
-  letter-spacing:.5px;
-  line-height:1.6;
-  margin-top:.35rem;
-}
-
-/* 3D scene wrapper — isolated context */
-.c3d-scene{
-  position:relative;
-  width:100%;
-  /* tall enough to show the carousel comfortably */
-  height:500px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  perspective:2200px;
-  /* hard isolation: no inherited transforms leak in */
-  isolation:isolate;
-  overflow:visible;
-}
-
-/* Glow blob */
-.c3d-glow{
-  position:absolute;
-  width:500px;
-  height:500px;
-  border-radius:50%;
-  background:radial-gradient(circle,rgba(59,156,237,.16),transparent 70%);
-  filter:blur(80px);
-  pointer-events:none;
-}
-
-/* Reflective floor */
-.c3d-floor{
-  position:absolute;
-  width:900px;
-  height:380px;
-  border-radius:50%;
-  background:radial-gradient(
-    ellipse at center,
-    rgba(255,255,255,.10),
-    rgba(255,255,255,.03) 40%,
-    transparent 75%
-  );
-  transform:rotateX(88deg);
-  filter:blur(8px);
-  pointer-events:none;
-}
-
-/* Spinning ring */
-.c3d-carousel{
-  position:relative;
-  width:130px;
-  height:260px;
-  transform-style:preserve-3d;
-  animation:c3d-spin 10s linear infinite;
-}
-
-/* Individual card */
-.c3d-card{
-  position:absolute;
-  width:130px;
-  height:260px;
-  transform-style:preserve-3d;
-}
-.c3d-card img{
-  width:100%;
-  height:100%;
-  display:block;
-  border-radius:20px;
-  object-fit:cover;
-  object-position:top center;
-  box-shadow:0 22px 55px rgba(0,0,0,.45);
-}
-
-/* Reflection pseudo-element */
-.c3d-card::after{
-  content:"";
-  position:absolute;
-  left:0;
-  top:101%;
-  width:100%;
-  height:100%;
-  background-image:var(--c3d-ref);
-  background-size:cover;
-  background-position:top center;
-  transform:scaleY(-1);
-  opacity:.5;
-  filter:blur(1.5px);
-  pointer-events:none;
-  -webkit-mask-image:linear-gradient(
-    to bottom,
-    rgba(0,0,0,0) 75%,
-    rgba(0,0,0,.25) 85%,
-    rgba(0,0,0,.55) 93%,
-    rgba(0,0,0,1) 100%
-  );
-  mask-image:linear-gradient(
-    to bottom,
-    rgba(0,0,0,0) 75%,
-    rgba(0,0,0,.25) 85%,
-    rgba(0,0,0,.55) 93%,
-    rgba(0,0,0,1) 100%
-  );
-}
-
-/* Card positions (4 cards × 90°) */
-.c3d-card:nth-child(1){--c3d-ref:url("img/sisacleansite.png");   transform:rotateY(0deg)   translateZ(120px)}
-.c3d-card:nth-child(2){--c3d-ref:url("img/kleberpintosite.png"); transform:rotateY(90deg)  translateZ(120px)}
-.c3d-card:nth-child(3){--c3d-ref:url("img/leparfragancysite.png");transform:rotateY(180deg) translateZ(120px)}
-.c3d-card:nth-child(4){--c3d-ref:url("img/znewtdevsite.png");    transform:rotateY(270deg) translateZ(120px)}
-
-@keyframes c3d-spin{
-  from{transform:rotateX(0deg) rotateY(0deg)}
-  to  {transform:rotateX(0deg) rotateY(360deg)}
-}
-
 /* ━━━━ Portfolio responsive ≤ 1024px ━━━━ */
 @media(max-width:1024px){
-  /* revert to stacked when below breakpoint */
-  .port-split{
-    grid-template-columns:1fr;
-    gap:3.5rem;
-  }
-  .port-split__projects .pgrid{
-    grid-template-columns:repeat(2,1fr);
-    gap:1.75rem;
-  }
-  .port-split__projects .pcardx-frame{width:75%;max-height:392px}
-  .port-split__carousel{
-    position:static;
-  }
-  .c3d-scene{height:420px}
+  .pgrid{grid-template-columns:repeat(2,1fr);gap:1.75rem}
+  .pcardx-frame{width:75%;max-height:392px}
 }
 
 /* ━━━━ Modal ≤ 480px ━━━━ */
@@ -1263,7 +1085,7 @@ footer .wrap{position:relative;z-index:1}
 @property --rgb-angle{syntax:'<angle>';initial-value:0deg;inherits:false}
 @keyframes rgb-spin{to{--rgb-angle:360deg}}
 
-/* Applied to: tcard, svc-mini, skitem (hover), citem, pcardx */
+/* Applied to: tcard, svc-mini, citem, pcardx */
 .tcard,
 .pcardx,
 .citem,
@@ -1357,31 +1179,6 @@ footer .wrap{position:relative;z-index:1}
 /* We add an additional glow via a child pseudo on :hover via JS-free approach
    by layering the existing border animation on a wrapper */
 
-/* skitem hover glow — subtle */
-.skitem{
-  position:relative;
-  isolation:isolate;
-}
-.skitem::before{
-  content:'';
-  position:absolute;inset:-1px;
-  z-index:-1;
-  background:conic-gradient(
-    from var(--rgb-angle),
-    transparent 0deg,
-    transparent 120deg,
-    rgba(59,156,237,.3) 170deg,
-    rgba(107,200,247,.4) 190deg,
-    rgba(59,156,237,.3) 210deg,
-    transparent 260deg,
-    transparent 360deg
-  );
-  animation:rgb-spin 10s linear infinite;
-  pointer-events:none;
-  opacity:0;
-  transition:opacity .4s ease;
-}
-.skitem:hover::before{opacity:.9}
 
 /* ptl-num rotating glow */
 .ptl-num{
@@ -1465,34 +1262,6 @@ footer .wrap{position:relative;z-index:1}
   .float-stack{bottom:1.2rem;right:1.2rem;gap:.5rem}
   .float-btn{width:42px;height:42px;font-size:1.1rem}
   .float-btn svg{width:18px;height:18px}
-
-  .sk-orbit{width:200px;height:200px}
-  .or1{width:108px;height:108px}
-  .or2{width:170px;height:170px}
-  .or3{width:195px;height:195px}
-  .orb-center{width:66px;height:66px}
-  .orb-center img{width:42px;height:42px}
-  .orb-item{width:36px;height:36px;font-size:1rem}
-  .orb-item svg{width:14px;height:14px}
-  .sk-tech-icon{width:22px;height:22px}
-  .sk-tech-icon svg{width:12px;height:12px}
-}
-@media(max-width:900px){
-  .sk-orbit{width:280px;height:280px}
-  .or1{width:130px;height:130px}
-  .or2{width:210px;height:210px}
-  .or3{width:270px;height:270px}
-  .orb-center{width:80px;height:80px}
-  .orb-center img{width:50px;height:50px}
-
-  /* Skills: empilhar colunas no mobile/tablet */
-  .sk-two-col {
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
-  }
-  .sk-left-col {
-    position: static;
-  }
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -1540,428 +1309,379 @@ footer .wrap{position:relative;z-index:1}
   pointer-events: none;
 }
 
-/* ━━━━ Contact compact block inside Skills ━━━━ */
-.sk-contact-block {
-  margin-top: 3.5rem;
-  padding: 2rem 2.5rem;
-  background: rgba(2,19,48,.45);
-  border: 1px solid var(--border);
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SHOWCASE — Layout principal
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+#showcase {
+  background: rgba(1,10,24,0.55);
   position: relative;
-  overflow: hidden;
-  grid-column: 1 / -1;
+  overflow: visible;
 }
-.sk-contact-block::before {
+#showcase::before {
   content: '';
   position: absolute;
-  inset: -1.5px;
-  background: conic-gradient(
-    from var(--gb-angle),
-    transparent 0deg,
-    transparent 60deg,
-    rgba(59,156,237,.45) 120deg,
-    rgba(107,200,247,.7) 180deg,
-    rgba(59,156,237,.45) 240deg,
-    transparent 300deg,
-    transparent 360deg
-  );
-  animation: gb-spin 8s linear infinite;
-  z-index: 0;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 55% 50% at 25% 50%, rgba(0,80,200,.07) 0%, transparent 70%),
+    radial-gradient(ellipse 55% 50% at 75% 50%, rgba(59,156,237,.05) 0%, transparent 70%);
   pointer-events: none;
 }
-.sk-contact-block-bg {
+
+.showcase-bg-grid {
   position: absolute;
-  inset: 1px;
-  background: rgba(2,19,48,.88);
+  inset: 0;
+  pointer-events: none;
   z-index: 0;
+  background-image:
+    linear-gradient(rgba(59,156,237,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59,156,237,.025) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 0%, transparent 100%);
 }
-.sk-contact-block > *:not(.sk-contact-block-bg) { position: relative; z-index: 1; }
-.sk-contact-header {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-  flex-wrap: wrap;
-}
-.sk-contact-header .stag { margin: 0; }
-.sk-contact-header h3 {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 1rem;
-  color: #fff;
-  margin: 0;
-}
-.sk-contact-header h3 em { font-style: normal; color: var(--neon); }
-.sk-contact-items {
+
+.showcase-split {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: .8rem;
-}
-.sk-contact-item {
-  display: flex;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
   align-items: center;
-  gap: .75rem;
-  padding: .7rem 1rem;
-  background: rgba(59,156,237,.04);
-  border: 1px solid rgba(59,156,237,.15);
-  transition: .3s;
-}
-.sk-contact-item:hover {
-  border-color: var(--neon);
-  background: rgba(59,156,237,.08);
-  transform: translateY(-2px);
-}
-.sk-contact-item .cicon { font-size: 1.1rem; }
-.sk-contact-item .ctxt span { font-size: .65rem; letter-spacing: 1.5px; }
-.sk-contact-item .ctxt strong { font-size: .88rem; }
-.sk-contact-cta {
-  margin-top: 1.2rem;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-.sk-contact-cta p {
-  color: rgba(220,238,255,.55);
-  font-size: .85rem;
-  margin: 0;
-  flex: 1;
-  min-width: 200px;
-}
-.sk-contact-cta .btn {
-  white-space: nowrap;
-  padding: .65rem 1.6rem;
-  font-size: .78rem;
 }
 
-/* ━━━━ SK LOGO CENTER (sem orbitas) ━━━━ */
-.sk-logo-center {
+/* ━━━━ LADO ESQUERDO ━━━━ */
+.showcase-left {
   display: flex;
-  align-items: center;
   justify-content: center;
-  padding: 2rem 0 1rem;
-}
-.sk-logo-center .orb-center {
-  width: 120px;
-  height: 120px;
-  box-shadow: 0 0 50px rgba(59,156,237,.3), 0 0 100px rgba(59,156,237,.12);
-}
-.sk-logo-center .orb-center img {
-  width: 80px;
-  height: 80px;
+  align-items: flex-start;
 }
 
-
-/* ══════════════════════════════════════════════════════════════
-   PORTFOLIO — SMARTPHONE CARD CAROUSEL (ppc)
-   Coluna esquerda do port-split: card único + botões 1/2/3
-   Coluna direita: Showcase 3D (intacto, sem alterações)
-══════════════════════════════════════════════════════════════ */
-
-/* ─── Wrapper interno da coluna esquerda ─── */
-.ppc-wrap {
+.showcase-card-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.8rem;
+  gap: 1rem;                 /* reduzido: o sc-nav já tem padding-top próprio */
+  width: 100%;
+  max-width: 270px;
+  overflow: visible;         /* garante que o glow do active não é cortado */
 }
 
-/* ─── SMARTPHONE SHELL ─── */
-.ppc-phone {
-  position: relative;
+/* Card dinâmico — herda todos os estilos de .pcardx */
+.showcase-dynamic-card {
+  width: 100%;
+  isolation: isolate;        /* evita que hover/scale sobreponha o sc-nav */
+}
+
+/* Transição de fade ao trocar projeto */
+.showcase-dynamic-card.sc-fading {
+  opacity: 0;
+  transform: translateY(6px) scale(0.99);
+  transition: opacity 0.22s ease, transform 0.22s ease;
+}
+.showcase-dynamic-card.sc-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition: opacity 0.28s ease, transform 0.28s ease;
+}
+
+/* ━━━━ NAVEGAÇÃO — QUADRADINHOS ESTILO PTAG ━━━━ */
+.sc-nav {
   display: flex;
+  align-items: center;
   justify-content: center;
-  align-items: center;
-  filter: drop-shadow(0 0 36px rgba(59,156,237,.22)) drop-shadow(0 0 70px rgba(59,156,237,.1));
-  transition: filter .5s ease;
-}
-.ppc-phone:hover {
-  filter: drop-shadow(0 0 52px rgba(59,156,237,.35)) drop-shadow(0 0 90px rgba(59,156,237,.15));
-}
-
-.ppc-shell {
-  position: relative;
-  width: 260px;
-  height: 540px;
-  background: linear-gradient(160deg, rgba(12,30,60,.95) 0%, rgba(4,15,35,.98) 100%);
-  border-radius: 44px;
-  border: 1.5px solid rgba(59,156,237,.35);
-  box-shadow:
-    0 0 0 1px rgba(255,255,255,.04) inset,
-    0 0 0 3px rgba(2,18,45,.9),
-    0 0 0 4px rgba(59,156,237,.12),
-    0 30px 70px -20px rgba(0,0,0,.8),
-    0 0 50px -18px rgba(59,156,237,.18);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* Notch */
-.ppc-notch {
+  gap: .45rem;
+  padding: .6rem 0 .2rem;
   position: relative;
   z-index: 10;
-  width: 110px;
-  height: 26px;
-  background: rgba(2,14,35,.98);
-  border-radius: 0 0 16px 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 7px;
-  flex-shrink: 0;
-  border-left: 1px solid rgba(59,156,237,.1);
-  border-right: 1px solid rgba(59,156,237,.1);
-  border-bottom: 1px solid rgba(59,156,237,.12);
-}
-.ppc-notch-cam {
-  width: 9px; height: 9px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, rgba(59,156,237,.55), rgba(5,20,50,.9));
-  border: 1px solid rgba(59,156,237,.28);
-  box-shadow: 0 0 5px rgba(59,156,237,.22);
-}
-.ppc-notch-speaker {
-  width: 46px; height: 4px;
-  border-radius: 2px;
-  background: rgba(59,156,237,.16);
-  box-shadow: inset 0 1px 2px rgba(0,0,0,.5);
 }
 
-/* Tela */
-.ppc-screen {
-  flex: 1;
-  width: 100%;
+.sc-dot {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: .6rem;
+  letter-spacing: 1px;
+  color: rgba(59,156,237,.65);
+  padding: .15rem .55rem;
+  border: 1px solid rgba(59,156,237,.18);
+  background: rgba(59,156,237,.04);
+  border-radius: 0;
+  cursor: pointer;
+  transition: color .3s, border-color .3s, background .3s, box-shadow .3s;
+  line-height: 1.4;
+}
+.sc-dot:hover {
+  color: var(--neon);
+  border-color: rgba(59,156,237,.45);
+  background: rgba(59,156,237,.1);
+  transform: none;
+  box-shadow: none;
+}
+.sc-dot.active {
+  color: var(--neon);
+  border-color: var(--neon);
+  background: rgba(59,156,237,.12);
+  box-shadow:
+    0 0 8px rgba(59,156,237,.45),
+    inset 0 0 6px rgba(59,156,237,.08);
+}
+.sc-dot.active::after {
+  content: none;
+}
+
+/* ━━━━ LADO DIREITO — CARROSSEL 3D ━━━━ */
+.showcase-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: .9rem;
+  background: transparent;
+}
+
+/* Badge + botão centralizados abaixo das duas colunas */
+.sc3d-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .75rem;
+  margin-top: 2rem;
+}
+
+/* Badge estilo [ LANDING PAGES ] */
+.sc3d-badge {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: .7rem;
+  letter-spacing: 3px;
+  color: var(--primary-accent);
+  border: 1px solid rgba(59,156,237,.35);
+  padding: .35rem 1rem;
+  background: rgba(59,156,237,.04);
+  display: inline-block;
+  text-align: center;
+  position: relative;
+}
+.sc3d-badge::before,
+.sc3d-badge::after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border: 1px solid var(--neon);
+}
+.sc3d-badge::before { top: -1px; left: -1px; border-right: none; border-bottom: none; }
+.sc3d-badge::after  { bottom: -1px; right: -1px; border-left: none; border-top: none; }
+
+/* Botão CONFERIR MODELOS */
+.sc3d-cta-btn {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: .72rem;
+  letter-spacing: 2.5px;
+  color: var(--neon);
+  border: 1px solid rgba(59,156,237,.5);
+  padding: .6rem 1.6rem;
+  background: rgba(59,156,237,.06);
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  transition: background .25s, box-shadow .25s, color .25s, border-color .25s;
   position: relative;
   overflow: hidden;
-  background: #000;
 }
-
-/* Slides — empilhados, só o .active aparece */
-.ppc-slide {
+.sc3d-cta-btn::before {
+  content: '';
   position: absolute;
   inset: 0;
-  opacity: 0;
-  transition: opacity .5s cubic-bezier(.4,0,.2,1);
-  pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(59,156,237,.08), transparent);
+  transform: translateX(-100%);
+  transition: transform .5s ease;
 }
-.ppc-slide.active {
-  opacity: 1;
-  pointer-events: all;
+.sc3d-cta-btn:hover::before {
+  transform: translateX(100%);
+}
+.sc3d-cta-btn:hover {
+  background: rgba(59,156,237,.12);
+  border-color: var(--neon);
+  color: #fff;
+  box-shadow: 0 0 18px rgba(59,156,237,.35), inset 0 0 10px rgba(59,156,237,.06);
 }
 
-/* Link wrapper */
-.ppc-frame-link {
-  display: block;
+/* Contêiner principal do carrossel 3D */
+.sc3d-scene {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  height: 640px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 2200px;
+  background: transparent;
+  overflow: visible;
+}
+
+/* Glow central — sutil, só luz difusa */
+.sc3d-glow {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(59,156,237,.12),
+    transparent 65%
+  );
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Chão / reflexo base */
+.sc3d-floor {
+  position: absolute;
+  width: 400px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255,255,255,.06),
+    rgba(255,255,255,.02) 40%,
+    transparent 70%
+  );
+  transform: rotateX(88deg);
+  filter: blur(6px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Stage 3D */
+.sc3d-stage {
+  position: relative;
   width: 100%;
   height: 100%;
-  position: relative;
-  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform-style: preserve-3d;
+  z-index: 1;
+  overflow: visible;
 }
 
-/* Scroll de imagem */
-.ppc-scroll {
-  position: absolute;
-  inset: 0;
-  will-change: transform;
+/* Variáveis de tamanho para o carrossel isolado */
+.sc3d-stage {
+--sc3d-card-w: 162px;
+--sc3d-card-h: 325px;
+--sc3d-radius: 112px;
+  --sc3d-ref-opacity: .5;
 }
-.ppc-scroll img {
+@media (min-width: 1100px) {
+.sc3d-stage {
+  --sc3d-card-w: 200px;
+  --sc3d-card-h: 400px;
+  --sc3d-radius: 150px;
+}
+}
+
+/* Carrossel giratório */
+.sc3d-carousel {
+  position: relative;
+  width: var(--sc3d-card-w);
+  height: var(--sc3d-card-h);
+  transform-style: preserve-3d;
+  animation: sc3d-spin 16s linear infinite;
+  overflow: visible;
+}
+
+/* Cards individuais */
+.sc3d-card {
+  position: absolute;
+  width: var(--sc3d-card-w);
+  height: var(--sc3d-card-h);
+  /* sem transform-style:preserve-3d para o reflexo ficar plano e visível */
+}
+
+/* Imagem principal do card */
+.sc3d-img {
+  width: 100%;
+  height: 100%;
   display: block;
-  width: 100%;
-  height: auto;
-  user-select: none;
-  pointer-events: none;
+  border-radius: 18px;
+  object-fit: cover;
+  object-position: top center;
+  box-shadow: 0 20px 50px rgba(0,0,0,.5);
 }
 
-/* Glare na tela */
-.ppc-glare {
+/* Reflexo real — img espelhada verticalmente */
+.sc3d-reflection {
   position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(255,255,255,.07) 0%, transparent 28%);
-  pointer-events: none;
-  z-index: 2;
-}
-
-/* Barra home */
-.ppc-home-bar {
+  left: 0;
+  top: calc(100% + 2px);
   width: 100%;
-  height: 26px;
-  background: rgba(2,14,35,.98);
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-top: 1px solid rgba(59,156,237,.08);
-}
-.ppc-home-bar span {
-  width: 80px; height: 4px;
-  border-radius: 2px;
-  background: rgba(59,156,237,.28);
-  box-shadow: 0 0 7px rgba(59,156,237,.18);
-}
-
-/* Glare da moldura */
-.ppc-shell-glare {
-  position: absolute;
-  inset: 0;
-  border-radius: 44px;
-  background: linear-gradient(
-    135deg,
-    rgba(255,255,255,.05) 0%,
-    transparent 40%,
-    transparent 60%,
-    rgba(255,255,255,.02) 100%
+  height: 100%;
+  display: block;
+  border-radius: 18px;
+  object-fit: cover;
+  object-position: top center;
+  transform: scaleY(-1);
+  pointer-events: none;
+  opacity: .55;
+  filter: blur(2px) brightness(0.65);
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    rgba(0,0,0,.9)  0%,
+    rgba(0,0,0,.5)  35%,
+    rgba(0,0,0,.12) 65%,
+    rgba(0,0,0,0)   85%
   );
-  pointer-events: none;
-  z-index: 5;
+  mask-image: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0)  0%,
+    rgba(0,0,0,0)  55%,
+    rgba(0,0,0,.3) 75%,
+    rgba(0,0,0,.9)   85%
+  );
 }
 
-/* Botões laterais físicos do smartphone */
-.ppc-shell::before,
-.ppc-shell::after {
-  content: '';
-  position: absolute;
-  right: -3px;
-  width: 3px;
-  border-radius: 0 2px 2px 0;
-  background: linear-gradient(to right, rgba(59,156,237,.15), rgba(59,156,237,.04));
-}
-.ppc-shell::before { top: 95px;  height: 38px; }
-.ppc-shell::after  { top: 147px; height: 56px; }
+/* Posições dos 4 cards no círculo */
+.sc3d-card:nth-child(1) { transform: rotateY(0deg)   translateZ(var(--sc3d-radius)); }
+.sc3d-card:nth-child(2) { transform: rotateY(90deg)  translateZ(var(--sc3d-radius)); }
+.sc3d-card:nth-child(3) { transform: rotateY(180deg) translateZ(var(--sc3d-radius)); }
+.sc3d-card:nth-child(4) { transform: rotateY(270deg) translateZ(var(--sc3d-radius)); }
 
-/* ─── INFO DO PROJETO ─── */
-.ppc-info {
-  width: 100%;
-  max-width: 280px;
-}
-.ppc-info-inner {
-  display: flex;
-  flex-direction: column;
-  gap: .6rem;
-  transition: opacity .3s ease, transform .3s ease;
-}
-.ppc-info-inner.is-transitioning {
-  opacity: 0;
-  transform: translateY(5px);
-}
-.ppc-head {
-  display: flex;
-  align-items: center;
-  gap: .7rem;
-  font-family: 'Share Tech Mono', monospace;
-  font-size: .78rem;
-  letter-spacing: .08em;
-  text-transform: uppercase;
+/* Animação de rotação */
+@keyframes sc3d-spin {
+  from { transform: rotateX(0deg) rotateY(0deg); }
+  to   { transform: rotateX(0deg) rotateY(360deg); }
 }
 
-/* ─── BOTÕES DE CONTROLE ─── */
-.ppc-controls {
-  display: flex;
-  gap: .85rem;
-  align-items: center;
-  justify-content: center;
-}
+/* ━━━━ RESPONSIVIDADE DA SHOWCASE ━━━━ */
 
-.ppc-btn {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: .3rem;
-  padding: .6rem 1.25rem .65rem;
-  background: rgba(2,14,35,.8);
-  border: 1px solid rgba(59,156,237,.22);
-  border-radius: 10px;
-  color: rgba(168,194,220,.65);
-  cursor: pointer;
-  font-family: 'Share Tech Mono', monospace;
-  transition: all .3s cubic-bezier(.2,.7,.2,1);
-  overflow: hidden;
-  min-width: 86px;
-  box-shadow: 0 4px 16px -8px rgba(0,0,0,.6);
-}
-.ppc-btn::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(59,156,237,.08), transparent 60%);
-  opacity: 0;
-  transition: opacity .3s;
-}
-.ppc-btn:hover::before,
-.ppc-btn.active::before { opacity: 1; }
-
-.ppc-btn:hover {
-  border-color: rgba(59,156,237,.5);
-  color: #fff;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px -10px rgba(59,156,237,.3);
-}
-.ppc-btn.active {
-  border-color: var(--neon, #3B9CED);
-  color: #fff;
-  background: rgba(59,156,237,.1);
-  box-shadow:
-    0 0 0 1px rgba(59,156,237,.15) inset,
-    0 8px 24px -10px rgba(59,156,237,.4);
-}
-
-.ppc-btn-num {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--neon, #3B9CED);
-  line-height: 1;
-  text-shadow: 0 0 10px rgba(59,156,237,.5);
-}
-.ppc-btn.active .ppc-btn-num {
-  text-shadow: 0 0 16px rgba(59,156,237,.8);
-}
-.ppc-btn-label {
-  font-size: .58rem;
-  letter-spacing: .07em;
-  white-space: nowrap;
-  text-transform: uppercase;
-  opacity: .7;
-}
-.ppc-btn.active .ppc-btn-label,
-.ppc-btn:hover .ppc-btn-label { opacity: 1; }
-
-/* ─── Override: dentro do port-split, a coluna esquerda
-       mantém o pcardx-tags alinhado à esquerda ─── */
-.port-split__projects .ppc-info .pcardx-tags {
-  justify-content: flex-start;
-}
-
-/* ─── Responsivo ≤ 1024px: empilha as colunas ─── */
-@media (max-width: 1024px) {
-  .ppc-wrap {
-    align-items: center;
+/* Tablet: lado a lado com gap menor */
+@media (max-width: 960px) {
+  .showcase-split {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
   }
-  .ppc-info {
-    max-width: 300px;
-    text-align: center;
+  .showcase-card-wrapper {
+    max-width: 220px;
   }
-  .port-split__projects .ppc-info .pcardx-tags {
-    justify-content: center;
-  }
-  .ppc-controls {
-    justify-content: center;
+  .sc3d-scene {
+    height: 520px;
   }
 }
 
-/* ─── Responsivo ≤ 680px ─── */
-@media (max-width: 680px) {
-  .ppc-shell {
-    width: 230px;
-    height: 476px;
-    border-radius: 38px;
+/* Mobile: empilhar */
+@media (max-width: 640px) {
+  .showcase-split {
+    grid-template-columns: 1fr;
+    gap: 3rem;
   }
-  .ppc-shell-glare { border-radius: 38px; }
-  .ppc-btn { min-width: 78px; padding: .5rem .9rem .55rem; }
-  .ppc-controls { gap: .65rem; }
-}
-
-@media (max-width: 400px) {
-  .ppc-shell { width: 205px; height: 428px; border-radius: 34px; }
-  .ppc-shell-glare { border-radius: 34px; }
+  .showcase-left {
+    order: 1;
+  }
+  .showcase-right {
+    order: 2;
+  }
+  .showcase-card-wrapper {
+    max-width: 260px;
+  }
+  .sc3d-scene {
+    height: 500px;
+    max-width: 320px;
+  }
 }

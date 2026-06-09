@@ -173,146 +173,110 @@
   </div>
 </section>
 
-<!-- PORTFOLIO -->
-<section id="portfolio" class="glow-border-section">
-  <div class="port-bg-grid" aria-hidden="true"></div>
+<!-- SHOWCASE -->
+<section id="modelos" class="glow-border-section">
+  <div class="showcase-bg-grid" aria-hidden="true"></div>
 
   <div class="wrap">
     <div class="sh reveal">
-      <span class="stag">// 04. PORTFOLIO</span>
-      <h2 class="stitle">Projetos <em>Recentes</em></h2>
-      <div class="sdiv"></div><br>
-      <p class="port-sub">Experiências de clientes reais</p>
+      <span class="stag">// 04.5. SHOWCASE</span>
+      <h2 class="stitle">Modelos <em>Reais</em></h2>
+      <div class="sdiv"></div>
     </div>
 
-    <!-- PORTFOLIO — DOIS COLUNAS: SMARTPHONE CARD + SHOWCASE 3D -->
-    <div class="port-split">
+    <div class="showcase-split">
 
-      <!-- ══ COLUNA ESQUERDA: Card smartphone + carrossel ══ -->
-      <div class="port-split__projects">
+      <!-- LADO ESQUERDO: CARD DINÂMICO DE PROJETOS -->
+      <div class="showcase-left reveal-l">
 
-        <!-- Wrapper do card + controles -->
-        <div class="ppc-wrap">
+        <div class="showcase-card-wrapper">
 
-          <!-- Card único no formato smartphone -->
-          <div class="ppc-phone" id="ppc-phone">
-            <div class="ppc-shell">
-              <!-- Notch / câmera -->
-              <div class="ppc-notch">
-                <span class="ppc-notch-cam"></span>
-                <span class="ppc-notch-speaker"></span>
+          <!-- Card reutilizável -->
+          <article class="pcardx showcase-dynamic-card" id="showcase-card">
+            <div class="pcardx-head">
+              <span class="pcardx-num" id="sc-num">01</span>
+              <span class="pcardx-cat" id="sc-cat">Landing page</span>
+            </div>
+            <a id="sc-link" href="https://fabiosill.github.io/hairstylist-website" target="_blank" rel="noopener"
+               class="pcardx-frame" aria-label="Ver projeto ao vivo">
+              <div class="pcardx-scroll" id="sc-scroll">
+                <img id="sc-img" src="img/kleberpintosite.png" alt="Preview do projeto" loading="lazy">
               </div>
-
-              <!-- Tela do projeto -->
-              <div class="ppc-screen">
-                <div class="ppc-slide active" data-idx="0">
-                  <a href="https://fabiosill.github.io/hairstylist-website" target="_blank" rel="noopener"
-                     class="ppc-frame-link" aria-label="Ver Kleber Pinto ao vivo">
-                    <div class="ppc-scroll">
-                      <img src="img/kleberpintosite.png" alt="Kleber Pinto" loading="lazy">
-                    </div>
-                    <span class="ppc-glare" aria-hidden="true"></span>
-                  </a>
-                </div>
-                <div class="ppc-slide" data-idx="1">
-                  <a href="https://fabiosill.github.io/sisa-clean" target="_blank" rel="noopener"
-                     class="ppc-frame-link" aria-label="Ver SISA Clean ao vivo">
-                    <div class="ppc-scroll">
-                      <img src="img/sisacleansite.png" alt="SISA Clean" loading="lazy">
-                    </div>
-                    <span class="ppc-glare" aria-hidden="true"></span>
-                  </a>
-                </div>
-                <div class="ppc-slide" data-idx="2">
-                  <a href="https://fabiosill.github.io/leparfragancy-web" target="_blank" rel="noopener"
-                     class="ppc-frame-link" aria-label="Ver Le Parfragancy ao vivo">
-                    <div class="ppc-scroll">
-                      <img src="img/leparfragancysite.png" alt="Le Parfragancy" loading="lazy">
-                    </div>
-                    <span class="ppc-glare" aria-hidden="true"></span>
-                  </a>
-                </div>
-              </div><!-- /ppc-screen -->
-
-              <!-- Barra home inferior -->
-              <div class="ppc-home-bar"><span></span></div>
-              <!-- Glare da moldura -->
-              <div class="ppc-shell-glare" aria-hidden="true"></div>
-            </div><!-- /ppc-shell -->
-          </div><!-- /ppc-phone -->
-
-          <!-- Info do projeto atual -->
-          <div class="ppc-info" id="ppc-info">
-            <div class="ppc-info-inner">
-              <div class="ppc-head">
-                <span class="pcardx-num" id="ppc-num">01</span>
-                <span class="pcardx-cat" id="ppc-cat">Landing Page</span>
-              </div>
-              <h3 class="pcardx-title" id="ppc-title">Kleber Pinto</h3>
-              <p class="pcardx-desc" id="ppc-desc">Site institucional para serviços de química, cabelo e barba.</p>
-              <div class="pcardx-tags" id="ppc-tags">
+              <span class="pcardx-glare" aria-hidden="true"></span>
+            </a>
+            <div class="pcardx-info">
+              <h3 class="pcardx-title" id="sc-title">Kleber Pinto</h3>
+              <p class="pcardx-desc" id="sc-desc">Site institucional para serviços de química, cabelo e barba.</p>
+              <div class="pcardx-tags" id="sc-tags">
                 <span class="ptag">HTML</span><span class="ptag">CSS</span><span class="ptag">JS</span>
               </div>
-              <a href="https://fabiosill.github.io/hairstylist-website" target="_blank" rel="noopener"
-                 class="pshow-link" id="ppc-link">
+              <a id="sc-plink" href="https://fabiosill.github.io/hairstylist-website" target="_blank" rel="noopener" class="pshow-link">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="13" height="13"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                 <span>Ver site ao vivo</span>
               </a>
             </div>
-          </div>
+          </article>
 
-          <!-- Botões do carrossel -->
-          <div class="ppc-controls" role="group" aria-label="Selecionar projeto">
-            <button class="ppc-btn active" data-target="0" aria-label="Projeto 1 — Kleber Pinto">
-              <span class="ppc-btn-num">1</span>
-              <span class="ppc-btn-label">Kleber Pinto</span>
-            </button>
-            <button class="ppc-btn" data-target="1" aria-label="Projeto 2 — SISA Clean">
-              <span class="ppc-btn-num">2</span>
-              <span class="ppc-btn-label">SISA Clean</span>
-            </button>
-            <button class="ppc-btn" data-target="2" aria-label="Projeto 3 — Le Parfragancy">
-              <span class="ppc-btn-num">3</span>
-              <span class="ppc-btn-label">Le Parfragancy</span>
-            </button>
-          </div>
+          <!-- Navegação numérica -->
+          <nav class="sc-nav" aria-label="Navegar entre projetos">
+            <button class="sc-dot active" data-idx="0" aria-label="Projeto 1">1</button>
+            <button class="sc-dot" data-idx="1" aria-label="Projeto 2">2</button>
+            <button class="sc-dot" data-idx="2" aria-label="Projeto 3">3</button>
+          </nav>
 
-        </div><!-- /ppc-wrap -->
-
-      </div><!-- /port-split__projects -->
-
-      <!-- ══ COLUNA DIREITA: Showcase 3D (intacto) ══ -->
-      <div class="port-split__carousel reveal-r" aria-label="Carrossel 3D de projetos">
-        <div class="c3d-label">
-          <span class="stag" style="text-align:left;margin-bottom:.5rem;">// SHOWCASE 3D</span>
-          <p class="c3d-desc">Uma visão imersiva dos projetos em rotação contínua.</p>
         </div>
-        <div class="c3d-scene">
-          <div class="c3d-glow" aria-hidden="true"></div>
-          <div class="c3d-floor" aria-hidden="true"></div>
-          <div class="c3d-carousel" aria-hidden="true">
-            <div class="c3d-card">
-              <img src="img/sisacleansite.png" alt="SISA Clean">
-            </div>
-            <div class="c3d-card">
-              <img src="img/kleberpintosite.png" alt="Kleber Pinto">
-            </div>
-            <div class="c3d-card">
-              <img src="img/leparfragancysite.png" alt="Le Parfragancy">
-            </div>
-            <div class="c3d-card">
-              <img src="img/znewtdevsite.png" alt="ZNewt Dev">
+
+      </div><!-- /showcase-left -->
+
+      <!-- LADO DIREITO: CARROSSEL 3D -->
+      <div class="showcase-right reveal-r">
+
+        <span class="sc3d-badge">[ LANDING PAGES ]</span>
+
+        <div class="sc3d-scene">
+          <div class="sc3d-glow"></div>
+          <div class="sc3d-floor"></div>
+          <div class="sc3d-stage">
+            <div class="sc3d-carousel">
+
+              <div class="sc3d-card">
+                <img class="sc3d-img" src="img/sisacleansite.png" alt="SISA Clean" loading="lazy">
+                <img class="sc3d-reflection" src="img/sisacleansite.png" alt="" aria-hidden="true" loading="lazy">
+              </div>
+
+              <div class="sc3d-card">
+                <img class="sc3d-img" src="img/kleberpintosite.png" alt="Kleber Pinto" loading="lazy">
+                <img class="sc3d-reflection" src="img/kleberpintosite.png" alt="" aria-hidden="true" loading="lazy">
+              </div>
+
+              <div class="sc3d-card">
+                <img class="sc3d-img" src="img/leparfragancysite.png" alt="Le Parfragancy" loading="lazy">
+                <img class="sc3d-reflection" src="img/leparfragancysite.png" alt="" aria-hidden="true" loading="lazy">
+              </div>
+
+              <div class="sc3d-card">
+                <img class="sc3d-img" src="img/znewtdevsite.png" alt="ZNewtDev" loading="lazy">
+                <img class="sc3d-reflection" src="img/znewtdevsite.png" alt="" aria-hidden="true" loading="lazy">
+              </div>
+
             </div>
           </div>
         </div>
-      </div><!-- /port-split__carousel -->
 
-    </div><!-- /port-split -->
+      </div><!-- /showcase-right -->
+
+    </div><!-- /showcase-split -->
+
+    <!-- Botão centralizado abaixo das duas showcases -->
+    <div class="sc3d-footer reveal">
+      <a href="#portfolio" class="btn btn-o shine-card">CONFERIR MODELOS</a>
+    </div>
+
   </div>
 </section>
 
 <!-- SEÇÃO UNIFICADA: COMO TRABALHO + O QUE OFEREÇO -->
-<section id="work-offer" class="glow-border-section">
+<section id="trabalho" class="glow-border-section">
   <div class="wrap">
     <div class="sh reveal">
       <span class="stag">// 02. MÉTODO &amp; SERVIÇOS</span>
@@ -369,7 +333,6 @@
               <p>Testes, ajustes finais e publicação com suporte no lançamento.</p>
             </div>
           </div>
-
 
         </div><!-- /process-timeline -->
       </div><!-- /wo-left -->
@@ -462,7 +425,7 @@
 </section>
 
 <!-- TESTIMONIALS — Carrossel automático -->
-<section id="testimonials">
+<section id="depoimento">
   <div class="wrap">
     <div class="sh reveal">
       <span class="stag">// 05. DEPOIMENTOS</span>
@@ -558,10 +521,9 @@
       <div class="foot-col">
         <h4>Navegação</h4>
         <ul>
-          <li><a href="#about">Sobre Mim</a></li>
-          <li><a href="#work-offer">Serviços</a></li>
-          <li><a href="#skills">Tecnologias</a></li>
-          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#modelo">Modelos</a></li>
+          <li><a href="#trabalho">Trabalho</a></li>
+          <li><a href="#depoimento">Portfolio</a></li>
           <li><a href="#" class="open-contact-btn">Contato</a></li>
         </ul>
       </div>
