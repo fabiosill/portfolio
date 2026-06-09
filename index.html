@@ -36,8 +36,6 @@
 <link rel="stylesheet" href="styles/main.css"/>
 </head>
 <body>
-
-<!-- Fixed Layers -->
 <canvas id="c-net"></canvas>
 <canvas id="c-rain"></canvas>
 <canvas id="c-grid"></canvas>
@@ -48,13 +46,13 @@
 <div class="sf">
   <a href="https://github.com/fabiosill" target="_blank" rel="noopener"><span class="tip">GitHub</span>⌥</a>
   <a href="https://www.linkedin.com/in/fabiosill/" target="_blank" rel="noopener"><span class="tip">LinkedIn</span>⊞</a>
-  <a href="https://instagram.com/fabiostudios_" target="_blank" rel="noopener"><span class="tip">Instagram</span>◈</a>
+  <a href="https://instagram.com/fabiosill" target="_blank" rel="noopener"><span class="tip">Instagram</span>◈</a>
   <a href="https://wa.me/5511921513742" target="_blank" rel="noopener"><span class="tip">WhatsApp</span>⊕</a>
 </div>
 
-<!-- Floating Buttons Stack -->
+<!-- [MODIFICADO] Float stack: STT removido; WA ocupa a posição do STT (bottom-right fixo) -->
 <div class="float-stack">
-  <!-- WhatsApp Button -->
+  <!-- WhatsApp Button — reposicionado para onde ficava o STT -->
   <a href="https://wa.me/5511921513742" target="_blank" rel="noopener" id="wabtn" class="float-btn float-wa" aria-label="Falar no WhatsApp">
     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="22" height="22">
       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
@@ -62,8 +60,6 @@
     </svg>
     <span class="float-btn-label">WhatsApp</span>
   </a>
-  <!-- Scroll to top -->
-  <button id="stt" onclick="window.scrollTo({top:0,behavior:'smooth'})" class="float-btn" aria-label="Voltar ao topo">↑</button>
 </div>
 
 <!-- ══════════════════════════════════════════════
@@ -77,7 +73,6 @@
     <div class="cmodal-inner">
       <!-- Info lateral -->
       <div class="cmodal-info">
-        <span class="stag">// CONTATO</span>
         <h3>Pronto para <em>transformar</em> sua presença digital?</h3>
         <p>Conte-me sobre seu projeto e receba uma proposta personalizada em até 24 horas.</p>
         <div class="citems">
@@ -85,7 +80,7 @@
             <span class="cicon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
             </span>
-            <div class="ctxt"><span>EMAIL</span><strong>fabiosill@email.com</strong></div>
+            <div class="ctxt"><span>EMAIL</span><strong>Fabio.silva12022001@email.com</strong></div>
           </div>
           <div class="citem">
             <span class="cicon">
@@ -111,14 +106,14 @@
       <!-- Formulário -->
       <div class="cform-wrap">
         <form onsubmit="doSend(event)">
-          <div class="fg"><label>NOME_COMPLETO</label><input type="text" placeholder="Seu nome completo..." required></div>
-          <div class="fg"><label>EMAIL_ADDRESS</label><input type="email" placeholder="seu@email.com" required></div>
+          <div class="fg"><label>NOME</label><input type="text" placeholder="Seu nome completo..." required></div>
+          <div class="fg"><label>EMAIL</label><input type="email" placeholder="seu@email.com" required></div>
           <div class="form-2col">
             <div class="fg"><label>TELEFONE</label><input type="tel" placeholder="(11) 99999-9999"></div>
-            <div class="fg"><label>TIPO_PROJETO</label><select><option value="">Selecionar...</option><option>Site Institucional</option><option>E-commerce</option><option>Landing Page</option><option>Manutenção</option><option>Outro</option></select></div>
+            <div class="fg"><label>PROJETO</label><select><option value="">Selecionar...</option><option>Landing page</option><option>E-commerce</option><option>Site institucional</option><option>Manutenção</option><option>Outro</option></select></div>
           </div>
-          <div class="fg"><label>MENSAGEM_DETALHES</label><textarea placeholder="Descreva seu projeto em detalhes..." required></textarea></div>
-          <button type="submit" class="sbtn" id="sbtn">⚡ ENVIAR MENSAGEM</button>
+          <div class="fg"><label>MENSAGEM</label><textarea placeholder="Descreva seu projeto em detalhes..." required></textarea></div>
+          <button type="submit" class="sbtn" id="sbtn">ENVIAR MENSAGEM</button>
         </form>
       </div>
     </div>
@@ -136,11 +131,10 @@
       <span></span><span></span><span></span>
     </button>
     <ul class="nlinks" id="navlinks">
-      <li><a href="#about">Sobre</a></li>
-      <li><a href="#work-offer">Serviços</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#portfolio">Portfolio</a></li>
-      <li><a href="#" class="open-contact-btn">Contratar</a></li>
+      <li><a href="#modelos">PROJETOS</a></li>
+      <li><a href="#trabalho">SERVIÇOS</a></li>
+      <li><a href="#depoimento">DEPOIMENTOS</a></li>
+      <li><a href="#" class="open-contact-btn">CONTRATAR</a></li>
     </ul>
   </div>
 </nav>
@@ -167,19 +161,18 @@
     <p class="htype" id="typeEl"></p>
     <p class="hdesc">Transformo ideias em experiências digitais extraordinárias. Sites que impressionam, convertem e ficam na memória do usuário.</p>
     <div class="ctas">
-      <a href="#portfolio" class="btn btn-p">Ver Projetos</a>
+      <a href="#projetos" class="btn btn-p">Ver Projetos</a>
       <a href="#" class="btn btn-o open-contact-btn shine-card">Iniciar Projeto</a>
     </div>
   </div>
 </section>
 
-<!-- SHOWCASE -->
-<section id="modelos" class="glow-border-section">
+<!-- PROJETOS -->
+<section id="projetos" class="glow-border-section">
   <div class="showcase-bg-grid" aria-hidden="true"></div>
 
   <div class="wrap">
     <div class="sh reveal">
-      <span class="stag">// 04.5. SHOWCASE</span>
       <h2 class="stitle">Modelos <em>Reais</em></h2>
       <div class="sdiv"></div>
     </div>
@@ -222,6 +215,8 @@
             <button class="sc-dot active" data-idx="0" aria-label="Projeto 1">1</button>
             <button class="sc-dot" data-idx="1" aria-label="Projeto 2">2</button>
             <button class="sc-dot" data-idx="2" aria-label="Projeto 3">3</button>
+            <!-- Indicação visual discreta de continuidade do carrossel -->
+            <span class="sc-next-hint" aria-hidden="true">&gt;</span>
           </nav>
 
         </div>
@@ -231,6 +226,8 @@
       <!-- LADO DIREITO: CARROSSEL 3D -->
       <div class="showcase-right reveal-r">
 
+        <!-- [MODIFICADO] Badge movido para dentro do showcase-right,
+             mais próximo do card 3D e acima do sc3d-scene -->
         <span class="sc3d-badge">[ LANDING PAGES ]</span>
 
         <div class="sc3d-scene">
@@ -245,13 +242,13 @@
               </div>
 
               <div class="sc3d-card">
-                <img class="sc3d-img" src="img/kleberpintosite.png" alt="Kleber Pinto" loading="lazy">
-                <img class="sc3d-reflection" src="img/kleberpintosite.png" alt="" aria-hidden="true" loading="lazy">
+                <img class="sc3d-img" src="img/barbeariapremiumsite.png" alt="Kleber Pinto" loading="lazy">
+                <img class="sc3d-reflection" src="img/barbeariapremiumsite.png" alt="" aria-hidden="true" loading="lazy">
               </div>
 
               <div class="sc3d-card">
-                <img class="sc3d-img" src="img/leparfragancysite.png" alt="Le Parfragancy" loading="lazy">
-                <img class="sc3d-reflection" src="img/leparfragancysite.png" alt="" aria-hidden="true" loading="lazy">
+                <img class="sc3d-img" src="img/fabianadesignsite.png" alt="Le Parfragancy" loading="lazy">
+                <img class="sc3d-reflection" src="img/fabianadesignsite.png" alt="" aria-hidden="true" loading="lazy">
               </div>
 
               <div class="sc3d-card">
@@ -263,14 +260,13 @@
           </div>
         </div>
 
+        <!-- [MODIFICADO] Botão movido para dentro do showcase-right,
+             alinhado ao conteúdo 3D (badge → card → botão) -->
+        <a href="#portfolio" class="btn btn-o shine-card sc3d-cta">CONFERIR MODELOS</a>
+
       </div><!-- /showcase-right -->
 
     </div><!-- /showcase-split -->
-
-    <!-- Botão centralizado abaixo das duas showcases -->
-    <div class="sc3d-footer reveal">
-      <a href="#portfolio" class="btn btn-o shine-card">CONFERIR MODELOS</a>
-    </div>
 
   </div>
 </section>
@@ -279,7 +275,6 @@
 <section id="trabalho" class="glow-border-section">
   <div class="wrap">
     <div class="sh reveal">
-      <span class="stag">// 02. MÉTODO &amp; SERVIÇOS</span>
       <h2 class="stitle">Como trabalho &amp; <em>O que ofereço</em></h2>
       <div class="sdiv"></div>
     </div>
@@ -298,7 +293,7 @@
             <div class="ptl-num">01</div>
             <div class="ptl-content">
               <h4>Briefing</h4>
-              <p>Entendo seus objetivos, público-alvo e necessidades do projeto em detalhe.</p>
+              <p>Entendo seus objetivos, público-alvo e necessidades em detalhe.</p>
             </div>
           </div>
 
@@ -428,7 +423,6 @@
 <section id="depoimento">
   <div class="wrap">
     <div class="sh reveal">
-      <span class="stag">// 05. DEPOIMENTOS</span>
       <h2 class="stitle">O que dizem <em>os clientes</em></h2>
       <div class="sdiv"></div>
     </div>
@@ -519,7 +513,7 @@
         <p>Desenvolvedor web especializado em criar experiências digitais que impressionam e convertem. São Paulo, Brasil.</p>
       </div>
       <div class="foot-col">
-        <h4>Navegação</h4>
+        <h4>Navegaçao</h4>
         <ul>
           <li><a href="#modelo">Modelos</a></li>
           <li><a href="#trabalho">Trabalho</a></li>

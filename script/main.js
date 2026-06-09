@@ -4,13 +4,12 @@ const isTouch  = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
 
 
 // ━━━━ NAV SCROLL ━━━━
+// [MODIFICADO] STT removido — apenas controla classe 'scrolled' da nav
 const nav = document.getElementById('nav');
-const stt = document.getElementById('stt');
 let lastScroll = 0;
 window.addEventListener('scroll', () => {
   const s = window.scrollY;
   if (nav) nav.classList.toggle('scrolled', s > 50);
-  if (stt) stt.classList.toggle('show', s > 400);
   lastScroll = s;
 }, { passive: true });
 
@@ -543,7 +542,7 @@ if (!isTouch) {
   const projects = [
     {
       num:   '01',
-      cat:   'Landing Page',
+      cat:   'Site institucional',
       img:   'img/kleberpintosite.png',
       alt:   'Kleber Pinto — preview do site',
       title: 'Kleber Pinto',
@@ -553,7 +552,7 @@ if (!isTouch) {
     },
     {
       num:   '02',
-      cat:   'Site Institucional',
+      cat:   'Landing Page',
       img:   'img/sisacleansite.png',
       alt:   'SISA Clean — preview do site',
       title: 'SISA Clean',
@@ -567,7 +566,7 @@ if (!isTouch) {
       img:   'img/leparfragancysite.png',
       alt:   'Le Parfragancy — preview do site',
       title: 'Le Parfragancy',
-      desc:  'Loja de perfumaria premium com experiência de compra luxuosa e intuitiva.',
+      desc:  'Loja de perfumaria premium com experiência de compra luxuosa.',
       tags:  ['E-commerce','UX','JS'],
       url:   'https://fabiosill.github.io/leparfragancy-web'
     }
@@ -696,8 +695,87 @@ if (!isTouch) {
 
   // Dot clicks
   dots.forEach((dot, i) => {
-    dot.addEventListener('click', () => goTo(i));
+    dot.addEventListener('click', () => {
+      // [MODIFICADO] ao clicar manualmente, reinicia o timer do autoplay
+      stopAutoplay();
+      goTo(i);
+      startAutoplay();
+    });
   });
+
+  // ── [MODIFICADO] Autoplay do showcase esquerdo ─────────────────────────────
+  // Troca automática a cada 3.5 s; pausa no hover/touch; retoma ao sair.
+  let autoplayTimer = null;
+
+  function nextSlide() {
+    const nextIdx = (current + 1) % projects.length;
+    goTo(nextIdx);
+  }
+
+  function startAutoplay() {
+    stopAutoplay();
+    autoplayTimer = setInterval(nextSlide, 3500);
+  }
+
+  function stopAutoplay() {
+    if (autoplayTimer) { clearInterval(autoplayTimer); autoplayTimer = null; }
+  }
+
+  // Pausa no hover do card
+  if (card) {
+    card.addEventListener('mouseenter', stopAutoplay);
+    card.addEventListener('mouseleave', startAutoplay);
+    card.addEventListener('touchstart', stopAutoplay, { passive: true });
+    card.addEventListener('touchend',   startAutoplay, { passive: true });
+  }
+
+  // Iniciar autoplay após breve delay (aguarda reveal animation)
+  setTimeout(startAutoplay, 1200);
+  // ── fim autoplay ────────────────────────────────────────────────────────────
+
+  // ── Swipe mobile (não interfere no scroll vertical) ──────────────────────
+  const wrapper = document.querySelector('.showcase-card-wrapper');
+  if (wrapper && isTouch) {
+    let swipeStartX = 0;
+    let swipeStartY = 0;
+    let swipeLocked = false; // true = gesto vertical, ignora horizontal
+
+    wrapper.addEventListener('touchstart', e => {
+      swipeStartX = e.touches[0].clientX;
+      swipeStartY = e.touches[0].clientY;
+      swipeLocked = false;
+      stopAutoplay();
+    }, { passive: true });
+
+    wrapper.addEventListener('touchmove', e => {
+      if (swipeLocked) return;
+      const dx = e.touches[0].clientX - swipeStartX;
+      const dy = e.touches[0].clientY - swipeStartY;
+      // Se movimento predominantemente vertical, trava o swipe horizontal
+      if (Math.abs(dy) > Math.abs(dx)) {
+        swipeLocked = true;
+        return;
+      }
+      // Movimento predominantemente horizontal: impede scroll da página
+      if (Math.abs(dx) > 8) e.preventDefault();
+    }, { passive: false });
+
+    wrapper.addEventListener('touchend', e => {
+      if (swipeLocked) { startAutoplay(); return; }
+      const dx = e.changedTouches[0].clientX - swipeStartX;
+      if (dx < -40) {
+        // Arrastar para esquerda → próximo slide
+        const nextIdx = (current + 1) % projects.length;
+        goTo(nextIdx);
+      } else if (dx > 40) {
+        // Arrastar para direita → slide anterior
+        const prevIdx = (current - 1 + projects.length) % projects.length;
+        goTo(prevIdx);
+      }
+      startAutoplay();
+    }, { passive: true });
+  }
+  // ── fim swipe ──────────────────────────────────────────────────────────────
 
 })();
 
