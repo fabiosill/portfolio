@@ -5,15 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fabiosill</title>
 
-<!-- Favicon -->
 <link rel="icon" href="img/logo.png" type="image/png">
 <link rel="apple-touch-icon" href="img/logo.png">
 
-<!-- SEO / Open Graph -->
 <meta name="description" content="Fábio Silva — Desenvolvedor Web especializado em sites institucionais, e-commerce e landing pages de alta conversão. São Paulo, Brasil.">
 <meta name="author" content="Fábio Silva — FabioSill">
 
-<!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="FABIOSILL">
 <meta property="og:description" content="Transformo ideias em experiências digitais extraordinárias. Sites que impressionam, convertem e ficam na memória.">
@@ -24,7 +21,6 @@
 <meta property="og:locale" content="pt_BR">
 <meta property="og:site_name" content="FABIOSILL">
 
-<!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="FABIOSILL">
 <meta name="twitter:description" content="Transformo ideias em experiências digitais extraordinárias. Sites que impressionam, convertem e ficam na memória.">
@@ -32,27 +28,31 @@
 <meta name="twitter:site" content="@fabiostudios_">
 <meta name="twitter:creator" content="@fabiostudios_">
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles/main.css"/>
+<link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
 
-<div class="noise"></div>
-<div id="vignette"></div>
+<div class="noise" aria-hidden="true"></div>
+<div id="vignette" aria-hidden="true"></div>
 
 <!-- Social Float -->
-<div class="sf">
-  <a href="https://github.com/fabiosill" target="_blank" rel="noopener"><span class="tip">GitHub</span>⌥</a>
-  <a href="https://www.linkedin.com/in/fabiosill/" target="_blank" rel="noopener"><span class="tip">LinkedIn</span>⊞</a>
-  <a href="https://instagram.com/fabiosill" target="_blank" rel="noopener"><span class="tip">Instagram</span>◈</a>
-  <a href="https://wa.me/5511921513742" target="_blank" rel="noopener"><span class="tip">WhatsApp</span>⊕</a>
-</div>
+ 
+<aside class="sf" aria-label="Redes sociais">
+  <a href="https://github.com/fabiosill" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><span class="tip" aria-hidden="true">GitHub</span>⌥</a>
+  <a href="https://www.linkedin.com/in/fabiosill/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><span class="tip" aria-hidden="true">LinkedIn</span>⊞</a>
+  <a href="https://instagram.com/fabiosill" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><span class="tip" aria-hidden="true">Instagram</span>◈</a>
+  <a href="https://wa.me/5511921513742" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><span class="tip" aria-hidden="true">WhatsApp</span>⊕</a>
+</aside>
 
-<!-- [MODIFICADO] Float stack: STT removido; WA ocupa a posição do STT (bottom-right fixo) -->
-<div class="float-stack">
-  <!-- WhatsApp Button — reposicionado para onde ficava o STT -->
-  <a href="https://wa.me/5511921513742" target="_blank" rel="noopener" id="wabtn" class="float-btn float-wa" aria-label="Falar no WhatsApp">
-    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="22" height="22">
+<!-- WhatsApp Float Button -->
+<div class="float-stack" aria-label="Ações rápidas">
+  <a href="https://wa.me/5511921513742" target="_blank" rel="noopener noreferrer" id="wabtn" class="float-btn float-wa" aria-label="Falar no WhatsApp">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="22" height="22" aria-hidden="true" focusable="false">
       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
       <path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.978-1.413A9.953 9.953 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18a7.946 7.946 0 0 1-4.076-1.118l-.291-.174-3.025.859.862-3.024-.19-.3A7.946 7.946 0 0 1 4 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/>
     </svg>
@@ -60,14 +60,10 @@
   </a>
 </div>
 
-<!-- ══════════════════════════════════════════════
-     CONTACT MODAL (substitui a section fixa)
-══════════════════════════════════════════════ -->
+<!-- CONTACT MODAL -->
 <div id="contact-modal" class="cmodal-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Formulário de contato">
   <div class="cmodal-box">
-    <!-- Fechar -->
     <button class="cmodal-close" id="cmodal-close" aria-label="Fechar formulário">✕</button>
-
     <div class="cmodal-inner">
       <!-- Info lateral -->
       <div class="cmodal-info">
@@ -75,25 +71,25 @@
         <p>Conte-me sobre seu projeto e receba uma proposta personalizada em até 24 horas.</p>
         <div class="citems">
           <div class="citem">
-            <span class="cicon">
+            <span class="cicon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
             </span>
             <div class="ctxt"><span>EMAIL</span><strong>Fabio.silva12022001@email.com</strong></div>
           </div>
           <div class="citem">
-            <span class="cicon">
+            <span class="cicon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.71 3.41 2 2 0 0 1 3.68 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
             </span>
             <div class="ctxt"><span>WHATSAPP</span><strong>(11) 92151-3742</strong></div>
           </div>
           <div class="citem">
-            <span class="cicon">
+            <span class="cicon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
             </span>
             <div class="ctxt"><span>LOCALIZAÇÃO</span><strong>São Paulo, Brasil</strong></div>
           </div>
           <div class="citem">
-            <span class="cicon">
+            <span class="cicon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             </span>
             <div class="ctxt"><span>RESPOSTA</span><strong>Até 24 horas</strong></div>
@@ -103,14 +99,24 @@
 
       <!-- Formulário -->
       <div class="cform-wrap">
-        <form onsubmit="doSend(event)">
-          <div class="fg"><label>NOME</label><input type="text" placeholder="Seu nome completo..." required></div>
-          <div class="fg"><label>EMAIL</label><input type="email" placeholder="seu@email.com" required></div>
+        <form onsubmit="doSend(event)" novalidate>
+          <div class="fg"><label for="f-nome">NOME</label><input id="f-nome" type="text" placeholder="Seu nome completo..." required autocomplete="name"></div>
+          <div class="fg"><label for="f-email">EMAIL</label><input id="f-email" type="email" placeholder="seu@email.com" required autocomplete="email"></div>
           <div class="form-2col">
-            <div class="fg"><label>TELEFONE</label><input type="tel" placeholder="(11) 99999-9999"></div>
-            <div class="fg"><label>PROJETO</label><select><option value="">Selecionar...</option><option>Landing page</option><option>E-commerce</option><option>Site institucional</option><option>Manutenção</option><option>Outro</option></select></div>
+            <div class="fg"><label for="f-tel">TELEFONE</label><input id="f-tel" type="tel" placeholder="(11) 99999-9999" autocomplete="tel"></div>
+            <div class="fg">
+              <label for="f-proj">PROJETO</label>
+              <select id="f-proj">
+                <option value="">Selecionar...</option>
+                <option>Landing page</option>
+                <option>E-commerce</option>
+                <option>Site institucional</option>
+                <option>Manutenção</option>
+                <option>Outro</option>
+              </select>
+            </div>
           </div>
-          <div class="fg"><label>MENSAGEM</label><textarea placeholder="Descreva seu projeto em detalhes..." required></textarea></div>
+          <div class="fg"><label for="f-msg">MENSAGEM</label><textarea id="f-msg" placeholder="Descreva seu projeto em detalhes..." required></textarea></div>
           <button type="submit" class="sbtn" id="sbtn">ENVIAR MENSAGEM</button>
         </form>
       </div>
@@ -119,17 +125,17 @@
 </div>
 
 <!-- NAV -->
-<nav id="nav">
+<nav id="nav" role="navigation" aria-label="Navegação principal">
   <div class="nav-i">
-    <a href="#hero" class="nlogo">
-      <img src="img/logo.png" alt="FabioSill">
+    <a href="#hero" class="nlogo" aria-label="FabioSill — Início">
+      <img src="img/logo.png" alt="" width="48" height="48" aria-hidden="true">
       <span>FABIOSILL</span>
     </a>
-    <button class="hamburger" id="hbg" aria-label="Menu">
+    <button class="hamburger" id="hbg" aria-label="Abrir menu" aria-expanded="false" aria-controls="navlinks">
       <span></span><span></span><span></span>
     </button>
     <ul class="nlinks" id="navlinks">
-      <li><a href="#modelos">PROJETOS</a></li>
+      <li><a href="#projetos">PROJETOS</a></li>
       <li><a href="#trabalho">SERVIÇOS</a></li>
       <li><a href="#depoimento">DEPOIMENTOS</a></li>
       <li><a href="#" class="open-contact-btn">CONTRATAR</a></li>
@@ -138,25 +144,21 @@
 </nav>
 
 <!-- HERO -->
-<section id="hero">
-  <video class="hero-video" autoplay muted loop playsinline>
+<section id="hero" aria-label="Apresentação">
+  <video class="hero-video" autoplay muted loop playsinline aria-hidden="true">
     <source src="img/fabiosillgif.mp4" type="video/mp4">
   </video>
-  <div class="hero-overlay"></div>
-  <div class="scan"></div>
+  <div class="hero-overlay" aria-hidden="true"></div>
+  <div class="scan" aria-hidden="true"></div>
   <div class="hero-c wrap">
-    <div class="avail-badge">
-      <div class="avail-dot"></div>
+    <div class="avail-badge" role="status">
+      <div class="avail-dot" aria-hidden="true"></div>
       <span>DISPONÍVEL PARA NOVOS PROJETOS</span>
     </div>
-    <div class="logo3d" id="logo3d">
-      <div class="logo3d-inner" id="logo3di">
-      </div>
-    </div>
-    <div class="badge">[ WEB DEVELOPER &amp; DESIGNER ]</div>
+    <p class="badge" aria-hidden="true">[ WEB DEVELOPER &amp; DESIGNER ]</p>
     <h1 class="htitle"><span class="glitch" data-text="FÁBIO SILVA">FÁBIO SILVA</span></h1>
     <p class="hsub">CRIANDO O FUTURO DIGITAL</p>
-    <p class="htype" id="typeEl"></p>
+    <p class="htype" id="typeEl" aria-live="polite" aria-atomic="true"></p>
     <p class="hdesc">Transformo ideias em experiências digitais extraordinárias. Sites que impressionam, convertem e ficam na memória do usuário.</p>
     <div class="ctas">
       <a href="#projetos" class="btn btn-p">Ver Projetos</a>
@@ -166,38 +168,32 @@
 </section>
 
 <!-- PROJETOS -->
-<section id="projetos" class="glow-border-section">
+<section id="projetos" class="glow-border-section" aria-labelledby="projetos-titulo">
   <div class="showcase-bg-grid" aria-hidden="true"></div>
-
   <div class="wrap">
     <div class="sh reveal">
-      <h2 class="stitle">Modelos <em>Reais</em></h2>
-      <div class="sdiv"></div>
+      <h2 class="stitle" id="projetos-titulo">Modelos <em>Reais</em></h2>
+      <div class="sdiv" aria-hidden="true"></div>
     </div>
 
     <div class="showcase-split">
 
-      <!-- LADO ESQUERDO: CARD DINÂMICO DE PROJETOS -->
+      <!-- Card dinâmico -->
       <div class="showcase-left reveal-l">
-
         <div class="showcase-card-wrapper">
-
-          <!-- Card reutilizável -->
           <article class="pcardx showcase-dynamic-card" id="showcase-card">
             <div class="pcardx-head">
               <span class="pcardx-num" id="sc-num">01</span>
               <span class="pcardx-cat" id="sc-cat">Landing page</span>
             </div>
             <div class="pcardx-frame-wrap">
-              <button class="sc-arrow sc-arrow-prev" aria-label="Projeto anterior" tabindex="-1">&#8249;</button>
-              <a id="sc-link" href="https://fabiosill.github.io/hairstylist-website" target="_blank" rel="noopener"
+              <a id="sc-link" href="https://fabiosill.github.io/hairstylist-website" target="_blank" rel="noopener noreferrer"
                  class="pcardx-frame" aria-label="Ver projeto ao vivo">
                 <div class="pcardx-scroll" id="sc-scroll">
-                  <img id="sc-img" src="img/kleberpintosite.png" alt="Preview do projeto" loading="lazy">
+                  <img id="sc-img" src="img/kleberpintosite.png" alt="Preview do projeto Kleber Pinto" loading="lazy" width="270" height="480">
                 </div>
                 <span class="pcardx-glare" aria-hidden="true"></span>
               </a>
-              <button class="sc-arrow sc-arrow-next" aria-label="Próximo projeto" tabindex="-1">&#8250;</button>
             </div>
             <div class="pcardx-info">
               <h3 class="pcardx-title" id="sc-title">Kleber Pinto</h3>
@@ -205,270 +201,232 @@
               <div class="pcardx-tags" id="sc-tags">
                 <span class="ptag">HTML</span><span class="ptag">CSS</span><span class="ptag">JS</span>
               </div>
-              <a id="sc-plink" href="https://fabiosill.github.io/hairstylist-website" target="_blank" rel="noopener" class="pshow-link">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="13" height="13"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              <a id="sc-plink" href="https://fabiosill.github.io/hairstylist-website" target="_blank" rel="noopener noreferrer" class="pshow-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="13" height="13" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                 <span>Ver site ao vivo</span>
               </a>
             </div>
           </article>
 
-          <!-- Navegação numérica -->
           <nav class="sc-nav" aria-label="Navegar entre projetos">
-            <button class="sc-dot active" data-idx="0" aria-label="Projeto 1">1</button>
+            <button class="sc-dot active" data-idx="0" aria-label="Projeto 1" aria-current="true">1</button>
             <button class="sc-dot" data-idx="1" aria-label="Projeto 2">2</button>
             <button class="sc-dot" data-idx="2" aria-label="Projeto 3">3</button>
-            <!-- Indicação visual discreta de continuidade do carrossel -->
             <span class="sc-next-hint" aria-hidden="true">&gt;</span>
           </nav>
-
         </div>
+      </div>
 
-      </div><!-- /showcase-left -->
-
-      <!-- LADO DIREITO: CARROSSEL 3D -->
+      <!-- Carrossel 3D -->
       <div class="showcase-right reveal-r">
-
-        <!-- [MODIFICADO] Badge movido para dentro do showcase-right,
-             mais próximo do card 3D e acima do sc3d-scene -->
         <span class="sc3d-badge">[ LANDING PAGES ]</span>
-
-        <div class="sc3d-scene">
+        <div class="sc3d-scene" aria-hidden="true">
           <div class="sc3d-glow"></div>
           <div class="sc3d-floor"></div>
           <div class="sc3d-stage">
             <div class="sc3d-carousel">
-
               <div class="sc3d-card">
                 <img class="sc3d-img" src="img/sisacleansite.png" alt="SISA Clean" loading="lazy">
-                <img class="sc3d-reflection" src="img/sisacleansite.png" alt="" aria-hidden="true" loading="lazy">
+                <img class="sc3d-reflection" src="img/sisacleansite.png" alt="" loading="lazy">
               </div>
-
               <div class="sc3d-card">
-                <img class="sc3d-img" src="img/barbeariapremiumsite.png" alt="Kleber Pinto" loading="lazy">
-                <img class="sc3d-reflection" src="img/barbeariapremiumsite.png" alt="" aria-hidden="true" loading="lazy">
+                <img class="sc3d-img" src="img/barbeariapremiumsite.png" alt="Barbearia Premium" loading="lazy">
+                <img class="sc3d-reflection" src="img/barbeariapremiumsite.png" alt="" loading="lazy">
               </div>
-
               <div class="sc3d-card">
-                <img class="sc3d-img" src="img/fabianadesignsite.png" alt="Le Parfragancy" loading="lazy">
-                <img class="sc3d-reflection" src="img/fabianadesignsite.png" alt="" aria-hidden="true" loading="lazy">
+                <img class="sc3d-img" src="img/fabianadesignsite.png" alt="Fabiana Design" loading="lazy">
+                <img class="sc3d-reflection" src="img/fabianadesignsite.png" alt="" loading="lazy">
               </div>
-
               <div class="sc3d-card">
                 <img class="sc3d-img" src="img/znewtdevsite.png" alt="ZNewtDev" loading="lazy">
-                <img class="sc3d-reflection" src="img/znewtdevsite.png" alt="" aria-hidden="true" loading="lazy">
+                <img class="sc3d-reflection" src="img/znewtdevsite.png" alt="" loading="lazy">
               </div>
-
             </div>
           </div>
         </div>
+        <a href="#projetos" class="btn btn-o shine-card sc3d-cta">CONFERIR MODELOS</a>
+      </div>
 
-        <!-- [MODIFICADO] Botão movido para dentro do showcase-right,
-             alinhado ao conteúdo 3D (badge → card → botão) -->
-        <a href="#portfolio" class="btn btn-o shine-card sc3d-cta">CONFERIR MODELOS</a>
-
-      </div><!-- /showcase-right -->
-
-    </div><!-- /showcase-split -->
-
+    </div>
   </div>
 </section>
 
-<!-- SEÇÃO UNIFICADA: COMO TRABALHO + O QUE OFEREÇO -->
-<section id="trabalho" class="glow-border-section">
+<!-- COMO TRABALHO + SERVIÇOS -->
+<section id="trabalho" class="glow-border-section" aria-labelledby="trabalho-titulo">
   <div class="wrap">
     <div class="sh reveal">
-      <h2 class="stitle">Como trabalho &amp; <em>O que ofereço</em></h2>
-      <div class="sdiv"></div>
+      <h2 class="stitle" id="trabalho-titulo">Como trabalho &amp; <em>O que ofereço</em></h2>
+      <div class="sdiv" aria-hidden="true"></div>
     </div>
 
     <div class="wo-split">
 
-      <!-- LADO ESQUERDO: COMO EU TRABALHO -->
       <div class="wo-left reveal-l">
         <div class="wo-label">
           <span class="stag" style="margin-bottom:.5rem">PROCESSO DE TRABALHO</span>
           <p class="wo-desc">Do briefing à entrega, cada etapa é planejada com precisão para garantir um resultado que supera expectativas.</p>
         </div>
-        <div class="process-timeline">
-
-          <div class="ptl-item reveal">
-            <div class="ptl-num">01</div>
+        <ol class="process-timeline">
+          <li class="ptl-item reveal">
+            <div class="ptl-num" aria-hidden="true">01</div>
             <div class="ptl-content">
-              <h4>Briefing</h4>
+              <h3>Briefing</h3>
               <p>Entendo seus objetivos, público-alvo e necessidades em detalhe.</p>
             </div>
-          </div>
-
-          <div class="ptl-item reveal">
-            <div class="ptl-num">02</div>
+          </li>
+          <li class="ptl-item reveal">
+            <div class="ptl-num" aria-hidden="true">02</div>
             <div class="ptl-content">
-              <h4>Planejamento</h4>
+              <h3>Planejamento</h3>
               <p>Defino arquitetura, wireframes e estratégia técnica personalizada.</p>
             </div>
-          </div>
-
-          <div class="ptl-item reveal">
-            <div class="ptl-num">03</div>
+          </li>
+          <li class="ptl-item reveal">
+            <div class="ptl-num" aria-hidden="true">03</div>
             <div class="ptl-content">
-              <h4>Design</h4>
+              <h3>Design</h3>
               <p>Crio layouts modernos e funcionais alinhados à identidade da marca.</p>
             </div>
-          </div>
-
-          <div class="ptl-item reveal">
-            <div class="ptl-num">04</div>
+          </li>
+          <li class="ptl-item reveal">
+            <div class="ptl-num" aria-hidden="true">04</div>
             <div class="ptl-content">
-              <h4>Desenvolvimento</h4>
+              <h3>Desenvolvimento</h3>
               <p>Código limpo, performático e otimizado para todos os dispositivos.</p>
             </div>
-          </div>
-
-          <div class="ptl-item reveal">
-            <div class="ptl-num">05</div>
+          </li>
+          <li class="ptl-item reveal">
+            <div class="ptl-num" aria-hidden="true">05</div>
             <div class="ptl-content">
-              <h4>Entrega</h4>
+              <h3>Entrega</h3>
               <p>Testes, ajustes finais e publicação com suporte no lançamento.</p>
             </div>
-          </div>
+          </li>
+        </ol>
+      </div>
 
-        </div><!-- /process-timeline -->
-      </div><!-- /wo-left -->
-
-      <!-- DIVISOR CENTRAL -->
-      <div class="wo-divider reveal">
+      <div class="wo-divider reveal" aria-hidden="true">
         <div class="wo-divider-line"></div>
         <div class="wo-divider-gem">◆</div>
         <div class="wo-divider-line"></div>
       </div>
 
-      <!-- LADO DIREITO: O QUE OFEREÇO -->
       <div class="wo-right reveal-r">
         <div class="wo-label">
           <span class="stag" style="margin-bottom:.5rem">SERVIÇOS DISPONÍVEIS</span>
           <p class="wo-desc">Soluções digitais completas, do conceito ao lançamento, com foco em resultados mensuráveis.</p>
         </div>
-        <div class="svc-quintet">
+        <ul class="svc-quintet">
 
-          <div class="svc-mini reveal shine-card">
-            <div class="svc-mini-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-              </svg>
+          <li class="svc-mini reveal shine-card">
+            <div class="svc-mini-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
             </div>
             <div class="svc-mini-body">
-              <h4>Sites Institucionais</h4>
+              <h3>Sites Institucionais</h3>
               <p>Design moderno, responsivo e profissional para qualquer dispositivo.</p>
               <span class="svc-tag">HTML / CSS / JS</span>
             </div>
-          </div>
+          </li>
 
-          <div class="svc-mini reveal shine-card">
-            <div class="svc-mini-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>
-              </svg>
+          <li class="svc-mini reveal shine-card">
+            <div class="svc-mini-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
             </div>
             <div class="svc-mini-body">
-              <h4>E-commerce</h4>
+              <h3>E-commerce</h3>
               <p>Lojas completas com checkout otimizado e integração de pagamentos.</p>
               <span class="svc-tag">WooCommerce / Shopify</span>
             </div>
-          </div>
+          </li>
 
-          <div class="svc-mini reveal shine-card">
-            <div class="svc-mini-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
-              </svg>
+          <li class="svc-mini reveal shine-card">
+            <div class="svc-mini-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
             </div>
             <div class="svc-mini-body">
-              <h4>Landing Pages</h4>
+              <h3>Landing Pages</h3>
               <p>Páginas de alta conversão projetadas para transformar visitantes em clientes.</p>
               <span class="svc-tag">CRO / Copywriting</span>
             </div>
-          </div>
+          </li>
 
-          <div class="svc-mini reveal shine-card">
-            <div class="svc-mini-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-              </svg>
+          <li class="svc-mini reveal shine-card">
+            <div class="svc-mini-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
             </div>
             <div class="svc-mini-body">
-              <h4>Performance &amp; SEO</h4>
+              <h3>Performance &amp; SEO</h3>
               <p>Otimização técnica completa para velocidade máxima e posicionamento no Google.</p>
               <span class="svc-tag">Core Web Vitals</span>
             </div>
-          </div>
+          </li>
 
-          <div class="svc-mini reveal shine-card">
-            <div class="svc-mini-icon">
+          <li class="svc-mini reveal shine-card">
+            <div class="svc-mini-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
               </svg>
             </div>
             <div class="svc-mini-body">
-              <h4>Manutenção &amp; Suporte</h4>
+              <h3>Manutenção &amp; Suporte</h3>
               <p>Suporte contínuo, atualizações e monitoramento 24/7 para seu site.</p>
               <span class="svc-tag">24/7 Support</span>
             </div>
-          </div>
+          </li>
 
-        </div><!-- /svc-quintet -->
-      </div><!-- /wo-right -->
+        </ul>
+      </div>
 
-    </div><!-- /wo-split -->
+    </div>
   </div>
 </section>
 
-<!-- TESTIMONIALS — Carrossel automático -->
-<section id="depoimento">
+<!-- DEPOIMENTOS -->
+<section id="depoimento" aria-labelledby="depoimento-titulo">
   <div class="wrap">
     <div class="sh reveal">
-      <h2 class="stitle">O que dizem <em>os clientes</em></h2>
-      <div class="sdiv"></div>
+      <h2 class="stitle" id="depoimento-titulo">O que dizem <em>os clientes</em></h2>
+      <div class="sdiv" aria-hidden="true"></div>
     </div>
 
     <div class="tcarousel-wrap">
-      <div class="tcarousel" id="tcarousel">
-        <!-- Card 1 -->
-        <div class="tcard glow-border-card">
-          <div class="stars">★★★★★</div>
+      <div class="tcarousel" id="tcarousel" role="list">
+        <div class="tcard glow-border-card" role="listitem">
+          <div class="stars" aria-label="5 estrelas">★★★★★</div>
           <p class="ttext">"Fábio superou todas as expectativas. O site ficou incrível e os resultados foram imediatos. Nossa taxa de conversão triplicou!"</p>
           <div class="tauthor">
-            <div class="tavatar tavatar-initials" data-initials="CM">CM</div>
+            <div class="tavatar tavatar-initials" aria-hidden="true" data-initials="CM">CM</div>
             <div>
               <div class="tname">Carlos Mendes</div>
               <div class="trole">CEO — TechCorp Solutions</div>
             </div>
           </div>
         </div>
-        <!-- Card 2 -->
-        <div class="tcard glow-border-card">
-          <div class="stars">★★★★★</div>
+        <div class="tcard glow-border-card" role="listitem">
+          <div class="stars" aria-label="5 estrelas">★★★★★</div>
           <p class="ttext">"Profissionalismo impecável do início ao fim. A landing page que ele criou converteu muito acima do esperado. Recomendo fortemente!"</p>
           <div class="tauthor">
-            <div class="tavatar tavatar-initials" data-initials="AC">AC</div>
+            <div class="tavatar tavatar-initials" aria-hidden="true" data-initials="AC">AC</div>
             <div>
               <div class="tname">Ana Paula Costa</div>
               <div class="trole">Diretora — FitLife Academy</div>
             </div>
           </div>
         </div>
-        <!-- Card 3 -->
-        <div class="tcard glow-border-card">
-          <div class="stars">★★★★★</div>
+        <div class="tcard glow-border-card" role="listitem">
+          <div class="stars" aria-label="5 estrelas">★★★★★</div>
           <p class="ttext">"O melhor investimento que fiz para meu negócio. Site rápido, bonito e que aparece no Google. Fábio é um verdadeiro profissional!"</p>
           <div class="tauthor">
-            <div class="tavatar tavatar-initials" data-initials="RL">RL</div>
+            <div class="tavatar tavatar-initials" aria-hidden="true" data-initials="RL">RL</div>
             <div>
               <div class="tname">Dr. Roberto Lima</div>
               <div class="trole">Diretor — MedCenter Clinic</div>
             </div>
           </div>
         </div>
-        <!-- Card 4 (clone para loop infinito) -->
-        <div class="tcard glow-border-card">
+        <!-- Clones para loop infinito -->
+        <div class="tcard glow-border-card" role="listitem" aria-hidden="true">
           <div class="stars">★★★★★</div>
           <p class="ttext">"Fábio superou todas as expectativas. O site ficou incrível e os resultados foram imediatos. Nossa taxa de conversão triplicou!"</p>
           <div class="tauthor">
@@ -479,8 +437,7 @@
             </div>
           </div>
         </div>
-        <!-- Card 5 (clone) -->
-        <div class="tcard glow-border-card">
+        <div class="tcard glow-border-card" role="listitem" aria-hidden="true">
           <div class="stars">★★★★★</div>
           <p class="ttext">"Profissionalismo impecável do início ao fim. A landing page que ele criou converteu muito acima do esperado. Recomendo fortemente!"</p>
           <div class="tauthor">
@@ -492,22 +449,18 @@
           </div>
         </div>
       </div>
-      <!-- Dots de navegação -->
-      <div class="tcarousel-dots" id="tcarousel-dots">
-        <button class="tdot active" data-idx="0" aria-label="Depoimento 1"></button>
-        <button class="tdot" data-idx="1" aria-label="Depoimento 2"></button>
-        <button class="tdot" data-idx="2" aria-label="Depoimento 3"></button>
+      <div class="tcarousel-dots" id="tcarousel-dots" role="tablist" aria-label="Depoimentos">
+        <button class="tdot active" data-idx="0" role="tab" aria-selected="true" aria-label="Depoimento 1"></button>
+        <button class="tdot" data-idx="1" role="tab" aria-selected="false" aria-label="Depoimento 2"></button>
+        <button class="tdot" data-idx="2" role="tab" aria-selected="false" aria-label="Depoimento 3"></button>
       </div>
     </div>
-
   </div>
 </section>
-
 
 <!-- FOOTER -->
 <footer>
   <div class="foot-bg" aria-hidden="true"></div>
-
   <div class="wrap">
     <div class="foot-top">
       <div class="foot-brand">
@@ -515,11 +468,11 @@
         <p>Desenvolvedor web especializado em criar experiências digitais que impressionam e convertem. São Paulo, Brasil.</p>
       </div>
       <div class="foot-col">
-        <h4>Navegaçao</h4>
+        <h4>Navegação</h4>
         <ul>
-          <li><a href="#modelo">Modelos</a></li>
-          <li><a href="#trabalho">Trabalho</a></li>
-          <li><a href="#depoimento">Portfolio</a></li>
+          <li><a href="#projetos">Projetos</a></li>
+          <li><a href="#trabalho">Serviços</a></li>
+          <li><a href="#depoimento">Depoimentos</a></li>
           <li><a href="#" class="open-contact-btn">Contato</a></li>
         </ul>
       </div>
@@ -537,22 +490,23 @@
     <div class="foot-bottom">
       <p class="foot-copy">© 2026 FÁBIO SILVA • FABIOSILL WEB DEVELOPER • TODOS OS DIREITOS RESERVADOS</p>
       <div class="socials">
-        <a href="https://github.com/fabiosill" target="_blank" rel="noopener" aria-label="GitHub">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        <a href="https://github.com/fabiosill" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
         </a>
-        <a href="https://www.linkedin.com/in/fabiosill/" target="_blank" rel="noopener" aria-label="LinkedIn">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        <a href="https://www.linkedin.com/in/fabiosill/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
         </a>
-        <a href="https://instagram.com/fabiostudios_" target="_blank" rel="noopener" aria-label="Instagram">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        <a href="https://instagram.com/fabiostudios_" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
         </a>
-        <a href="https://wa.me/5511921513742" target="_blank" rel="noopener" aria-label="WhatsApp">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        <a href="https://wa.me/5511921513742" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
         </a>
       </div>
     </div>
   </div>
 </footer>
-<script src="script/main.js"></script>
+
+<script src="script/main.js" defer></script>
 </body>
 </html>

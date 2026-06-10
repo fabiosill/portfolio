@@ -108,8 +108,9 @@ nav.scrolled{
 }
 .nlogo img:hover{filter:drop-shadow(0 0 4px var(--neon)) drop-shadow(0 0 4px var(--neon))}
 .nlogo span{
-  font-family:'Orbitron',monospace;font-size:1.15rem;font-weight:900;
-  color:var(--neon);letter-spacing:3px;
+  
+  font-family:'Orbitron',monospace;font-size:1.10rem;font-weight:1000;
+  color:var(--neon);letter-spacing:1.2px;
   text-shadow:0 0 20px rgba(59,156,237,.5);white-space:nowrap;
 }
 .nlogo::before{
@@ -151,15 +152,6 @@ nav.scrolled .nlogo img{
   opacity:.2;animation:scan 5s linear infinite;pointer-events:none;
 }
 @keyframes scan{from{top:-3px}to{top:100%}}
-
-/* Logo 3D */
-.logo3d{display:inline-block;position:relative;margin-bottom:2.5rem;perspective:600px}
-.logo3d-inner{position:relative;transition:transform .1s linear;transform-style:preserve-3d}
-.logo3d img{
-  width:200px;height:200px;object-fit:contain;
-  filter:drop-shadow(0 0 30px rgba(59,156,237,.9)) drop-shadow(0 0 70px rgba(59,156,237,.4));
-  animation:lf 4.5s ease-in-out infinite;display:block;
-}
 @keyframes lf{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-18px) rotate(1.5deg)}}
 .ring{position:absolute;border-radius:50%;animation:rs linear infinite;border:1.5px solid rgba(59,156,237,.3)}
 .r1{inset:-18px;animation-duration:10s}
@@ -206,6 +198,11 @@ nav.scrolled .nlogo img{
   overflow:hidden;white-space:nowrap;text-overflow:ellipsis;
 }
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.cursor-blink{
+  display:inline-block;width:2px;height:1.05em;
+  background:var(--neon);margin-left:2px;vertical-align:text-bottom;
+  animation:blink .7s step-start infinite;
+}
 .hdesc{font-size:1.05rem;max-width:580px;margin:0 auto 2.5rem;color:rgba(220,238,255,.6);line-height:1.9}
 .ctas{display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap}
 
@@ -433,7 +430,7 @@ section{padding:5.5rem 0;position:relative;z-index:10}
 .pcardx-cat{color:#9ec7ee}
 
 .pcardx-frame{
-  position:relative;display:block;width:95%;margin:0 auto;
+  position:relative;display:block;width:120%;margin:0 auto;
   aspect-ratio:9/16;max-height:384px;border-radius:16px;overflow:hidden;
   background:#0a0f1a;border:1px solid rgba(59,156,237,.18);
   box-shadow:
@@ -448,7 +445,7 @@ section{padding:5.5rem 0;position:relative;z-index:10}
   user-select:none;pointer-events:none;transform:translateZ(0);
 }
 .pcardx-scroll.is-animating{
-  transition:transform var(--pdur,6s) cubic-bezier(.22,.61,.36,1);
+  transition:transform var(--pdur,4s) cubic-bezier(.22,.61,.36,1);
 }
 
 .pcardx-glare{
@@ -618,8 +615,8 @@ footer{
 footer .wrap{position:relative;z-index:1}
 .foot-top{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:2rem;margin-bottom:1.2rem}
 .foot-brand .flogo{
-  font-family:'Orbitron',sans-serif;font-size:1.6rem;font-weight:900;
-  color:var(--neon);letter-spacing:3px;
+  font-family:'Orbitron',sans-serif;font-size:1.4rem;font-weight:1000;
+  color:var(--neon);letter-spacing:1px;
   text-shadow:0 0 30px rgba(59,156,237,.45);display:block;margin-bottom:.55rem;
 }
 .foot-brand p{color:rgba(220,238,255,.5);font-size:.88rem;line-height:1.65;max-width:280px}
@@ -1132,7 +1129,6 @@ footer .wrap{position:relative;z-index:1}
   .foot-top{grid-template-columns:1fr 1fr;gap:2rem}
   .sf{display:none}
 
-  .logo3d img{width:160px;height:160px}
   .htitle{font-size:clamp(2rem,7vw,3.5rem)}
   .hsub{font-size:1.1rem;letter-spacing:3px}
   .htype{font-size:.95rem}
@@ -1210,9 +1206,6 @@ footer .wrap{position:relative;z-index:1}
   .nlinks{width:85vw;max-width:300px;padding:4.5rem 2rem 2rem;gap:1.5rem}
 
   .hero-c{padding-top:75px;padding-left:.75rem;padding-right:.75rem}
-  .logo3d{margin-bottom:1.6rem}
-  .logo3d img{width:110px;height:110px}
-  .logo3d-inner{transform:none !important}
   .r1{inset:-12px}.r2{inset:-24px}.r3{inset:-36px}
   .badge{font-size:.58rem;letter-spacing:1.5px;padding:.28rem .75rem;max-width:calc(100% - 2rem);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .htitle{font-size:clamp(1.65rem,9.5vw,2.6rem);word-break:break-word;hyphens:auto}
@@ -1298,7 +1291,6 @@ footer .wrap{position:relative;z-index:1}
 @media(max-width:380px){
   .wrap{padding:0 .85rem}
   .hero-c{padding-left:.5rem;padding-right:.5rem}
-  .logo3d img{width:95px;height:95px}
   .htitle{font-size:clamp(1.45rem,10vw,2rem)}
   .badge{font-size:.52rem;padding:.25rem .6rem}
   .hsub{font-size:.82rem}
@@ -1316,8 +1308,6 @@ footer .wrap{position:relative;z-index:1}
 @media(max-width:900px) and (orientation:landscape) and (max-height:500px){
   #hero{min-height:auto;padding:6rem 0 4rem}
   .hero-c{padding-top:70px}
-  .logo3d{margin-bottom:1rem}
-  .logo3d img{width:80px;height:80px}
   .r1{inset:-8px}.r2{inset:-16px}.r3{inset:-24px}
   .htitle{font-size:clamp(1.4rem,5vw,2rem)}
   .hdesc{display:none}

@@ -517,7 +517,7 @@ document.addEventListener('keydown', e => {
   }
 
   const stopAutoplay  = () => { if (autoplayTimer) { clearInterval(autoplayTimer); autoplayTimer = null; } };
-  const startAutoplay = () => { stopAutoplay(); autoplayTimer = setInterval(() => goTo((current + 1) % projects.length), 6500); };
+  const startAutoplay = () => { stopAutoplay(); autoplayTimer = setInterval(() => goTo((current + 1) % projects.length), 5500); };
 
   dots.forEach((dot, i) => {
     dot.addEventListener('click', () => { stopAutoplay(); goTo(i); startAutoplay(); });
