@@ -36,9 +36,7 @@
 <link rel="stylesheet" href="styles/main.css"/>
 </head>
 <body>
-<canvas id="c-net"></canvas>
-<canvas id="c-rain"></canvas>
-<canvas id="c-grid"></canvas>
+
 <div class="noise"></div>
 <div id="vignette"></div>
 
@@ -190,13 +188,17 @@
               <span class="pcardx-num" id="sc-num">01</span>
               <span class="pcardx-cat" id="sc-cat">Landing page</span>
             </div>
-            <a id="sc-link" href="https://fabiosill.github.io/hairstylist-website" target="_blank" rel="noopener"
-               class="pcardx-frame" aria-label="Ver projeto ao vivo">
-              <div class="pcardx-scroll" id="sc-scroll">
-                <img id="sc-img" src="img/kleberpintosite.png" alt="Preview do projeto" loading="lazy">
-              </div>
-              <span class="pcardx-glare" aria-hidden="true"></span>
-            </a>
+            <div class="pcardx-frame-wrap">
+              <button class="sc-arrow sc-arrow-prev" aria-label="Projeto anterior" tabindex="-1">&#8249;</button>
+              <a id="sc-link" href="https://fabiosill.github.io/hairstylist-website" target="_blank" rel="noopener"
+                 class="pcardx-frame" aria-label="Ver projeto ao vivo">
+                <div class="pcardx-scroll" id="sc-scroll">
+                  <img id="sc-img" src="img/kleberpintosite.png" alt="Preview do projeto" loading="lazy">
+                </div>
+                <span class="pcardx-glare" aria-hidden="true"></span>
+              </a>
+              <button class="sc-arrow sc-arrow-next" aria-label="Próximo projeto" tabindex="-1">&#8250;</button>
+            </div>
             <div class="pcardx-info">
               <h3 class="pcardx-title" id="sc-title">Kleber Pinto</h3>
               <p class="pcardx-desc" id="sc-desc">Site institucional para serviços de química, cabelo e barba.</p>
