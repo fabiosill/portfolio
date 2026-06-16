@@ -235,8 +235,8 @@ nav.scrolled .nlogo img{
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    SECTIONS BASE
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-section{padding:5.5rem 0;position:relative;z-index:10}
-.sh{text-align:center;margin-bottom:3rem;position:relative;z-index:12}
+section{padding:4rem 0;position:relative;z-index:10}
+.sh{text-align:center;margin-bottom:2.5rem;position:relative;z-index:12}
 .stag{
   font-family:'Share Tech Mono',monospace;font-size:.82rem;
   color:var(--neon);letter-spacing:4px;text-transform:uppercase;
@@ -273,7 +273,7 @@ section{padding:5.5rem 0;position:relative;z-index:10}
   gap:0;
   align-items:stretch;
 }
-.wo-label{margin-bottom:2.2rem}
+.wo-label{margin-bottom:1.5rem}
 .wo-desc{color:rgba(220,238,255,.55);font-size:.92rem;line-height:1.75;margin-top:.6rem;max-width:360px}
 .wo-left{padding-right:3rem;display:flex;flex-direction:column}
 .wo-right{padding-left:3rem;display:flex;flex-direction:column}
@@ -290,7 +290,7 @@ section{padding:5.5rem 0;position:relative;z-index:10}
 }
 .ptl-item{
   display:flex;gap:1.4rem;align-items:flex-start;
-  margin-bottom:3rem;position:relative;z-index:1;transition:.35s;
+  margin-bottom:2rem;position:relative;z-index:1;transition:.35s;
 }
 .ptl-item:last-child{margin-bottom:0}
 .ptl-item:hover{transform:translateX(6px)}
@@ -500,20 +500,21 @@ section{padding:5.5rem 0;position:relative;z-index:10}
   position:relative;overflow:hidden;
   -webkit-mask-image:linear-gradient(to right,transparent 0%,black 8%,black 92%,transparent 100%);
   mask-image:linear-gradient(to right,transparent 0%,black 8%,black 92%,transparent 100%);
-  padding:1rem 0 2.5rem;
+  padding:1rem 0 1.5rem;
 }
-.tcarousel{display:flex;gap:2rem;will-change:transform;transition:none}
+.tcarousel{display:flex;gap:2rem;will-change:transform;transition:none;align-items:stretch}
 
 .tcard{
   background:var(--card);border:1px solid var(--border);
   padding:2rem 2rem 1.8rem;position:relative;isolation:isolate;
   transition:border-color .4s,box-shadow .4s;
   min-width:340px;max-width:340px;flex-shrink:0;cursor:pointer;
+  display:flex;flex-direction:column;
 }
 .tcard:hover{border-color:rgba(59,156,237,.45);box-shadow:0 18px 50px rgba(59,156,237,.1)}
 
 .stars{color:var(--neon);font-size:1.1rem;margin-bottom:1rem;letter-spacing:3px}
-.ttext{color:rgba(220,238,255,.75);line-height:1.85;font-size:.95rem;margin-bottom:1.5rem}
+.ttext{color:rgba(220,238,255,.75);line-height:1.85;font-size:.95rem;margin-bottom:1.5rem;flex:1}
 .tauthor{display:flex;align-items:center;gap:1rem}
 .tavatar{
   width:48px;height:48px;border-radius:50%;border:2px solid var(--neon);
@@ -530,7 +531,7 @@ section{padding:5.5rem 0;position:relative;z-index:10}
 .tname{font-weight:700;font-size:1rem}
 .trole{font-size:.8rem;color:rgba(220,238,255,.5);letter-spacing:1px}
 
-.tcarousel-dots{display:flex;justify-content:center;gap:.55rem;margin-top:1.8rem}
+.tcarousel-dots{display:flex;justify-content:center;gap:.55rem;margin-top:1.2rem}
 .tdot{
   width:28px;height:3px;border-radius:999px;
   background:rgba(59,156,237,.18);border:none;cursor:pointer;
@@ -802,6 +803,17 @@ footer .wrap{position:relative;z-index:1}
 }
 .cmodal-inner .form-2col{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
 
+/* Pausa as animações de borda giratória quando o card está fora da viewport
+   (classe alternada via IntersectionObserver em main.js) — elimina repaints
+   contínuos do conic-gradient sem alterar o visual enquanto em tela. */
+.glow-paused.tcard::before,
+.glow-paused.pcardx::before,
+.glow-paused.citem::before,
+.glow-paused.glow-border-card::before,
+.glow-paused.glow-border-section::after{
+  animation-play-state:paused;
+}
+
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    ROTATING GLOW BORDER — sections
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
@@ -1070,6 +1082,7 @@ footer .wrap{position:relative;z-index:1}
   position:relative;width:var(--sc3d-card-w);height:var(--sc3d-card-h);
   transform-style:preserve-3d;
   animation:sc3d-spin 16s linear infinite;overflow:visible;
+  will-change:transform;
 }
 .sc3d-card{position:absolute;width:var(--sc3d-card-w);height:var(--sc3d-card-h)}
 .sc3d-img{
@@ -1135,9 +1148,9 @@ footer .wrap{position:relative;z-index:1}
   .hdesc{font-size:.95rem;padding:0 .5rem}
 
   .wo-split{grid-template-columns:1fr;gap:0}
-  .wo-left{padding-right:0;margin-bottom:3rem}
+  .wo-left{padding-right:0;margin-bottom:2rem}
   .wo-right{padding-left:0}
-  .wo-divider{flex-direction:row;padding-top:0;margin:2rem 0;height:auto}
+  .wo-divider{flex-direction:row;padding-top:0;margin:1.5rem 0;height:auto}
   .wo-divider-line{flex:1;width:auto;height:2px;background:linear-gradient(90deg,transparent,var(--neon),transparent);opacity:.18}
 
   .tcard:hover{transform:translateY(-4px)}
@@ -1185,6 +1198,12 @@ footer .wrap{position:relative;z-index:1}
 @media(max-width:600px){
   #hero{min-height:100svh}
   #c-net,#c-rain,#c-grid,.noise,#vignette{display:none}
+
+  /* Blur reduzido em mobile: visualmente quase idêntico, porém muito mais
+     leve para a GPU em elementos fixed que recompõem a cada frame de scroll. */
+  nav.scrolled{backdrop-filter:blur(12px)}
+  .nlinks{backdrop-filter:blur(12px)}
+  .cmodal-overlay{backdrop-filter:blur(8px) saturate(0.8);-webkit-backdrop-filter:blur(8px) saturate(0.8)}
   .hero-video{
     display:block;position:absolute;inset:0;
     width:100%;height:100%;object-fit:cover;object-position:center;
@@ -1195,8 +1214,8 @@ footer .wrap{position:relative;z-index:1}
     opacity:1;
   }
   .wrap{padding:0 1rem}
-  section{padding:4rem 0}
-  .sh{margin-bottom:3rem}
+  section{padding:2.8rem 0}
+  .sh{margin-bottom:2rem}
   body{cursor:auto}
 
   nav{padding:.9rem 0}
@@ -1219,7 +1238,7 @@ footer .wrap{position:relative;z-index:1}
 
   .wo-left,.wo-right{padding:0}
   .wo-desc{max-width:100%}
-  .ptl-item{gap:1rem;margin-bottom:2.2rem}
+  .ptl-item{gap:1rem;margin-bottom:1.6rem}
   .ptl-num{width:36px;height:36px;font-size:.7rem}
   .ptl-content h3{font-size:.82rem}
   .ptl-content p{font-size:.84rem}

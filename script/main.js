@@ -2,6 +2,24 @@
 const isMobile = /Mobi|Android|iPhone|iPad|iPod|Touch/i.test(navigator.userAgent) || window.innerWidth <= 900;
 const isTouch  = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
 
+// Helper: true se o canvas está oculto via CSS (display:none) ou a aba está em segundo plano.
+// Evita rodar requestAnimationFrame/setInterval "no vazio" — principal causa de
+// aquecimento/CPU alta no navegador interno do Instagram e em telas < 600px,
+// onde #c-net/#c-rain/#c-grid são display:none mas os loops continuavam ativos.
+function isCanvasActive(c) {
+  return document.visibilityState === 'visible' && c.offsetParent !== null && getComputedStyle(c).display !== 'none';
+}
+
+// Debounce: evita reflows/realocações repetidas durante o resize contínuo
+// (ex.: barra de endereço do mobile aparecendo/escondendo, redimensionamento de janela).
+function debounce(fn, wait) {
+  let t = null;
+  return function (...args) {
+    clearTimeout(t);
+    t = setTimeout(() => fn.apply(this, args), wait);
+  };
+}
+
 // ━━━━ NAV SCROLL ━━━━
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
@@ -30,6 +48,7 @@ window.addEventListener('scroll', () => {
   }
 
   function draw() {
+    if (!isCanvasActive(c)) { requestAnimationFrame(draw); return; }
     ctx.clearRect(0, 0, W, H);
     pts.forEach(p => {
       p.x += p.vx; p.y += p.vy;
@@ -58,7 +77,7 @@ window.addEventListener('scroll', () => {
     requestAnimationFrame(draw);
   }
   init(); draw();
-  window.addEventListener('resize', init, { passive: true });
+  window.addEventListener('resize', debounce(init, 200), { passive: true });
 })();
 
 // ━━━━ CODE RAIN (desktop only) ━━━━
@@ -75,7 +94,11 @@ window.addEventListener('scroll', () => {
     cols = Math.floor(W / 14);
     drops = Array(cols).fill(1);
   }
-  function draw() {
+  function draw(now) {
+    requestAnimationFrame(draw);
+    if (!isCanvasActive(c)) return;
+    if (now - lastT < 55) return;
+    lastT = now;
     ctx.fillStyle = 'rgba(1,13,31,.055)';
     ctx.fillRect(0, 0, W, H);
     ctx.fillStyle = '#3B9CED';
@@ -86,8 +109,9 @@ window.addEventListener('scroll', () => {
       drops[i]++;
     });
   }
-  init(); setInterval(draw, 55);
-  window.addEventListener('resize', init, { passive: true });
+  let lastT = 0;
+  init(); requestAnimationFrame(draw);
+  window.addEventListener('resize', debounce(init, 200), { passive: true });
 })();
 
 // ━━━━ PERSPECTIVE GRID ━━━━
@@ -95,21 +119,20 @@ window.addEventListener('scroll', () => {
   const c = document.getElementById('c-grid');
   if (!c) return;
   const ctx = c.getContext('2d');
-  let W, H, off = 0;
-  const speed = isMobile ? .2 : .3;
+  let W, H;
   function init() {
     W = c.width = window.innerWidth;
     H = c.height = window.innerHeight;
   }
   function draw() {
+    if (!isCanvasActive(c)) return;
     ctx.clearRect(0, 0, W, H);
-    off = (off + speed) % 60;
     const vp = { x: W / 2, y: H * .55 };
     const rows = isMobile ? 8 : 12;
     const cols = isMobile ? 14 : 20;
     const fz = 800;
     for (let r = 0; r <= rows; r++) {
-      const y = H * .55 + ((r / rows) * H * .7 + off * 4) - off * 4;
+      const y = H * .55 + (r / rows) * H * .7;
       const scale = fz / (fz + (y - vp.y));
       const xw = W * scale;
       ctx.beginPath();
@@ -134,20 +157,26 @@ window.addEventListener('scroll', () => {
       ctx.strokeStyle = 'rgba(0,80,200,.1)';
       ctx.lineWidth = .5; ctx.stroke();
     }
-    requestAnimationFrame(draw);
   }
   init(); draw();
-  window.addEventListener('resize', init, { passive: true });
+  window.addEventListener('resize', () => { init(); draw(); }, { passive: true });
 })();
 
 // ━━━━ HERO 3D TILT (desktop only) ━━━━
 const logo3di = document.getElementById('logo3di');
 if (logo3di && !isTouch) {
+  let tiltRaf = false, tiltX = 0, tiltY = 0;
   document.addEventListener('mousemove', e => {
-    const rx = (e.clientY / window.innerHeight - .5) * 25;
-    const ry = (e.clientX / window.innerWidth - .5) * 25;
-    logo3di.style.transform = `perspective(600px) rotateX(${-rx}deg) rotateY(${ry}deg)`;
-  });
+    tiltX = e.clientX; tiltY = e.clientY;
+    if (tiltRaf) return;
+    tiltRaf = true;
+    requestAnimationFrame(() => {
+      const rx = (tiltY / window.innerHeight - .5) * 25;
+      const ry = (tiltX / window.innerWidth - .5) * 25;
+      logo3di.style.transform = `perspective(600px) rotateX(${-rx}deg) rotateY(${ry}deg)`;
+      tiltRaf = false;
+    });
+  }, { passive: true });
 }
 
 // ━━━━ TYPEWRITER ━━━━
@@ -185,6 +214,38 @@ document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach((el, i) => {
   io.observe(el);
 });
 
+// ━━━━ SC3D CAROUSEL — pausa fora da viewport ━━━━
+// Evita rodar a animação 16s rotateY (com preserve-3d + reflexos com blur)
+// quando a seção não está visível, reduzindo GPU/aquecimento em mobile.
+(()=>{
+  const carousel3d = document.querySelector('.sc3d-carousel');
+  if (!carousel3d) return;
+  const io3d = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      carousel3d.style.animationPlayState = e.isIntersecting ? 'running' : 'paused';
+    });
+  }, { threshold: 0 });
+  io3d.observe(carousel3d);
+})();
+
+// ━━━━ GLOW BORDERS — pausa fora da viewport ━━━━
+// .tcard::before / .pcardx::before / .citem::before / .glow-border-* usam
+// conic-gradient animado via @property (gb-spin/rgb-spin), o que força repaint
+// contínuo do pseudo-elemento. Pausar quando fora da tela elimina repaints
+// desnecessários (causa relevante de aquecimento/CPU alta em mobile),
+// sem alterar a aparência enquanto visível.
+(()=>{
+  const glowSelectors = '.tcard,.pcardx,.citem,.glow-border-card,.glow-border-section';
+  const glowEls = document.querySelectorAll(glowSelectors);
+  if (!glowEls.length) return;
+  const ioGlow = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      e.target.classList.toggle('glow-paused', !e.isIntersecting);
+    });
+  }, { threshold: 0, rootMargin: '50px' });
+  glowEls.forEach(el => ioGlow.observe(el));
+})();
+
 // ━━━━ CONTACT FORM ━━━━
 function doSend(e) {
   e.preventDefault();
@@ -211,14 +272,21 @@ function doSend(e) {
 // ━━━━ TILT CARDS (desktop only) ━━━━
 if (!isTouch) {
   document.querySelectorAll('.svc-mini,.tcard,.pcard').forEach(card => {
+    let tcRaf = false, tcEvent = null;
     card.addEventListener('mousemove', e => {
-      const r = card.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width - .5;
-      const y = (e.clientY - r.top) / r.height - .5;
-      const intensity = card.classList.contains('svc-mini') ? 6 : 10;
-      const tx = card.classList.contains('svc-mini') ? '6px' : '-10px';
-      card.style.transform = `perspective(${card.classList.contains('svc-mini') ? 600 : 900}px) rotateX(${-y * intensity}deg) rotateY(${x * intensity}deg) translateX(${tx})`;
-    });
+      tcEvent = e;
+      if (tcRaf) return;
+      tcRaf = true;
+      requestAnimationFrame(() => {
+        const r = card.getBoundingClientRect();
+        const x = (tcEvent.clientX - r.left) / r.width - .5;
+        const y = (tcEvent.clientY - r.top) / r.height - .5;
+        const intensity = card.classList.contains('svc-mini') ? 6 : 10;
+        const tx = card.classList.contains('svc-mini') ? '6px' : '-10px';
+        card.style.transform = `perspective(${card.classList.contains('svc-mini') ? 600 : 900}px) rotateX(${-y * intensity}deg) rotateY(${x * intensity}deg) translateX(${tx})`;
+        tcRaf = false;
+      });
+    }, { passive: true });
     card.addEventListener('mouseleave', () => { card.style.transform = ''; });
   });
 }
@@ -275,7 +343,7 @@ if (hbg && navlinks) {
       scroller.style.setProperty('--pdur', Math.min(MAX_DUR, Math.max(MIN_DUR, maxT / SPEED)).toFixed(2) + 's');
     };
     if (img.complete) measure(); else img.addEventListener('load', measure, { once: true });
-    window.addEventListener('resize', measure, { passive: true });
+    window.addEventListener('resize', debounce(measure, 200), { passive: true });
 
     const enter = () => {
       if (!maxT) measure();
@@ -341,38 +409,59 @@ document.addEventListener('keydown', e => {
   const dotsContainer = document.getElementById('tcarousel-dots');
   if (!carousel) return;
 
-  const TOTAL_REAL = 3;
-  const dots = dotsContainer ? dotsContainer.querySelectorAll('.tdot') : [];
+  // Todos os .tcard são depoimentos reais — sem clones, sem loop por módulo.
+  const cards = Array.from(carousel.querySelectorAll('.tcard'));
+  const TOTAL = cards.length;
+  cards.forEach(c => c.removeAttribute('aria-hidden'));
+
+  // Gera os dots dinamicamente: 1 por depoimento (corrige descompasso 3 dots / 5 cards)
+  let dots = [];
+  if (dotsContainer) {
+    dotsContainer.innerHTML = '';
+    for (let i = 0; i < TOTAL; i++) {
+      const b = document.createElement('button');
+      b.className = 'tdot' + (i === 0 ? ' active' : '');
+      b.dataset.idx = i;
+      b.setAttribute('role', 'tab');
+      b.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+      b.setAttribute('aria-label', `Depoimento ${i + 1}`);
+      dotsContainer.appendChild(b);
+    }
+    dots = Array.from(dotsContainer.querySelectorAll('.tdot'));
+  }
+
   let cardW = 0, gap = 0, currentIdx = 0, autoTimer = null;
-  let isDragging = false, startX = 0, startOffset = 0, transitioning = false;
+  let isDragging = false, startX = 0, startOffset = 0;
+  let rafPending = false;
 
   function getCardWidth() {
-    const card = carousel.querySelector('.tcard');
+    const card = cards[0];
     if (!card) return 340;
     gap = parseFloat(window.getComputedStyle(carousel).gap) || 32;
     return card.offsetWidth;
   }
 
+  function maxIdx() {
+    const wrap = carousel.parentElement;
+    const visible = wrap ? Math.max(1, Math.round(wrap.clientWidth / (cardW + gap))) : 1;
+    return Math.max(0, TOTAL - visible);
+  }
+
   function goTo(idx, animate = true) {
     cardW = getCardWidth();
-    currentIdx = idx;
+    currentIdx = Math.min(Math.max(0, idx), maxIdx());
     carousel.style.transition = animate ? 'transform 0.6s cubic-bezier(.23,1,.32,1)' : 'none';
-    carousel.style.transform = `translateX(${-(currentIdx * (cardW + gap))}px)`;
-    const realIdx = currentIdx % TOTAL_REAL;
+    carousel.style.transform = `translate3d(${-(currentIdx * (cardW + gap))}px,0,0)`;
     dots.forEach((d, i) => {
-      d.classList.toggle('active', i === realIdx);
-      d.setAttribute('aria-selected', String(i === realIdx));
+      const active = i === currentIdx;
+      d.classList.toggle('active', active);
+      d.setAttribute('aria-selected', String(active));
     });
   }
 
   function next() {
-    if (transitioning) return;
-    const nextIdx = currentIdx + 1;
-    goTo(nextIdx);
-    if (nextIdx >= TOTAL_REAL) {
-      transitioning = true;
-      setTimeout(() => { goTo(nextIdx % TOTAL_REAL, false); transitioning = false; }, 680);
-    }
+    if (currentIdx >= maxIdx()) goTo(0);
+    else goTo(currentIdx + 1);
   }
 
   function startAuto() { stopAuto(); autoTimer = setInterval(next, 4000); }
@@ -392,21 +481,27 @@ document.addEventListener('keydown', e => {
   }, { passive: true });
   carousel.addEventListener('touchmove', e => {
     if (!isDragging) return;
-    carousel.style.transition = 'none';
-    carousel.style.transform = `translateX(${-(startOffset - (e.touches[0].clientX - startX))}px)`;
+    const dx = e.touches[0].clientX - startX;
+    if (rafPending) return;
+    rafPending = true;
+    requestAnimationFrame(() => {
+      carousel.style.transition = 'none';
+      carousel.style.transform = `translate3d(${-(startOffset - dx)}px,0,0)`;
+      rafPending = false;
+    });
   }, { passive: true });
   carousel.addEventListener('touchend', e => {
     if (!isDragging) return;
     isDragging = false;
     const dx = e.changedTouches[0].clientX - startX;
-    if (dx < -50) next();
-    else if (dx > 50 && currentIdx > 0) goTo(currentIdx - 1);
+    if (dx < -50) goTo(currentIdx + 1);
+    else if (dx > 50) goTo(currentIdx - 1);
     else goTo(currentIdx);
     startAuto();
   }, { passive: true });
 
   setTimeout(() => { goTo(0, false); startAuto(); }, 300);
-  window.addEventListener('resize', () => goTo(currentIdx, false), { passive: true });
+  window.addEventListener('resize', debounce(() => goTo(currentIdx, false), 150), { passive: true });
 })();
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -448,7 +543,7 @@ document.addEventListener('keydown', e => {
       scroller.style.setProperty('--pdur', Math.min(MAX_DUR, Math.max(MIN_DUR, maxT / SPEED)).toFixed(2) + 's');
     };
     if (img.complete) measure(); else img.addEventListener('load', measure, { once: true });
-    window.addEventListener('resize', measure, { passive: true });
+    window.addEventListener('resize', debounce(measure, 200), { passive: true });
 
     frame._scEnter = () => {
       if (!maxT) measure();
