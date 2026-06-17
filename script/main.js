@@ -244,6 +244,8 @@ document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach((el, i) => {
     });
   }, { threshold: 0, rootMargin: '50px' });
   glowEls.forEach(el => ioGlow.observe(el));
+  // Expõe globalmente para o marquee observar os clones
+  window._ioGlow = ioGlow;
 })();
 
 // ━━━━ CONTACT FORM ━━━━
@@ -402,106 +404,105 @@ document.addEventListener('keydown', e => {
 });
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   TESTIMONIALS — CARROSSEL AUTOMÁTICO
+   TESTIMONIALS — INFINITE MARQUEE
+   Técnica: clona os cards originais até ter largura >= 2× o track,
+   depois anima via CSS custom property --marquee-shift.
+   Não reinicia, não trava, não "volta": quando o translateX atinge
+   o ponto de shift, o loop CSS reinicia do mesmo ponto visual.
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-(function testimonialCarousel() {
+(function initInfiniteMarquee() {
+  const wrap     = document.querySelector('.tcarousel-wrap');
   const carousel = document.getElementById('tcarousel');
-  const dotsContainer = document.getElementById('tcarousel-dots');
-  if (!carousel) return;
+  if (!wrap || !carousel) return;
 
-  // Todos os .tcard são depoimentos reais — sem clones, sem loop por módulo.
-  const cards = Array.from(carousel.querySelectorAll('.tcard'));
-  const TOTAL = cards.length;
-  cards.forEach(c => c.removeAttribute('aria-hidden'));
+  // Remove dots container (não se aplica ao marquee)
+  const dotsEl = document.getElementById('tcarousel-dots');
+  if (dotsEl) dotsEl.remove();
 
-  // Gera os dots dinamicamente: 1 por depoimento (corrige descompasso 3 dots / 5 cards)
-  let dots = [];
-  if (dotsContainer) {
-    dotsContainer.innerHTML = '';
-    for (let i = 0; i < TOTAL; i++) {
-      const b = document.createElement('button');
-      b.className = 'tdot' + (i === 0 ? ' active' : '');
-      b.dataset.idx = i;
-      b.setAttribute('role', 'tab');
-      b.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
-      b.setAttribute('aria-label', `Depoimento ${i + 1}`);
-      dotsContainer.appendChild(b);
-    }
-    dots = Array.from(dotsContainer.querySelectorAll('.tdot'));
-  }
-
-  let cardW = 0, gap = 0, currentIdx = 0, autoTimer = null;
-  let isDragging = false, startX = 0, startOffset = 0;
-  let rafPending = false;
-
-  function getCardWidth() {
-    const card = cards[0];
-    if (!card) return 340;
-    gap = parseFloat(window.getComputedStyle(carousel).gap) || 32;
-    return card.offsetWidth;
-  }
-
-  function maxIdx() {
-    const wrap = carousel.parentElement;
-    const visible = wrap ? Math.max(1, Math.round(wrap.clientWidth / (cardW + gap))) : 1;
-    return Math.max(0, TOTAL - visible);
-  }
-
-  function goTo(idx, animate = true) {
-    cardW = getCardWidth();
-    currentIdx = Math.min(Math.max(0, idx), maxIdx());
-    carousel.style.transition = animate ? 'transform 0.6s cubic-bezier(.23,1,.32,1)' : 'none';
-    carousel.style.transform = `translate3d(${-(currentIdx * (cardW + gap))}px,0,0)`;
-    dots.forEach((d, i) => {
-      const active = i === currentIdx;
-      d.classList.toggle('active', active);
-      d.setAttribute('aria-selected', String(active));
-    });
-  }
-
-  function next() {
-    if (currentIdx >= maxIdx()) goTo(0);
-    else goTo(currentIdx + 1);
-  }
-
-  function startAuto() { stopAuto(); autoTimer = setInterval(next, 4000); }
-  function stopAuto()  { if (autoTimer) { clearInterval(autoTimer); autoTimer = null; } }
-
-  dots.forEach((dot, i) => {
-    dot.addEventListener('click', () => { stopAuto(); goTo(i); startAuto(); });
+  // Remove atributos de lista/role para melhor semântica no novo contexto
+  carousel.removeAttribute('role');
+  carousel.querySelectorAll('.tcard').forEach(c => {
+    c.removeAttribute('role');
+    c.removeAttribute('aria-hidden');
   });
 
-  carousel.addEventListener('mouseenter', stopAuto);
-  carousel.addEventListener('mouseleave', startAuto);
+  // ── CLONAR ATÉ COBRIR NO MÍNIMO 2× A LARGURA DA JANELA ──────────────
+  // Garante que quando o set 1 sai da tela o set 2 já está visível,
+  // e o loop anima exatamente 1 set completo (originalWidth + gap entre sets).
 
-  carousel.addEventListener('touchstart', e => {
-    startX = e.touches[0].clientX;
-    startOffset = currentIdx * (getCardWidth() + gap);
-    isDragging = true; stopAuto();
-  }, { passive: true });
-  carousel.addEventListener('touchmove', e => {
-    if (!isDragging) return;
-    const dx = e.touches[0].clientX - startX;
-    if (rafPending) return;
-    rafPending = true;
-    requestAnimationFrame(() => {
-      carousel.style.transition = 'none';
-      carousel.style.transform = `translate3d(${-(startOffset - dx)}px,0,0)`;
-      rafPending = false;
+  const GAP = 32; // deve coincidir com o gap do .tcarousel (2rem = 32px)
+
+  function buildMarquee() {
+    // Remove todos os clones anteriores, mantém apenas os originais
+    carousel.querySelectorAll('[data-clone]').forEach(el => el.remove());
+
+    const originals = Array.from(carousel.querySelectorAll('.tcard:not([data-clone])'));
+    if (!originals.length) return;
+
+    // Mede o bloco original COMPLETO (cards + gaps internos)
+    // = último card (right) - primeiro card (left)
+    const firstRect = originals[0].getBoundingClientRect();
+    const lastRect  = originals[originals.length - 1].getBoundingClientRect();
+    const originalWidth = (lastRect.right - firstRect.left);
+
+    // O "shift" para o loop é exatamente um conjunto de cards + 1 gap de separação
+    const shiftPx = originalWidth + GAP;
+
+    // Clonar até ter pelo menos 2× o viewport de largura (+ segurança de 1 set extra)
+    const minWidth = window.innerWidth * 2 + shiftPx;
+    let totalWidth = shiftPx; // já temos o set original
+    while (totalWidth < minWidth) {
+      originals.forEach(card => {
+        const clone = card.cloneNode(true);
+        clone.setAttribute('data-clone', '1');
+        clone.setAttribute('aria-hidden', 'true');
+        carousel.appendChild(clone);
+      });
+      totalWidth += shiftPx;
+    }
+
+    // Registra nova largura total para glow observer e tilt (se existir)
+    document.querySelectorAll('[data-clone] .glow-border-card, [data-clone].glow-border-card').forEach(el => {
+      if (window._ioGlow) window._ioGlow.observe(el);
     });
-  }, { passive: true });
-  carousel.addEventListener('touchend', e => {
-    if (!isDragging) return;
-    isDragging = false;
-    const dx = e.changedTouches[0].clientX - startX;
-    if (dx < -50) goTo(currentIdx + 1);
-    else if (dx > 50) goTo(currentIdx - 1);
-    else goTo(currentIdx);
-    startAuto();
-  }, { passive: true });
 
-  setTimeout(() => { goTo(0, false); startAuto(); }, 300);
-  window.addEventListener('resize', debounce(() => goTo(currentIdx, false), 150), { passive: true });
+    // Velocidade: px/s constante → duração proporcional à distância
+    const PX_PER_SECOND = 60; // ajuste fino de velocidade (px/s)
+    const dur = (shiftPx / PX_PER_SECOND).toFixed(2);
+
+    // Aplica as custom properties no CSS
+    carousel.style.setProperty('--marquee-shift', `-${shiftPx}px`);
+    carousel.style.setProperty('--marquee-dur',   `${dur}s`);
+
+    // Reinicia a animação sem flash (remove/readd)
+    carousel.style.animation = 'none';
+    // eslint-disable-next-line no-unused-expressions
+    carousel.offsetWidth; // reflow forçado
+    carousel.style.animation = '';
+  }
+
+  // Constrói na primeira vez após layout estabilizar
+  requestAnimationFrame(() => requestAnimationFrame(buildMarquee));
+
+  // Reconstrói no resize (debounced)
+  window.addEventListener('resize', debounce(buildMarquee, 250), { passive: true });
+
+  // ── PAUSA: hover + focus (acessibilidade) + touch ───────────────────
+  const pause   = () => wrap.style.setProperty('--marquee-play', 'paused');
+  const resume  = () => wrap.style.setProperty('--marquee-play', 'running');
+
+  wrap.addEventListener('mouseenter',  pause,  { passive: true });
+  wrap.addEventListener('mouseleave',  resume, { passive: true });
+  wrap.addEventListener('focusin',     pause,  { passive: true });
+  wrap.addEventListener('focusout',    resume, { passive: true });
+  wrap.addEventListener('touchstart',  pause,  { passive: true });
+  wrap.addEventListener('touchend',    resume, { passive: true });
+  wrap.addEventListener('touchcancel', resume, { passive: true });
+
+  // Pausa quando aba fica em segundo plano
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') pause(); else resume();
+  });
 })();
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

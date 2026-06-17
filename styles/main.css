@@ -235,8 +235,8 @@ nav.scrolled .nlogo img{
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    SECTIONS BASE
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-section{padding:4rem 0;position:relative;z-index:10}
-.sh{text-align:center;margin-bottom:2.5rem;position:relative;z-index:12}
+section{padding:2.8rem 0;position:relative;z-index:10}
+.sh{text-align:center;margin-bottom:2rem;position:relative;z-index:12}
 .stag{
   font-family:'Share Tech Mono',monospace;font-size:.82rem;
   color:var(--neon);letter-spacing:4px;text-transform:uppercase;
@@ -247,7 +247,7 @@ section{padding:4rem 0;position:relative;z-index:10}
 .sdiv{
   width:100px;height:3px;
   background:linear-gradient(90deg,transparent,var(--neon),transparent);
-  margin:2rem auto;position:relative;
+  margin:1.2rem auto;position:relative;
 }
 .sdiv::before,.sdiv::after{
   content:'';position:absolute;top:50%;transform:translateY(-50%);
@@ -391,16 +391,16 @@ section{padding:4rem 0;position:relative;z-index:10}
 
 .port-sub{
   color:rgba(220,238,255,.55);font-size:.85rem;letter-spacing:2.5px;
-  font-family:'Share Tech Mono',monospace;margin-top:-2.5rem;
+  font-family:'Share Tech Mono',monospace;margin-top:-1.5rem;
   text-transform:uppercase;position:relative;z-index:15;
-  display:block;margin-bottom:1rem;
+  display:block;margin-bottom:.8rem;
 }
 
 .pgrid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(200px,270px));
   justify-content:center;
-  gap:3rem;
+  gap:2rem;
 }
 
 .pcardx{
@@ -492,26 +492,56 @@ section{padding:4rem 0;position:relative;z-index:10}
 .pshow-link:hover svg{transform:translate(2px,-2px)}
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   TESTIMONIALS
+   TESTIMONIALS — INFINITE MARQUEE
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 #testimonials{background:rgba(1,10,24,0.55)}
 
+/* Wrapper: clipagem + fade lateral */
 .tcarousel-wrap{
-  position:relative;overflow:hidden;
-  -webkit-mask-image:linear-gradient(to right,transparent 0%,black 8%,black 92%,transparent 100%);
-  mask-image:linear-gradient(to right,transparent 0%,black 8%,black 92%,transparent 100%);
+  position:relative;
+  overflow:hidden;
+  -webkit-mask-image:linear-gradient(to right,transparent 0%,black 10%,black 90%,transparent 100%);
+  mask-image:linear-gradient(to right,transparent 0%,black 10%,black 90%,transparent 100%);
   padding:1rem 0 1.5rem;
+  /* Pausa ao hover/touch — via var controlada pelo JS */
+  --marquee-play:running;
 }
-.tcarousel{display:flex;gap:2rem;will-change:transform;transition:none;align-items:stretch}
 
+/* Track — tamanho calculado pelo JS para caber os clones */
+.tcarousel{
+  display:flex;
+  gap:2rem;
+  width:max-content;        /* não quebra linha */
+  will-change:transform;
+  animation:tmarquee var(--marquee-dur,30s) linear infinite;
+  animation-play-state:var(--marquee-play);
+}
+
+@keyframes tmarquee{
+  0%   { transform:translateX(0); }
+  100% { transform:translateX(var(--marquee-shift,0px)); }
+}
+
+/* Pausa declarativa via CSS também (fallback / redundância) */
+.tcarousel-wrap:hover .tcarousel,
+.tcarousel-wrap:focus-within .tcarousel{
+  animation-play-state:paused;
+}
+
+/* Cards */
 .tcard{
   background:var(--card);border:1px solid var(--border);
   padding:2rem 2rem 1.8rem;position:relative;isolation:isolate;
-  transition:border-color .4s,box-shadow .4s;
-  min-width:340px;max-width:340px;flex-shrink:0;cursor:pointer;
+  transition:border-color .4s,box-shadow .4s,transform .3s;
+  min-width:340px;max-width:340px;flex-shrink:0;cursor:default;
   display:flex;flex-direction:column;
+  user-select:none;
 }
-.tcard:hover{border-color:rgba(59,156,237,.45);box-shadow:0 18px 50px rgba(59,156,237,.1)}
+.tcard:hover{
+  border-color:rgba(59,156,237,.45);
+  box-shadow:0 18px 50px rgba(59,156,237,.1);
+  transform:translateY(-4px);
+}
 
 .stars{color:var(--neon);font-size:1.1rem;margin-bottom:1rem;letter-spacing:3px}
 .ttext{color:rgba(220,238,255,.75);line-height:1.85;font-size:.95rem;margin-bottom:1.5rem;flex:1}
@@ -530,20 +560,6 @@ section{padding:4rem 0;position:relative;z-index:10}
 }
 .tname{font-weight:700;font-size:1rem}
 .trole{font-size:.8rem;color:rgba(220,238,255,.5);letter-spacing:1px}
-
-.tcarousel-dots{display:flex;justify-content:center;gap:.55rem;margin-top:1.2rem}
-.tdot{
-  width:28px;height:3px;border-radius:999px;
-  background:rgba(59,156,237,.18);border:none;cursor:pointer;
-  transition:width .38s cubic-bezier(.4,0,.2,1),background .38s,box-shadow .38s,opacity .38s ease;
-  padding:0;opacity:.65;
-}
-.tdot:hover{opacity:1;background:rgba(59,156,237,.35)}
-.tdot.active{
-  background:linear-gradient(90deg,#1a6dff 0%,#00c6ff 55%,#38e1ff 100%);
-  box-shadow:0 0 8px rgba(59,156,237,.75),0 0 18px rgba(59,156,237,.40),0 0 32px rgba(59,156,237,.18);
-  width:60px;opacity:1;
-}
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    CONTACT MODAL
@@ -1153,6 +1169,7 @@ footer .wrap{position:relative;z-index:1}
   .wo-divider{flex-direction:row;padding-top:0;margin:1.5rem 0;height:auto}
   .wo-divider-line{flex:1;width:auto;height:2px;background:linear-gradient(90deg,transparent,var(--neon),transparent);opacity:.18}
 
+  .tcard{min-width:280px;max-width:280px}
   .tcard:hover{transform:translateY(-4px)}
 }
 
@@ -1214,8 +1231,8 @@ footer .wrap{position:relative;z-index:1}
     opacity:1;
   }
   .wrap{padding:0 1rem}
-  section{padding:2.8rem 0}
-  .sh{margin-bottom:2rem}
+  section{padding:2rem 0}
+  .sh{margin-bottom:1.5rem}
   body{cursor:auto}
 
   nav{padding:.9rem 0}
