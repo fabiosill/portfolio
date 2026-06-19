@@ -349,6 +349,68 @@ section{padding:2.8rem 0;position:relative;z-index:10}
   transform:translateX(6px);
   box-shadow:0 8px 30px rgba(59,156,237,.1);
 }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   GLOW BORDER — Serviços Disponíveis (.svc-mini)
+
+   Técnica: background-clip padding-box / border-box
+   ─────────────────────────────────────────────────────────
+   O conic-gradient é aplicado ao background com clip
+   border-box, tornando-o visível em toda a caixa do elemento.
+   Uma segunda camada (linear-gradient com a cor do card),
+   recortada ao padding-box, cobre o interior — deixando o
+   gradiente exposto APENAS na faixa de border.
+
+   Resultado:
+   • linha luminosa exatamente sobre a borda, sem deslocamento;
+   • respeita qualquer border-radius automaticamente;
+   • sem pseudo-elemento → sem conflito com ::before (barra
+     lateral de hover) nem com ::after (.shine-card);
+   • sem inset negativo → overflow:hidden não corta nada;
+   • reutiliza @property --gb-angle e @keyframes gb-spin
+     já declarados no arquivo, sem nada duplicado.
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.svc-mini{
+  /* border transparent é obrigatório para que o background-clip
+     border-box do conic-gradient seja renderizado nessa faixa */
+  border:1.5px solid transparent;
+
+  background:
+    /* Camada 1 (topo): cor sólida do card, recortada ao padding-box.
+       Cobre o interior, deixando o gradiente visível só no border. */
+    linear-gradient(var(--card),var(--card)) padding-box,
+    /* Camada 2 (base): luz circulante — ocupa o border-box inteiro
+       mas só "aparece" onde a camada 1 não cobre (= a faixa do border).
+       Arco de ~150° garante que o brilho seja sempre visível em todos
+       os cards ao mesmo tempo, sem deixar trechos totalmente apagados. */
+    conic-gradient(
+      from var(--gb-angle),
+      rgba(59,156,237,.18)   0deg,    /* base dim contínua          */
+      rgba(59,156,237,.18)  210deg,   /* mantém dim até aqui        */
+      rgba(59,156,237,.45)  255deg,   /* ramp-up início             */
+      rgba(107,200,247,.9)  300deg,   /* pico luminoso              */
+      rgba(59,156,237,.45)  345deg,   /* ramp-down                  */
+      rgba(59,156,237,.18)  360deg    /* fecha no base dim          */
+    ) border-box;
+
+  animation:gb-spin 2s linear infinite;
+}
+
+/* Todos os cards em fase idêntica → brilho visível em todos ao mesmo tempo */
+
+/* Hover: mantém border transparent para preservar o background-clip.
+   O feedback visual permanece via box-shadow + translateX existentes. */
+.svc-mini:hover{border-color:transparent}
+
+/* Fallback para browsers sem suporte a conic-gradient:
+   restaura o visual estático original sem animação. */
+@supports not (background:conic-gradient(from 0deg,red,blue)){
+  .svc-mini{
+    border:1px solid var(--border);
+    background:var(--card);
+    animation:none;
+  }
+}
 .svc-mini-icon{
   width:38px;height:38px;flex-shrink:0;
   border:1px solid var(--border);
@@ -826,7 +888,9 @@ footer .wrap{position:relative;z-index:1}
 .glow-paused.pcardx::before,
 .glow-paused.citem::before,
 .glow-paused.glow-border-card::before,
-.glow-paused.glow-border-section::after{
+.glow-paused.glow-border-section::after,
+/* .svc-mini anima o próprio elemento (não ::before) — pausa via section pai */
+.glow-paused.glow-border-section .svc-mini{
   animation-play-state:paused;
 }
 
@@ -925,11 +989,16 @@ footer .wrap{position:relative;z-index:1}
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    GLOW BORDER CARD
+   Técnica: padding + mask-composite:exclude
+   O conic-gradient é renderizado apenas na faixa
+   de padding (1.5px), nunca fora do elemento.
+   border-radius é respeitado geometricamente.
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 .glow-border-card{position:relative;isolation:isolate}
 .glow-border-card::before{
-  content:'';position:absolute;inset:-1.5px;
+  content:'';position:absolute;inset:0;
   border-radius:inherit;
+  padding:1.5px;
   background:conic-gradient(
     from var(--gb-angle),
     transparent 0deg,transparent 60deg,
@@ -937,11 +1006,16 @@ footer .wrap{position:relative;z-index:1}
     rgba(59,156,237,.55) 240deg,
     transparent 300deg,transparent 360deg
   );
-  animation:gb-spin 2s linear infinite;z-index:-1;pointer-events:none;
-}
-.glow-border-card::after{
-  content:'';position:absolute;inset:1px;
-  background:var(--card);border-radius:inherit;z-index:-1;pointer-events:none;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite:exclude;
+  animation:gb-spin 2s linear infinite;
+  pointer-events:none;
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
