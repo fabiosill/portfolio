@@ -235,8 +235,8 @@ nav.scrolled .nlogo img{
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    SECTIONS BASE
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-section{padding:2.8rem 0;position:relative;z-index:10}
-.sh{text-align:center;margin-bottom:2rem;position:relative;z-index:12}
+section{padding:1.6rem 0;position:relative;z-index:10}
+.sh{text-align:center;margin-bottom:1.4rem;position:relative;z-index:12}
 .stag{
   font-family:'Share Tech Mono',monospace;font-size:.82rem;
   color:var(--neon);letter-spacing:4px;text-transform:uppercase;
@@ -284,7 +284,7 @@ section{padding:2.8rem 0;position:relative;z-index:10}
   position:relative;padding-left:.5rem;flex:1;
 }
 .process-timeline::before{
-  content:'';position:absolute;left:22px;top:12px;bottom:12px;width:2px;
+  content:'';position:absolute;left:30px;top:12px;bottom:12px;width:2px;
   background:linear-gradient(180deg,var(--neon),rgba(59,156,237,.1));
   opacity:.25;z-index:0;
 }
@@ -332,11 +332,11 @@ section{padding:2.8rem 0;position:relative;z-index:10}
 @keyframes pulse-gem{0%,100%{opacity:.35;transform:scale(1)}50%{opacity:.8;transform:scale(1.25)}}
 
 /* Serviços */
-.svc-quintet{display:grid;list-style:none;grid-template-rows:repeat(5,1fr);gap:1rem;flex:1}
+.svc-quintet{display:grid;list-style:none;gap:.55rem;flex:1}
 .svc-mini{
   display:flex;align-items:flex-start;gap:1.1rem;
   background:var(--card);border:1px solid var(--border);
-  padding:1.15rem 1.35rem;position:relative;overflow:hidden;
+  padding:.75rem 1rem;position:relative;overflow:hidden;
   transition:.4s;cursor:default;
 }
 .svc-mini::before{
@@ -678,7 +678,7 @@ section{padding:2.8rem 0;position:relative;z-index:10}
 footer{
   background:rgba(1,13,31,.97);
   border-top:1px solid var(--border);
-  padding:2.5rem 0 1.5rem;
+  padding:1.8rem 0 1rem;
   position:relative;z-index:10;overflow:visible;
 }
 .foot-bg{
@@ -692,7 +692,7 @@ footer{
   background:linear-gradient(180deg,transparent 0%,rgba(0,80,200,.06) 50%,transparent 100%);
 }
 footer .wrap{position:relative;z-index:1}
-.foot-top{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:2rem;margin-bottom:1.2rem}
+.foot-top{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:2rem;margin-bottom:.8rem}
 .foot-brand .flogo{
   font-family:'Orbitron',sans-serif;font-size:1.4rem;font-weight:1000;
   color:var(--neon);letter-spacing:1px;
@@ -1305,8 +1305,8 @@ footer .wrap{position:relative;z-index:1}
     opacity:1;
   }
   .wrap{padding:0 1rem}
-  section{padding:2rem 0}
-  .sh{margin-bottom:1.5rem}
+  section{padding:1.4rem 0}
+  .sh{margin-bottom:1.1rem}
   body{cursor:auto}
 
   nav{padding:.9rem 0}
@@ -1331,10 +1331,11 @@ footer .wrap{position:relative;z-index:1}
   .wo-desc{max-width:100%}
   .ptl-item{gap:1rem;margin-bottom:1.6rem}
   .ptl-num{width:36px;height:36px;font-size:.7rem}
+  .process-timeline::before{left:26px}
   .ptl-content h3{font-size:.82rem}
   .ptl-content p{font-size:.84rem}
-  .svc-quintet{gap:.75rem}
-  .svc-mini{padding:.9rem 1rem}
+  .svc-quintet{gap:.4rem}
+  .svc-mini{padding:.65rem .85rem}
   .svc-mini-icon{width:32px;height:32px}
   .svc-mini-body h3{font-size:.75rem}
   .svc-mini-body p{font-size:.8rem}
