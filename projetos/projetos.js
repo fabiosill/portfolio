@@ -72,8 +72,12 @@ function normalizeStr(str) {
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
       if (a.classList.contains('open-contact-btn')) return;
+      const href = a.getAttribute('href');
+      /* Links "placeholder" (href="#") não têm alvo de scroll —
+         apenas previne o salto padrão sem tentar buscar um seletor inválido. */
+      if (!href || href.length <= 1) { e.preventDefault(); return; }
       e.preventDefault();
-      const t = document.querySelector(a.getAttribute('href'));
+      const t = document.querySelector(href);
       if (t) t.scrollIntoView({ behavior: 'smooth' });
     });
   });

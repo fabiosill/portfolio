@@ -27,7 +27,7 @@
 *{margin:0;padding:0;box-sizing:border-box}
 html{
   scroll-behavior:smooth;
-  overflow-x:hidden;
+  overflow-x:clip;
   scrollbar-width:thin;
   scrollbar-color:rgba(59,156,237,.45) rgba(1,13,31,.6);
 }
@@ -44,7 +44,7 @@ html::-webkit-scrollbar-thumb:hover{
 body{
   background:var(--bg);color:var(--txt);
   font-family:'Rajdhani',sans-serif;
-  overflow-x:hidden;
+  overflow-x:clip;
   max-width:100vw;
   -webkit-tap-highlight-color:transparent;
 }
@@ -107,11 +107,11 @@ body{
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    NAV
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-nav{
+#nav{
   position:fixed;top:0;left:0;right:0;z-index:200;
   padding:1.6rem 0;transition:.4s;width:100%;
 }
-nav.scrolled{
+#nav.scrolled{
   background:rgba(1,13,31,.94);
   backdrop-filter:blur(24px);
   border-bottom:1px solid var(--border);
@@ -139,7 +139,7 @@ nav.scrolled{
   width:76px;height:76px;border-radius:50%;pointer-events:none;
   background:radial-gradient(circle,rgba(59,156,237,.18) 0%,rgba(59,156,237,.08) 50%,transparent 75%);
 }
-nav.scrolled .nlogo img{
+#nav.scrolled .nlogo img{
   filter:drop-shadow(0 0 2px rgba(59,156,237,1)) drop-shadow(0 0 2px rgba(59,156,237,.8)) drop-shadow(0 0 2px rgba(59,156,237,.5));
 }
 .nlinks{display:flex;gap:2rem;list-style:none;align-items:center}
@@ -506,7 +506,7 @@ footer{
 }
 .foot-bg{
   position:absolute;inset:0;
-  background-image:url('../img/footer-bg.png');
+  background-image:url('img/footer-bg.png');
   background-size:cover;background-position:center;background-repeat:no-repeat;
   opacity:.07;pointer-events:none;z-index:0;
 }
@@ -556,7 +556,7 @@ footer .wrap{position:relative;z-index:1}
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    HERO PROJETOS
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-#proj-hero{min-height:80vh;min-height:80dvh;display:flex;align-items:center;justify-content:center;position:relative;overflow:clip;width:100%;text-align:center}
+#proj-hero{min-height:44vh;min-height:44dvh;display:flex;align-items:center;justify-content:center;position:relative;overflow:clip;width:100%;text-align:center}
 .proj-hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(59,156,237,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(59,156,237,.04) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(ellipse 75% 65% at 50% 50%,black 0%,transparent 100%);pointer-events:none;z-index:1}
 .proj-hero-orbs{position:absolute;inset:0;pointer-events:none;z-index:0}
 .proj-orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.12}
@@ -565,19 +565,20 @@ footer .wrap{position:relative;z-index:1}
 .proj-orb-3{width:300px;height:300px;background:radial-gradient(circle,var(--primary-accent) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);opacity:.06;animation:orb-pulse 8s ease-in-out infinite}
 @keyframes orb-drift{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(30px,-20px) scale(1.05)}66%{transform:translate(-20px,30px) scale(.95)}}
 @keyframes orb-pulse{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.06}50%{transform:translate(-50%,-50%) scale(1.2);opacity:.1}}
-.proj-hero-c{position:relative;z-index:10;padding-top:100px;padding-bottom:4rem}
-.proj-hero-title{font-family:'Orbitron',sans-serif;font-size:clamp(2.4rem,5.5vw,5.4rem);font-weight:900;line-height:1.08;margin-bottom:1.4rem}
-.proj-hero-sub{font-size:1.25rem;color:rgba(220,238,255,.65);font-weight:300;letter-spacing:3px;margin-bottom:.8rem}
+.proj-hero-c{position:relative;z-index:10;padding-top:92px;padding-bottom:1.5rem}
+.proj-hero-title{font-family:'Orbitron',sans-serif;font-size:clamp(2rem,4.2vw,3.6rem);font-weight:900;line-height:1.08;margin-bottom:.7rem}
+.proj-hero-sub{font-size:1.05rem;color:rgba(220,238,255,.65);font-weight:300;letter-spacing:2.5px;margin-bottom:.5rem}
 .proj-hero-sub em{font-style:normal;color:var(--neon);text-shadow:0 0 24px rgba(59,156,237,.5)}
-.proj-hero-desc{font-size:1rem;color:rgba(220,238,255,.55);line-height:1.9;max-width:560px;margin:0 auto 2rem}
-.proj-hero-tags{display:flex;gap:.65rem;justify-content:center;flex-wrap:wrap;margin-top:1.4rem}
-.proj-hero-tags span{display:inline-block;padding:.28rem .9rem;border:1px solid rgba(59,156,237,.25);font-family:'Share Tech Mono',monospace;font-size:.72rem;color:rgba(59,156,237,.7);letter-spacing:1.5px;transition:.3s;background:rgba(59,156,237,.03)}
+.proj-hero-desc{font-size:.92rem;color:rgba(220,238,255,.55);line-height:1.55;max-width:520px;margin:0 auto 1rem}
+.proj-hero-tags{display:flex;gap:.55rem;justify-content:center;flex-wrap:wrap;margin-top:.8rem}
+.proj-hero-tags span{display:inline-block;padding:.22rem .75rem;border:1px solid rgba(59,156,237,.25);font-family:'Share Tech Mono',monospace;font-size:.7rem;color:rgba(59,156,237,.7);letter-spacing:1.5px;transition:.3s;background:rgba(59,156,237,.03)}
 .proj-hero-tags span:hover{border-color:var(--neon);color:var(--neon);background:rgba(59,156,237,.07)}
+.proj-hero-c .badge{margin-bottom:.7rem}
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    FILTROS
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-#proj-filtros{background:rgba(1,10,24,.6);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1.8rem 0;position:sticky;top:60px;z-index:150;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+#proj-filtros{background:rgba(1,10,24,.6);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1.8rem 0;position:sticky;top:82px;z-index:150;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
 .filtros-wrap{display:flex;flex-direction:column;gap:1.2rem}
 .filtros-search-row{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap}
 .search-box{display:flex;align-items:center;gap:.7rem;background:rgba(59,156,237,.04);border:1px solid rgba(59,156,237,.22);padding:.6rem 1rem;flex:1;min-width:0;max-width:380px;transition:.3s;position:relative}
@@ -680,11 +681,10 @@ footer .wrap{position:relative;z-index:1}
   .foot-top{grid-template-columns:1fr 1fr;gap:2rem}
   .sf{display:none}
 
-  #proj-filtros{top:55px}
   .filtros-search-row{flex-direction:column;align-items:flex-start;gap:.75rem}
   .search-box{max-width:100%;width:100%}
-  .proj-hero-title{font-size:clamp(2rem,7vw,3.2rem)}
-  .proj-hero-sub{font-size:1rem;letter-spacing:2px}
+  .proj-hero-title{font-size:clamp(1.7rem,6vw,2.6rem)}
+  .proj-hero-sub{font-size:.92rem;letter-spacing:2px}
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -701,7 +701,7 @@ footer .wrap{position:relative;z-index:1}
    MOBILE ≤ 600px
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 @media(max-width:600px){
-  nav.scrolled{backdrop-filter:blur(12px)}
+  #nav.scrolled{backdrop-filter:blur(12px)}
   .nlinks{backdrop-filter:blur(12px)}
   .cmodal-overlay{backdrop-filter:blur(8px) saturate(0.8);-webkit-backdrop-filter:blur(8px) saturate(0.8)}
 
@@ -709,7 +709,7 @@ footer .wrap{position:relative;z-index:1}
   section{padding:1.4rem 0}
   .sh{margin-bottom:1.1rem}
 
-  nav{padding:.9rem 0}
+  #nav{padding:.9rem 0}
   .nav-i{padding:0 1rem}
   .nlogo img{width:36px;height:36px}
   .nlogo span{font-size:.88rem;letter-spacing:2px}
@@ -748,14 +748,14 @@ footer .wrap{position:relative;z-index:1}
   .float-btn{width:42px;height:42px;font-size:1.1rem}
   .float-btn svg{width:18px;height:18px}
 
-  #proj-hero{min-height:70svh}
-  .proj-hero-c{padding-top:85px}
-  .proj-hero-title{font-size:clamp(1.8rem,9.5vw,2.8rem);line-height:1.12}
-  .proj-hero-sub{font-size:.88rem;letter-spacing:1.5px}
-  .proj-hero-desc{font-size:.88rem;padding:0 .5rem}
-  .proj-hero-tags{gap:.45rem}
-  .proj-hero-tags span{font-size:.65rem;padding:.22rem .7rem}
-  #proj-filtros{top:52px;padding:1.2rem 0}
+  #proj-hero{min-height:40svh}
+  .proj-hero-c{padding-top:72px;padding-bottom:1.1rem}
+  .proj-hero-title{font-size:clamp(1.5rem,8vw,2.1rem);line-height:1.15;margin-bottom:.5rem}
+  .proj-hero-sub{font-size:.8rem;letter-spacing:1.5px;margin-bottom:.4rem}
+  .proj-hero-desc{font-size:.82rem;line-height:1.5;padding:0 .5rem;margin-bottom:.8rem}
+  .proj-hero-tags{gap:.4rem;margin-top:.6rem}
+  .proj-hero-tags span{font-size:.62rem;padding:.2rem .6rem}
+  #proj-filtros{top:66px;padding:1.2rem 0}
   .filtros-cats{gap:.4rem}
   .filtro-btn{font-size:.65rem;padding:.35rem .8rem;letter-spacing:1px}
   .proj-grid{grid-template-columns:1fr;gap:1.2rem}
@@ -781,7 +781,7 @@ footer .wrap{position:relative;z-index:1}
   .nlogo span{font-size:.78rem;letter-spacing:1.5px}
   .nlogo img{width:32px;height:32px}
   .foot-brand .flogo{font-size:1.15rem}
-  .proj-hero-title{font-size:clamp(1.6rem,11vw,2rem)}
+  .proj-hero-title{font-size:clamp(1.4rem,10vw,1.8rem)}
   .filtro-btn{font-size:.6rem;padding:.3rem .65rem}
 }
 
@@ -789,5 +789,5 @@ footer .wrap{position:relative;z-index:1}
    LANDSCAPE MOBILE
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 @media(max-width:900px) and (orientation:landscape) and (max-height:500px){
-  nav{padding:.9rem 0}
+  #nav{padding:.9rem 0}
 }
