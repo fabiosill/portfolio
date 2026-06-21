@@ -144,7 +144,7 @@
       Modelos Reais
     </h1>
     <div class="proj-hero-tags" aria-hidden="true">
-      <span>HTML</span><span>CSS</span><span>JavaScript</span><span>UI/UX</span><span>E-commerce</span><span>SEO</span>
+      <span>HTML</span><span>CSS</span><span>JavaScript</span><span>UI/UX</span><span>E-commerce</span>
     </div>
   </div>
 </section>
@@ -163,7 +163,7 @@
           </button>
         </div>
         <div class="proj-count" id="proj-count" aria-live="polite" aria-atomic="true">
-          <span id="count-num">9</span> projetos encontrados
+          <span id="count-num">9</span> - PROJETOS
         </div>
       </div>
       <nav class="filtros-cats" aria-label="Filtrar por categoria" id="filtro-nav">
@@ -192,29 +192,50 @@
   <div class="wrap">
 
 
+    <!--
+      COMO ADICIONAR O SCREENSHOT REAL DE CADA PROJETO:
+      Todos os cards já estão prontos com a tag <img class="proj-card-img">.
+      Basta trocar o "src" de cada <img> pelo caminho real do arquivo da screenshot, por exemplo:
+        <img src="../img/nome-do-projeto.png" alt="Screenshot do site Nome do Projeto" class="proj-card-img" loading="lazy">
+      A imagem ideal é a screenshot do HERO (topo) do site, em alta resolução (mín. 1200px de largura).
+      O CSS já cuida do enquadramento (object-fit:cover, object-position:top) — não é preciso cortar a imagem manualmente.
+    -->
     <div class="proj-grid" id="proj-grid" role="list" aria-label="Lista de projetos">
 
       <!-- Card 01 -->
       <article class="proj-card glow-border-card" data-cat="institucional" data-title="Kleber Pinto Hairstylist" role="listitem">
-        <div class="proj-card-img-wrap">
-          <div class="proj-card-img proj-card-img--placeholder" aria-hidden="true">
-            <div class="proj-card-placeholder-inner">
-              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="40" height="40" rx="4"/><circle cx="16" cy="16" r="4"/><polyline points="4,30 16,18 28,28 34,22 44,32"/></svg>
-            </div>
-            <div class="proj-card-img-bg" style="--c1:#003A99;--c2:#0050C8"></div>
+        <div class="proj-card-browserbar" aria-hidden="true">
+          <div class="proj-card-dots"><span></span><span></span><span></span></div>
+          <div class="proj-card-urlbar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <span>kleberpinto.fabiosill.com.br</span>
           </div>
-          <div class="proj-card-overlay">
-            <a href="#" class="proj-card-view-btn" target="_blank" rel="noopener noreferrer" aria-label="Ver projeto Kleber Pinto Hairstylist">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-              VER PROJETO
-            </a>
-          </div>
-          <div class="proj-card-num" aria-hidden="true">01</div>
+          <span class="proj-card-num">01</span>
         </div>
-        <div class="proj-card-body">
-          <div class="proj-card-cat-row">
-            <span class="proj-cat-badge">INSTITUCIONAL</span>
+          <div class="proj-card-img-wrap">
+            <img
+              src="../img/klebermodelo.png"
+              alt="Screenshot do site Kleber Hairstylist"
+              class="proj-card-img"
+              loading="lazy"
+            />
+
+            <div class="proj-card-cat-row">
+              <span class="proj-cat-badge">INSTITUCIONAL</span>
+            </div>
+
+            <div class="proj-card-overlay">
+              <a href="#" class="proj-card-view-btn" target="_blank" rel="noopener noreferrer" aria-label="Ver projeto Kleber Pinto Hairstylist">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                  <polyline points="15 3 21 3 21 9"/>
+                  <line x1="10" y1="14" x2="21" y2="3"/>
+                </svg>
+                VER PROJETO
+              </a>
+            </div>
           </div>
+        <div class="proj-card-body">
           <h3 class="proj-card-title">Kleber Hairstylist</h3>
           <p class="proj-card-desc">Site institucional para salão de beleza com identidade visual forte, galeria de serviços e integração com WhatsApp.</p>
           <div class="proj-card-tags">
@@ -229,25 +250,34 @@
 
       <!-- Card 02 -->
       <article class="proj-card glow-border-card" data-cat="landing-page" data-title="SISA Clean Diarista" role="listitem">
-        <div class="proj-card-img-wrap">
-          <div class="proj-card-img proj-card-img--placeholder" aria-hidden="true">
-            <div class="proj-card-placeholder-inner">
-              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 20L24 4l18 16"/><path d="M8 18v22h10V28h12v12h10V18"/></svg>
-            </div>
-            <div class="proj-card-img-bg" style="--c1:#01296E;--c2:#3B9CED"></div>
+        <div class="proj-card-browserbar" aria-hidden="true">
+          <div class="proj-card-dots"><span></span><span></span><span></span></div>
+          <div class="proj-card-urlbar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <span>sisaclean.fabiosill.com.br</span>
           </div>
+          <span class="proj-card-num">02</span>
+        </div>
+        <div class="proj-card-img-wrap">
+          <img
+            src="../img/sisacleanmodelo.png"
+            alt="Screenshot do site SISA Clean"
+            class="proj-card-img"
+            loading="lazy"
+          />
+
+          <div class="proj-card-cat-row">
+            <span class="proj-cat-badge">LANDING PAGE</span>
+          </div>
+
           <div class="proj-card-overlay">
             <a href="#" class="proj-card-view-btn" target="_blank" rel="noopener noreferrer" aria-label="Ver projeto SISA Clean">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
               VER PROJETO
             </a>
           </div>
-          <div class="proj-card-num" aria-hidden="true">02</div>
         </div>
         <div class="proj-card-body">
-          <div class="proj-card-cat-row">
-            <span class="proj-cat-badge">LANDING PAGE</span>
-          </div>
           <h3 class="proj-card-title">SISA Clean</h3>
           <p class="proj-card-desc">Landing page focada em conversão para serviços de limpeza domiciliar com depoimentos e CTA estratégico.</p>
           <div class="proj-card-tags">
@@ -262,25 +292,34 @@
 
       <!-- Card 03 -->
       <article class="proj-card glow-border-card" data-cat="ecommerce" data-title="Le Parfragancy Perfumaria" role="listitem">
-        <div class="proj-card-img-wrap">
-          <div class="proj-card-img proj-card-img--placeholder" aria-hidden="true">
-            <div class="proj-card-placeholder-inner">
-              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 6h16v8H16z"/><path d="M12 14h24l-3 26H15L12 14z"/><path d="M20 14v4M28 14v4"/></svg>
-            </div>
-            <div class="proj-card-img-bg" style="--c1:#0050C8;--c2:#6BC8F7"></div>
+        <div class="proj-card-browserbar" aria-hidden="true">
+          <div class="proj-card-dots"><span></span><span></span><span></span></div>
+          <div class="proj-card-urlbar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <span>leparfragancy.fabiosill.com.br</span>
           </div>
+          <span class="proj-card-num">03</span>
+        </div>
+        <div class="proj-card-img-wrap">
+          <img
+            src="../img/leparfragancymodelo.png"
+            alt="Screenshot do site Le Parfragancy"
+            class="proj-card-img"
+            loading="lazy"
+          />
+
+          <div class="proj-card-cat-row">
+            <span class="proj-cat-badge">E-COMMERCE</span>
+          </div>
+
           <div class="proj-card-overlay">
             <a href="#" class="proj-card-view-btn" target="_blank" rel="noopener noreferrer" aria-label="Ver projeto Le Parfragancy">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
               VER PROJETO
             </a>
           </div>
-          <div class="proj-card-num" aria-hidden="true">03</div>
         </div>
         <div class="proj-card-body">
-          <div class="proj-card-cat-row">
-            <span class="proj-cat-badge">E-COMMERCE</span>
-          </div>
           <h3 class="proj-card-title">Le Parfragancy</h3>
           <p class="proj-card-desc">Loja de perfumaria premium com experiência de compra luxuosa, catálogo dinâmico e checkout otimizado.</p>
           <div class="proj-card-tags">
@@ -295,25 +334,34 @@
 
       <!-- Card 04 -->
       <article class="proj-card glow-border-card" data-cat="institucional" data-title="DataService Empresarial" role="listitem">
-        <div class="proj-card-img-wrap">
-          <div class="proj-card-img proj-card-img--placeholder" aria-hidden="true">
-            <div class="proj-card-placeholder-inner">
-              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="24" cy="12" rx="16" ry="5"/><path d="M8 12v8c0 2.76 7.16 5 16 5s16-2.24 16-5v-8"/><path d="M8 20v8c0 2.76 7.16 5 16 5s16-2.24 16-5v-8"/></svg>
-            </div>
-            <div class="proj-card-img-bg" style="--c1:#003A99;--c2:#01296E"></div>
+        <div class="proj-card-browserbar" aria-hidden="true">
+          <div class="proj-card-dots"><span></span><span></span><span></span></div>
+          <div class="proj-card-urlbar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <span>dataserviceemp.fabiosill.com.br</span>
           </div>
+          <span class="proj-card-num">04</span>
+        </div>
+        <div class="proj-card-img-wrap">
+          <img
+            src="../img/dataservicemodelo.png"
+            alt="Screenshot do site DataService Empresarial"
+            class="proj-card-img"
+            loading="lazy"
+          />
+
+          <div class="proj-card-cat-row">
+            <span class="proj-cat-badge">INSTITUCIONAL</span>
+          </div>
+
           <div class="proj-card-overlay">
             <a href="#" class="proj-card-view-btn" target="_blank" rel="noopener noreferrer" aria-label="Ver projeto DataService">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
               VER PROJETO
             </a>
           </div>
-          <div class="proj-card-num" aria-hidden="true">04</div>
         </div>
         <div class="proj-card-body">
-          <div class="proj-card-cat-row">
-            <span class="proj-cat-badge">INSTITUCIONAL</span>
-          </div>
           <h3 class="proj-card-title">DataService Empresarial</h3>
           <p class="proj-card-desc">Site corporativo para empresa de tecnologia com dashboard demonstrativo, cases de sucesso e área de contato.</p>
           <div class="proj-card-tags">
@@ -328,31 +376,40 @@
 
       <!-- Card 05 -->
       <article class="proj-card glow-border-card" data-cat="landing-page" data-title="Simone Psicóloga" role="listitem">
-        <div class="proj-card-img-wrap">
-          <div class="proj-card-img proj-card-img--placeholder" aria-hidden="true">
-            <div class="proj-card-placeholder-inner">
-              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="24" cy="16" r="10"/><path d="M8 44c0-8.84 7.16-16 16-16s16 7.16 16 16"/></svg>
-            </div>
-            <div class="proj-card-img-bg" style="--c1:#0050C8;--c2:#003A99"></div>
+        <div class="proj-card-browserbar" aria-hidden="true">
+          <div class="proj-card-dots"><span></span><span></span><span></span></div>
+          <div class="proj-card-urlbar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <span>www.simonepsicolog.com.br</span>
           </div>
+          <span class="proj-card-num">05</span>
+        </div>
+        <div class="proj-card-img-wrap">
+          <img
+            src="../img/simonepsicologamodelo.png"
+            alt="Screenshot do site Simone Psicóloga"
+            class="proj-card-img"
+            loading="lazy"
+          />
+
+          <div class="proj-card-cat-row">
+            <span class="proj-cat-badge">LANDING PAGE</span>
+          </div>
+
           <div class="proj-card-overlay">
             <a href="#" class="proj-card-view-btn" target="_blank" rel="noopener noreferrer" aria-label="Ver projeto Simone Psicóloga">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
               VER PROJETO
             </a>
           </div>
-          <div class="proj-card-num" aria-hidden="true">05</div>
         </div>
         <div class="proj-card-body">
-          <div class="proj-card-cat-row">
-            <span class="proj-cat-badge">LANDING PAGE</span>
-          </div>
           <h3 class="proj-card-title">Simone — Psicóloga</h3>
           <p class="proj-card-desc">Landing page acolhedora para consultório de psicologia com agendamento online e abordagem humanizada.</p>
           <div class="proj-card-tags">
             <span class="ptag">HTML</span><span class="ptag">CSS</span><span class="ptag">UX</span>
           </div>
-          <a href="#" class="proj-card-link" target="_blank" rel="noopener noreferrer" aria-label="Ver projeto Simone Psicóloga">
+          <a href="https://fabiosill.github.io/simonepsicologa/" class="proj-card-link" target="_blank" rel="noopener noreferrer" aria-label="Ver projeto Simone Psicóloga">
             <span>Ver Projeto</span>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </a>
@@ -361,25 +418,34 @@
 
       <!-- Card 06 -->
       <article class="proj-card glow-border-card" data-cat="ecommerce" data-title="Fabiana Nail Design" role="listitem">
-        <div class="proj-card-img-wrap">
-          <div class="proj-card-img proj-card-img--placeholder" aria-hidden="true">
-            <div class="proj-card-placeholder-inner">
-              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4l-8 20h36L34 4z"/><path d="M6 24v20h36V24"/><line x1="24" y1="24" x2="24" y2="44"/><line x1="6" y1="34" x2="42" y2="34"/></svg>
-            </div>
-            <div class="proj-card-img-bg" style="--c1:#3B9CED;--c2:#6BC8F7"></div>
+        <div class="proj-card-browserbar" aria-hidden="true">
+          <div class="proj-card-dots"><span></span><span></span><span></span></div>
+          <div class="proj-card-urlbar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <span>fabiananail.fabiosill.com.br</span>
           </div>
+          <span class="proj-card-num">06</span>
+        </div>
+        <div class="proj-card-img-wrap">
+          <img
+            src="../img/fabiananailmodelo.png"
+            alt="Screenshot do site Fabiana Nail Design"
+            class="proj-card-img"
+            loading="lazy"
+          />
+
+          <div class="proj-card-cat-row">
+            <span class="proj-cat-badge">LANDING PAGE</span>
+          </div>
+
           <div class="proj-card-overlay">
             <a href="#" class="proj-card-view-btn" target="_blank" rel="noopener noreferrer" aria-label="Ver projeto Fabiana Nail Design">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
               VER PROJETO
             </a>
           </div>
-          <div class="proj-card-num" aria-hidden="true">06</div>
         </div>
         <div class="proj-card-body">
-          <div class="proj-card-cat-row">
-            <span class="proj-cat-badge">E-COMMERCE</span>
-          </div>
           <h3 class="proj-card-title">Fabiana Nail Design</h3>
           <p class="proj-card-desc">Loja virtual para salão de nail design com catálogo de serviços, galeria de trabalhos e agendamento integrado.</p>
           <div class="proj-card-tags">
@@ -393,59 +459,98 @@
       </article>
 
       <!-- Card 07 -->
-      <article class="proj-card glow-border-card" data-cat="ui-ux" data-title="Dashboard Analytics Premium" role="listitem">
-        <div class="proj-card-img-wrap">
-          <div class="proj-card-img proj-card-img--placeholder" aria-hidden="true">
-            <div class="proj-card-placeholder-inner">
-              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="40" height="40" rx="3"/><polyline points="12,32 18,22 24,28 32,16 36,20"/><line x1="4" y1="14" x2="44" y2="14"/></svg>
-            </div>
-            <div class="proj-card-img-bg" style="--c1:#01296E;--c2:#0050C8"></div>
+      <article class="proj-card glow-border-card" data-cat="web" data-title="zNewtDev - Plataforma de Cursos Online" role="listitem">
+        <div class="proj-card-browserbar" aria-hidden="true">
+          <div class="proj-card-dots">
+            <span></span><span></span><span></span>
           </div>
+          <div class="proj-card-urlbar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="11" width="18" height="11" rx="2"/>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+            <span>znewtdev.fabiosill.com.br</span>
+          </div>
+          <span class="proj-card-num">07</span>
+        </div>
+
+        <div class="proj-card-img-wrap">
+          <img
+            src="../img/znewtdevmodelo.png"
+            alt="Screenshot da plataforma de cursos online zNewtDev"
+            class="proj-card-img"
+            loading="lazy"
+          />
+
+          <div class="proj-card-cat-row">
+            <span class="proj-cat-badge">WEB APP</span>
+          </div>
+
           <div class="proj-card-overlay">
-            <a href="#" class="proj-card-view-btn" target="_blank" rel="noopener noreferrer" aria-label="Ver projeto Dashboard Analytics">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            <a href="#" class="proj-card-view-btn" target="_blank" rel="noopener noreferrer" aria-label="Ver projeto zNewtDev">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                <polyline points="15 3 21 3 21 9"/>
+                <line x1="10" y1="14" x2="21" y2="3"/>
+              </svg>
               VER PROJETO
             </a>
           </div>
-          <div class="proj-card-num" aria-hidden="true">07</div>
         </div>
+
         <div class="proj-card-body">
-          <div class="proj-card-cat-row">
-            <span class="proj-cat-badge">UI/UX</span>
-          </div>
-          <h3 class="proj-card-title">Dashboard Analytics</h3>
-          <p class="proj-card-desc">Interface de dashboard administrativo com gráficos interativos, KPIs em tempo real e design system completo.</p>
+          <h3 class="proj-card-title">zNewtDev</h3>
+
+          <p class="proj-card-desc">
+            Plataforma moderna de cursos online com catálogo de aulas, área do aluno, trilhas de aprendizado e experiência otimizada para ensino digital.
+          </p>
+
           <div class="proj-card-tags">
-            <span class="ptag">UI/UX</span><span class="ptag">CSS</span><span class="ptag">Charts</span>
+            <span class="ptag">Web App</span>
+            <span class="ptag">E-learning</span>
+            <span class="ptag">UI/UX</span>
           </div>
-          <a href="#" class="proj-card-link" target="_blank" rel="noopener noreferrer" aria-label="Ver projeto Dashboard Analytics">
+
+          <a href="#" class="proj-card-link" target="_blank" rel="noopener noreferrer" aria-label="Ver projeto zNewtDev">
             <span>Ver Projeto</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true">
+              <line x1="5" y1="12" x2="19" y2="12"/>
+              <polyline points="12 5 19 12 12 19"/>
+            </svg>
           </a>
         </div>
       </article>
 
       <!-- Card 08 -->
       <article class="proj-card glow-border-card" data-cat="landing-page" data-title="Academia FitPower" role="listitem">
-        <div class="proj-card-img-wrap">
-          <div class="proj-card-img proj-card-img--placeholder" aria-hidden="true">
-            <div class="proj-card-placeholder-inner">
-              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 24h4m28 0h4M10 24a4 4 0 0 1 4-4h20a4 4 0 0 1 4 4v0a4 4 0 0 1-4 4H14a4 4 0 0 1-4-4z"/><line x1="16" y1="16" x2="16" y2="32"/><line x1="32" y1="16" x2="32" y2="32"/></svg>
-            </div>
-            <div class="proj-card-img-bg" style="--c1:#003A99;--c2:#6BC8F7"></div>
+        <div class="proj-card-browserbar" aria-hidden="true">
+          <div class="proj-card-dots"><span></span><span></span><span></span></div>
+          <div class="proj-card-urlbar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <span>academiafitpow.fabiosill.com.br</span>
           </div>
+          <span class="proj-card-num">08</span>
+        </div>
+        <div class="proj-card-img-wrap">
+          <img
+            src="../img/academiafitpowermodelo.png"
+            alt="Screenshot do site Academia FitPower"
+            class="proj-card-img"
+            loading="lazy"
+          />
+
+          <div class="proj-card-cat-row">
+            <span class="proj-cat-badge">LANDING PAGE</span>
+          </div>
+
           <div class="proj-card-overlay">
             <a href="#" class="proj-card-view-btn" target="_blank" rel="noopener noreferrer" aria-label="Ver projeto Academia FitPower">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
               VER PROJETO
             </a>
           </div>
-          <div class="proj-card-num" aria-hidden="true">08</div>
         </div>
         <div class="proj-card-body">
-          <div class="proj-card-cat-row">
-            <span class="proj-cat-badge">LANDING PAGE</span>
-          </div>
           <h3 class="proj-card-title">Academia FitPower</h3>
           <p class="proj-card-desc">Landing page energética para academia com planos de matrícula, galeria de resultados e formulário de captação.</p>
           <div class="proj-card-tags">
@@ -460,25 +565,34 @@
 
       <!-- Card 09 -->
       <article class="proj-card glow-border-card" data-cat="ui-ux" data-title="Design System Corporativo" role="listitem">
-        <div class="proj-card-img-wrap">
-          <div class="proj-card-img proj-card-img--placeholder" aria-hidden="true">
-            <div class="proj-card-placeholder-inner">
-              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="24" cy="24" r="3"/><circle cx="10" cy="10" r="4"/><circle cx="38" cy="10" r="4"/><circle cx="10" cy="38" r="4"/><circle cx="38" cy="38" r="4"/><line x1="13" y1="13" x2="21" y2="21"/><line x1="35" y1="13" x2="27" y2="21"/><line x1="13" y1="35" x2="21" y2="27"/><line x1="35" y1="35" x2="27" y2="27"/></svg>
-            </div>
-            <div class="proj-card-img-bg" style="--c1:#0050C8;--c2:#01296E"></div>
+        <div class="proj-card-browserbar" aria-hidden="true">
+          <div class="proj-card-dots"><span></span><span></span><span></span></div>
+          <div class="proj-card-urlbar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <span>designsystem.fabiosill.com.br</span>
           </div>
+          <span class="proj-card-num">09</span>
+        </div>
+        <div class="proj-card-img-wrap">
+          <img
+            src="../img/designsystemmodelo.png"
+            alt="Screenshot do Design System Corporativo"
+            class="proj-card-img"
+            loading="lazy"
+          />
+
+          <div class="proj-card-cat-row">
+            <span class="proj-cat-badge">UI/UX</span>
+          </div>
+
           <div class="proj-card-overlay">
             <a href="#" class="proj-card-view-btn" target="_blank" rel="noopener noreferrer" aria-label="Ver projeto Design System">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
               VER PROJETO
             </a>
           </div>
-          <div class="proj-card-num" aria-hidden="true">09</div>
         </div>
         <div class="proj-card-body">
-          <div class="proj-card-cat-row">
-            <span class="proj-cat-badge">UI/UX</span>
-          </div>
           <h3 class="proj-card-title">Design System Corp.</h3>
           <p class="proj-card-desc">Sistema de design completo com tokens de cor, tipografia, componentes reutilizáveis e documentação interativa.</p>
           <div class="proj-card-tags">
@@ -513,7 +627,7 @@
         <span class="flogo">FABIOSILL</span>
         <p>Desenvolvedor web especializado em criar experiências digitais que impressionam e convertem. São Paulo, Brasil.</p>
       </div>
-      <div class="foot-col">
+      <div class="foot-col hide-mobile">
         <h4>Navegação</h4>
         <ul>
           <li><a href="index.html">Início</a></li>
