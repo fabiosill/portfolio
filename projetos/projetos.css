@@ -774,6 +774,8 @@ footer .wrap{position:relative;z-index:1}
 
   .filtros-search-row{flex-direction:column;align-items:flex-start;gap:.75rem}
   .search-box{max-width:100%;width:100%}
+  /* ── Botões de categoria ocultos em mobile ── */
+  .filtros-cats{display:none}
   .proj-hero-title{font-size:clamp(1.7rem,6vw,2.6rem)}
   .proj-hero-sub{font-size:.92rem;letter-spacing:2px}
 }
@@ -840,8 +842,8 @@ footer .wrap{position:relative;z-index:1}
   .float-btn{width:42px;height:42px;font-size:1.1rem}
   .float-btn svg{width:18px;height:18px}
 
-  #proj-hero{min-height:40svh}
-  .proj-hero-c{padding-top:72px;padding-bottom:1.1rem}
+  #proj-hero{min-height:26svh}
+  .proj-hero-c{padding-top:56px;padding-bottom:.6rem}
   .proj-hero-title{font-size:clamp(1.5rem,8vw,2.1rem);line-height:1.15;margin-bottom:.5rem}
   .proj-hero-sub{font-size:.8rem;letter-spacing:1.5px;margin-bottom:.4rem}
   .proj-hero-desc{font-size:.82rem;line-height:1.5;padding:0 .5rem;margin-bottom:.8rem}
