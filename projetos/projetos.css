@@ -844,19 +844,19 @@ footer .wrap{position:relative;z-index:1}
   .float-btn{width:42px;height:42px;font-size:1.1rem}
   .float-btn svg{width:18px;height:18px}
 
-  /* ── Hero mobile: altura e espaçamentos corrigidos ── */
+  /* ── Hero mobile: empurra o conteúdo para baixo do nav fixo ── */
   #proj-hero{
+    /* padding-top na section = altura do nav fixo mobile (~64px).
+       Isso garante que align-items:center opere dentro da área visível,
+       e não que o conteúdo nasça atrás do nav. */
+    padding-top:64px;
     min-height:auto;
-    padding-top:0;
-    padding-bottom:0;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    align-items:flex-start;
   }
   .proj-hero-c{
-    /* nav mobile: ~64px de altura + 10px de folga */
-    padding-top:78px;
-    padding-bottom:1.4rem;
+    /* reseta o padding-top do desktop (92px) — o espaço vem da #proj-hero agora */
+    padding-top:1.6rem;
+    padding-bottom:1.6rem;
     width:100%;
   }
   .proj-hero-c .badge{
@@ -864,7 +864,6 @@ footer .wrap{position:relative;z-index:1}
     letter-spacing:2px;
     padding:.3rem .85rem;
     margin-bottom:.65rem;
-    /* evita transbordo lateral em telas estreitas */
     max-width:100%;
     white-space:nowrap;
     overflow:hidden;
@@ -880,14 +879,13 @@ footer .wrap{position:relative;z-index:1}
   .proj-hero-tags{
     gap:.4rem;
     margin-top:.6rem;
-    /* impede overflow horizontal dos tags */
     justify-content:center;
     flex-wrap:wrap;
     padding:0 .25rem;
   }
   .proj-hero-tags span{font-size:.62rem;padding:.2rem .6rem}
-  /* sticky filtros: top = altura real do nav mobile (~64px) */
-  #proj-filtros{top:62px;padding:1.1rem 0}
+  /* sticky filtros: top = altura real do nav mobile */
+  #proj-filtros{top:64px;padding:1.1rem 0}
   .filtros-cats{gap:.4rem}
   .filtro-btn{font-size:.65rem;padding:.35rem .8rem;letter-spacing:1px}
   .proj-grid{grid-template-columns:1fr;gap:1.4rem}
