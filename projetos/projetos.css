@@ -778,6 +778,8 @@ footer .wrap{position:relative;z-index:1}
   .filtros-cats{display:none}
   .proj-hero-title{font-size:clamp(1.7rem,6vw,2.6rem)}
   .proj-hero-sub{font-size:.92rem;letter-spacing:2px}
+  /* sticky filtros alinhado à altura real do nav tablet (~78px) */
+  #proj-filtros{top:78px}
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -842,14 +844,50 @@ footer .wrap{position:relative;z-index:1}
   .float-btn{width:42px;height:42px;font-size:1.1rem}
   .float-btn svg{width:18px;height:18px}
 
-  #proj-hero{min-height:26svh}
-  .proj-hero-c{padding-top:56px;padding-bottom:.6rem}
-  .proj-hero-title{font-size:clamp(1.5rem,8vw,2.1rem);line-height:1.15;margin-bottom:.5rem}
+  /* ── Hero mobile: altura e espaçamentos corrigidos ── */
+  #proj-hero{
+    min-height:auto;
+    padding-top:0;
+    padding-bottom:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .proj-hero-c{
+    /* nav mobile: ~64px de altura + 10px de folga */
+    padding-top:78px;
+    padding-bottom:1.4rem;
+    width:100%;
+  }
+  .proj-hero-c .badge{
+    font-size:.66rem;
+    letter-spacing:2px;
+    padding:.3rem .85rem;
+    margin-bottom:.65rem;
+    /* evita transbordo lateral em telas estreitas */
+    max-width:100%;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .proj-hero-title{
+    font-size:clamp(1.5rem,8vw,2.1rem);
+    line-height:1.15;
+    margin-bottom:.5rem;
+  }
   .proj-hero-sub{font-size:.8rem;letter-spacing:1.5px;margin-bottom:.4rem}
-  .proj-hero-desc{font-size:.82rem;line-height:1.5;padding:0 .5rem;margin-bottom:.8rem}
-  .proj-hero-tags{gap:.4rem;margin-top:.6rem}
+  .proj-hero-desc{font-size:.82rem;line-height:1.5;padding:0 .5rem;margin-bottom:.6rem}
+  .proj-hero-tags{
+    gap:.4rem;
+    margin-top:.6rem;
+    /* impede overflow horizontal dos tags */
+    justify-content:center;
+    flex-wrap:wrap;
+    padding:0 .25rem;
+  }
   .proj-hero-tags span{font-size:.62rem;padding:.2rem .6rem}
-  #proj-filtros{top:66px;padding:1.2rem 0}
+  /* sticky filtros: top = altura real do nav mobile (~64px) */
+  #proj-filtros{top:62px;padding:1.1rem 0}
   .filtros-cats{gap:.4rem}
   .filtro-btn{font-size:.65rem;padding:.35rem .8rem;letter-spacing:1px}
   .proj-grid{grid-template-columns:1fr;gap:1.4rem}
