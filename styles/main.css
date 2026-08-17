@@ -1216,6 +1216,10 @@ footer .wrap{position:relative;z-index:1}
    TABLET ≤ 900px
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 @media(max-width:900px){
+  /* Esconde o card dinâmico de projetos (Le Parfragancy / Simone / SISA Clean) apenas em mobile */
+  .showcase-left{display:none}
+  .showcase-split{grid-template-columns:1fr}
+
   .hamburger{display:flex}
   .nlinks{
     display:flex;flex-direction:column;

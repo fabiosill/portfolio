@@ -510,9 +510,9 @@ document.addEventListener('keydown', e => {
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 (function showcaseDynamicCard() {
   const projects = [
-    { num:'01', cat:'Site institucional', img:'img/kleberpintosite.png', alt:'Kleber Pinto — preview do site', title:'Kleber Pinto', desc:'Site institucional para serviços de química, cabelo e barba.', tags:['HTML','CSS','JS'], url:'https://fabiosill.github.io/hairstylist-website' },
-    { num:'02', cat:'Landing Page',       img:'img/sisacleansite.png',   alt:'SISA Clean — preview do site', title:'SISA Clean', desc:'Site limpo e moderno com foco em conversão e identidade visual forte.', tags:['HTML','CSS','UI/UX'], url:'https://fabiosill.github.io/sisa-clean' },
-    { num:'03', cat:'E-commerce',         img:'img/leparfragancysite.png', alt:'Le Parfragancy — preview do site', title:'Le Parfragancy', desc:'Loja de perfumaria premium com experiência de compra luxuosa.', tags:['E-commerce','UX','JS'], url:'https://fabiosill.github.io/leparfragancy-web' }
+    { num:'01', cat:'E-commerce', img:'img/leparfragancysite.png', alt:'Le Parfragancy — preview do site', title:'Le Parfragancy', desc:'Loja de perfumaria premium com experiência de compra luxuosa.', tags:['E-commerce','UX','JS'], url:'https://fabiosill.github.io/leparfragancy-web' },
+    { num:'02', cat:'Site institucional', img:'img/simonepsicologasite.png', alt:'Simone Psicóloga — preview do site', title:'Simone Psicóloga', desc:'Site institucional para atendimento psicológico, com identidade acolhedora e profissional.', tags:['HTML','CSS','JS'], url:'https://fabiosill.github.io/simonepsicologa' },
+    { num:'03', cat:'Landing Page', img:'img/sisacleansite.png', alt:'SISA Clean — preview do site', title:'SISA Clean', desc:'Site limpo e moderno com foco em conversão e identidade visual forte.', tags:['HTML','CSS','UI/UX'], url:'https://fabiosill.github.io/sisa-clean' }
   ];
 
   const card    = document.getElementById('showcase-card');
